@@ -1,0 +1,16 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Application under test is cloned here by scripts/aut-up.ps1
+aut/
+
+# Test run output: generated specs, traces, Allure results and report
+test-output/
+
+# Raw MCP output (traces, session files). Curated evidence lives in reports/<story>/<run>/evidence/
+reports/_mcp-output/
+
+# Local working notes (decisions log, planning, presentation material). Never committed.
+docs/

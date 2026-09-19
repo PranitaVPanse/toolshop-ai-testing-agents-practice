@@ -1,0 +1,26 @@
+{
+  "name": "toolshop-test-framework",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BDD test framework for the Toolshop (Playwright, playwright-bdd, Allure) with an exploratory testing agent that produces automation-readiness reports.",
+  "scripts": {
+    "aut:up": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/aut-up.ps1",
+    "aut:down": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/aut-down.ps1",
+    "aut:reset": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/aut-up.ps1 -Reseed",
+    "typecheck": "tsc --noEmit",
+    "test": "bddgen && playwright test",
+    "test:headed": "set HEADED=1&& bddgen && playwright test",
+    "report:generate": "allure generate test-output/allure-results",
+    "report:open": "allure open test-output/allure-report"
+  },
+  "devDependencies": {
+    "@playwright/mcp": "0.0.82",
+    "@playwright/test": "1.63.0",
+    "@types/node": "^24.0.0",
+    "allure": "3.18.0",
+    "allure-playwright": "3.12.2",
+    "dotenv": "^17.0.0",
+    "playwright-bdd": "9.2.1",
+    "typescript": "^5.9.0"
+  }
+}
