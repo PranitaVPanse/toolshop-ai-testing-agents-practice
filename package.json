@@ -1,26 +1,48 @@
 {
-  "name": "toolshop-test-framework",
+  "name": "toolshop-ai-testing-agents-practice",
   "version": "0.1.0",
   "private": true,
   "description": "BDD test framework for the Toolshop (Playwright, playwright-bdd, Allure) with an exploratory testing agent that produces automation-readiness reports.",
   "scripts": {
-    "aut:up": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/aut-up.ps1",
-    "aut:down": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/aut-down.ps1",
-    "aut:reset": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/aut-up.ps1 -Reseed",
-    "typecheck": "tsc --noEmit",
+    "prepare": "husky",
     "test": "bddgen && playwright test",
-    "test:headed": "set HEADED=1&& bddgen && playwright test",
-    "report:generate": "allure generate test-output/allure-results",
-    "report:open": "allure open test-output/allure-report"
+    "test:headed": "bddgen && playwright test --headed",
+    "test:smoke": "bddgen && playwright test --grep @smoke",
+    "report": "allure generate test-output/allure-results",
+    "report:open": "allure open test-output/allure-report",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "aut:up": "node helpers/aut.mjs up",
+    "aut:down": "node helpers/aut.mjs down",
+    "aut:reset": "node helpers/aut.mjs reset"
   },
   "devDependencies": {
+    "@eslint/js": "10.0.1",
     "@playwright/mcp": "0.0.82",
     "@playwright/test": "1.63.0",
     "@types/node": "^24.0.0",
     "allure": "3.18.0",
     "allure-playwright": "3.12.2",
     "dotenv": "^17.0.0",
+    "eslint": "10.11.0",
+    "eslint-plugin-playwright": "2.12.0",
+    "globals": "17.12.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0",
     "playwright-bdd": "9.2.1",
-    "typescript": "^5.9.0"
+    "prettier": "3.9.9",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "8.70.1"
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.{ts,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,yml,yaml}": "prettier --write"
   }
 }

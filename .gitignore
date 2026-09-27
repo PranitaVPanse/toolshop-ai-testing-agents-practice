@@ -3,14 +3,11 @@ node_modules/
 .env.*
 !.env.example
 
-# Application under test is cloned here by scripts/aut-up.ps1
+# Local Toolshop checkout, created by npm run aut:up
 aut/
 
-# Test run output: generated specs, traces, Allure results and report
+# Test run output: generated specs, traces, Allure, raw MCP output
 test-output/
 
-# Raw MCP output (traces, session files). Curated evidence lives in reports/<story>/<run>/evidence/
-reports/_mcp-output/
-
-# Local working notes (decisions log, planning, presentation material). Never committed.
-docs/
+# Local working notes: decisions log, planning, presentation material. Never committed.
+.local/

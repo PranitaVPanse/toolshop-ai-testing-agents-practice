@@ -1,0 +1,4 @@
+Action 39. Payment method Credit Card shows textboxes: Credit Card Number, Expiration Date, CVV, Card Holder Name. Confirm button enabled while all four are empty.
+Action 40-41. Values: 0000-0000-0000-0000 / 01/2020 / 12 / ETA Test, then blur:
+{"confirmDisabled":true,"errors":["alert alert-danger: Expiration date must be in the future.","alert alert-danger: CVV must be 3 or 4 digits."]}
+No error for the all-zero card number. Error elements carry no data-test attribute and no role.

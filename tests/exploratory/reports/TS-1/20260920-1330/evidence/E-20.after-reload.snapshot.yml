@@ -1,0 +1,42 @@
+- generic [ref=f3e2]:
+    - list [ref=f3e4]:
+        - listitem [ref=f3e5]:
+            - generic [ref=f3e6] [cursor=pointer]:
+                - generic [ref=f3e7]: Cart
+                - generic [ref=f3e8]: '1'
+        - listitem:
+            - generic:
+                - generic: Sign in
+                - generic: '2'
+        - listitem:
+            - generic:
+                - generic: Billing Address
+                - generic: '3'
+        - listitem:
+            - generic:
+                - generic: Payment
+                - generic: '4'
+    - generic [ref=f3e15]:
+        - tablist [ref=f3e17]:
+            - listitem [ref=f3e18]:
+                - tab "Sign in" [ref=f3e19] [cursor=pointer]
+            - listitem [ref=f3e20]:
+                - tab "Continue as Guest" [ref=f3e21] [cursor=pointer]
+        - tabpanel [ref=f3e23]:
+            - heading "Login" [level=3] [ref=f3e24]
+            - generic [ref=f3e25]:
+                - generic [ref=f3e26]:
+                    - generic [ref=f3e27]: Email address *
+                    - textbox "Email address *" [ref=f3e28]:
+                        - /placeholder: Your email
+                - generic [ref=f3e29]:
+                    - generic [ref=f3e30]: Password *
+                    - textbox "Password *" [ref=f3e31]:
+                        - /placeholder: Your password
+                - button "Login" [ref=f3e33] [cursor=pointer]
+                - paragraph [ref=f3e35]:
+                    - text: Not yet an account?
+                    - link "Register your account" [ref=f3e36] [cursor=pointer]:
+                        - /url: /auth/register
+                    - link "Forgot your Password?" [ref=f3e37] [cursor=pointer]:
+                        - /url: /auth/forgot-password

@@ -1,0 +1,3 @@
+Action 19. Evaluate 2 s after clicking the remove control in the Combination Pliers row.
+{"total":"$145.23","titles":["Bolt Cutters"],"lines":["$145.23"],"badge":"3"}
+No confirmation prompt, no toast. Network: DELETE /carts/<id>/product/<productId> => 204.

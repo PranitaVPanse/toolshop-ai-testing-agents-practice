@@ -1,0 +1,25 @@
+52. [GET] http://localhost:8091/users/me => [401] Unauthorized
+53. [GET] http://localhost:8091/users/me => [401] Unauthorized
+75. [GET] http://localhost:8091/carts/01m2zcxqzvng4ywvjazv217mk4 => [200] OK
+76. [GET] http://localhost:8091/users/me => [401] Unauthorized
+77. [GET] http://localhost:8091/users/me => [401] Unauthorized
+78. [GET] http://localhost:8091/carts/01m2zcxqzvng4ywvjazv217mk4 => [200] OK
+79. [DELETE] http://localhost:8091/carts/01m2zcxqzvng4ywvjazv217mk4/product/01M2XDJW0GJBEEZG42B8DZK8FD => [204] No Content
+80. [GET] http://localhost:8091/carts/01m2zcxqzvng4ywvjazv217mk4 => [200] OK
+81. [POST] http://localhost:8091/users/login => [200] OK
+82. [GET] http://localhost:8091/users/me => [401] Unauthorized
+83. [GET] http://localhost:8091/users/me => [200] OK
+84. [GET] http://localhost:8091/users/me => [200] OK
+85. [GET] http://localhost:8091/users/me => [200] OK
+86. [GET] http://localhost:8091/postcode-lookup?country=AT&postcode=00000&house_number=1 => [422] Unprocessable Content
+87. [GET] http://localhost:8091/postcode-lookup?country=AT&postcode=00000&house_number=1 => [422] Unprocessable Content
+88. [POST] http://localhost:8091/payment/check => [200] OK
+89. [POST] http://localhost:8091/invoices => [422] Unprocessable Content
+141. [GET] http://localhost:8091/users/me => [401] Unauthorized
+142. [GET] http://localhost:8091/users/me => [401] Unauthorized
+164. [GET] http://localhost:8091/carts/01m2zcxqzvng4ywvjazv217mk4 => [200] OK
+165. [GET] http://localhost:8091/users/me => [401] Unauthorized
+166. [GET] http://localhost:8091/users/me => [401] Unauthorized
+167. [GET] http://localhost:8091/carts/01m2zcxqzvng4ywvjazv217mk4 => [200] OK
+
+Note: 142 static requests not shown, run with "static" option to see them.

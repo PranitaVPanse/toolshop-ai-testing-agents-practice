@@ -1,0 +1,5 @@
+Action 15. Evaluate 3 s after changing "Quantity for Bolt Cutters" from 1 to 3 (fill + Enter). Cart held Combination Pliers x2 ($14.15) and Bolt Cutters ($48.41).
+{"total":"$76.71","lines":["$28.30","$145.23"],"qty":["2","3"],"badge":"3"}
+Expected total $173.53 and badge 5.
+Action 17. Same evaluate after reloading /checkout:
+{"total":"$173.53","lines":["$28.30","$145.23"],"qty":["2","3"],"badge":"5"}

@@ -1,0 +1,2 @@
+Action 43. Locator match counts on the payment step, method Cash on Delivery selected:
+{"getByRole(combobox,{name:Payment Method})":1,"getByLabel(Payment Method)":1,"[data-test=payment-method]":1,"getByRole(button,{name:Confirm})":1,"[data-test=finish]":1,"getByRole(heading,{name:Payment})":1,"getByRole(button,{name:Proceed to checkout})":0,"confirmDisabled":false,"comboAccessibleName":"Payment Method"}

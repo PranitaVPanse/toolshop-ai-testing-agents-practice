@@ -1,0 +1,78 @@
+- generic [ref=f2e2]:
+  - generic [ref=f2e3]:
+    - text: View the
+    - link "Documentation" [ref=f2e4] [cursor=pointer]:
+      - /url: https://testsmith-io.github.io/practice-software-testing/#/
+    - text: for this application.
+  - generic [ref=f2e5]:
+    - generic [ref=f2e7]:
+      - generic [ref=f2e8]: Practice Black Box Testing & Bug Hunting
+      - button "Testing Guide" [ref=f2e9] [cursor=pointer]
+    - navigation [ref=f2e10]:
+      - generic [ref=f2e11]:
+        - link "Practice Software Testing - Toolshop" [ref=f2e12] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e31]:
+          - menubar "Main menu" [ref=f2e32]:
+            - menuitem [ref=f2e33]:
+              - link "Home" [ref=f2e34] [cursor=pointer]:
+                - /url: /
+            - menuitem [ref=f2e35]:
+              - button "Categories" [ref=f2e36] [cursor=pointer]
+            - menuitem [ref=f2e37]:
+              - link "Contact" [ref=f2e38] [cursor=pointer]:
+                - /url: /contact
+            - menuitem [ref=f2e175]:
+              - button "Jane Doe" [ref=f2e176] [cursor=pointer]
+            - menuitem [ref=f2e41]:
+              - link "cart" [ref=f2e42] [cursor=pointer]:
+                - /url: /checkout
+                - generic [ref=f2e46]: "3"
+          - button "Select language" [ref=f2e48] [cursor=pointer]: EN
+  - generic [ref=f2e72]:
+    - list [ref=f2e74]:
+      - listitem [ref=f2e128]:
+        - generic [ref=f2e129] [cursor=pointer]:
+          - generic [ref=f2e130]: Cart
+          - generic [ref=f2e131]: "1"
+      - listitem [ref=f2e180]:
+        - generic [ref=f2e181] [cursor=pointer]:
+          - generic [ref=f2e182]: Sign in
+          - generic [ref=f2e183]: "2"
+      - listitem [ref=f2e213]:
+        - generic [ref=f2e214] [cursor=pointer]:
+          - generic [ref=f2e215]: Billing Address
+          - generic [ref=f2e216]: "3"
+      - listitem:
+        - generic:
+          - generic: Payment
+          - generic: "4"
+    - generic [ref=f2e221]:
+      - heading "Payment" [level=3] [ref=f2e222]
+      - generic [ref=f2e224]:
+        - generic [ref=f2e225]: Payment Method
+        - combobox "Payment Method" [ref=f2e226]:
+          - option "Choose your payment method" [disabled] [selected]
+          - option "Bank Transfer"
+          - option "Cash on Delivery"
+          - option "Credit Card"
+          - option "Buy Now Pay Later"
+          - option "Gift Card"
+      - generic [ref=f2e227]:
+        - button "Confirm" [disabled]
+  - contentinfo [ref=f2e53]:
+    - generic [ref=f2e54]:
+      - generic [ref=f2e55]:
+        - text: This is a DEMO application, used for software testing training purpose. |
+        - link "Privacy Policy" [ref=f2e56] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=f2e57] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=f2e58] [cursor=pointer]:
+          - /url: https://unsplash.com/photos/t5YUoHW6zRo
+        - text: .
+      - generic [ref=f2e59]: vdev | Built 2026-09-19 | Angular 20.0.5
+  - button "Open chat" [ref=f2e61] [cursor=pointer]
+  - button "Show live shop activity" [ref=f2e65] [cursor=pointer]

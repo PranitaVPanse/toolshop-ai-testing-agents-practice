@@ -1,0 +1,6 @@
+Action 44: first click on Confirm. Action 45 (8 s later): text "Payment was successful" shown, Confirm still enabled, no invoice number (see E-16).
+Action 46: second click on Confirm. Action 47: 20 s later no confirmation element, cart badge still 3, Confirm still visible.
+Action 48 network: POST /payment/check => 200, POST /invoices => 422.
+Action 49 response body of POST /invoices:
+{"billing_country":["The billing_country does not match the entered address. The postal code format is not valid for the selected country."]}
+The page showed no error. "Payment was successful" stayed on screen.

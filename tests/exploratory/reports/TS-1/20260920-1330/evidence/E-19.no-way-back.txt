@@ -1,0 +1,1 @@
+Action 50. Clicked the "Billing Address" entry in the wizard navigation from the payment step. Action 51: postal code field not visible. Snapshot after the click still shows heading "Payment", text "Payment was successful", button "Confirm". No Back or Previous button exists on the payment step (E-13, E-16).

@@ -1,0 +1,9 @@
+node_modules/
+test-output/
+aut/
+.local/
+package-lock.json
+# Markdown keeps compact tables.
+*.md
+# Agent reports and evidence must stay exactly as captured.
+tests/exploratory/reports/

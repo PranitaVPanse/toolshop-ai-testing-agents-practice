@@ -1,0 +1,4 @@
+Action 52-53. Reloaded /checkout at about 13:42 (login was at 13:36), clicked proceed-1. [data-test="proceed-2"] never became visible in 60 s. E-20 shows the login form on the sign-in step.
+Action 55:
+{"hasToken":true,"storageKeys":["auth-token"],"navUser":null,"signInLink":true,"stepShowsLoginForm":false,"stepShowsAlreadyLoggedIn":false,"badge":"3"}
+API check after the run: login token lifetime (exp - iat) = 5 minutes.

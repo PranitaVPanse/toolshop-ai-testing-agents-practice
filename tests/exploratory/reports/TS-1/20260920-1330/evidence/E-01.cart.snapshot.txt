@@ -1,0 +1,10 @@
+Action 11, /checkout as visitor, snapshot of app-checkout (excerpt)
+- list: Cart 1 / Sign in 2 / Billing Address 3 / Payment 4
+- table:
+  - columnheader "Item" | "Quantity" | "Price" | "Total" | (unnamed)
+  - row: cell "Combination Pliers" | spinbutton "Quantity for Combination Pliers": "2" | cell "$14.15" | cell "$28.30" | cell > generic [cursor=pointer]  <- remove control, no role, no name
+  - row: cell "Bolt Cutters" | spinbutton "Quantity for Bolt Cutters": "1" | cell "$48.41" | cell "$48.41" | cell > generic [cursor=pointer]
+  - row: strong "Total" | cell "$76.71"
+- button "Continue Shopping"
+- button "Proceed to checkout"
+Check: 2 x 14.15 + 48.41 = 76.71

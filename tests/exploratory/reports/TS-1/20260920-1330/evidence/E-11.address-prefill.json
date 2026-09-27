@@ -1,0 +1,7 @@
+Action 32. Billing address step, 4 s after arriving (logged in as customer):
+all six fields empty, proceedDisabled true. No required / maxlength / aria-invalid attributes on any field.
+Action 34. About 40 s later, same step:
+{"country":"","postal_code":"","house_number":"","street":"Test street 98","city":"Vienna","state":"","countryOptions":249,"proceedDisabled":true}
+API GET /users/me address for the same customer:
+{"street":"Test street 98","house_number":null,"city":"Vienna","state":null,"country":"Austria","postal_code":null}
+Network at action 33: GET /users/me => 401 once directly after login, then 200, 200, one pending.

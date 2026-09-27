@@ -1,0 +1,4 @@
+Action 36. After filling Country=Austria, Postal code=00000, House number=1, State left empty:
+{"fields":{"country":"AT","postal_code":"00000","house_number":"1","street":"Test street 98","city":"Vienna","state":""},"proceedDisabled":true,"errors":["Looking up your address..."]}
+No message says which field is missing. Select value is the code "AT"; the profile stores the name "Austria".
+After State was filled (action 37) the Proceed button accepted the click (action 38) with postal code 00000.

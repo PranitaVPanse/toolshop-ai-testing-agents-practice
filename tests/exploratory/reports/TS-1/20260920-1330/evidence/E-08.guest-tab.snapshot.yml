@@ -1,0 +1,87 @@
+- generic [ref=f2e2]:
+  - generic [ref=f2e3]:
+    - text: View the
+    - link "Documentation" [ref=f2e4] [cursor=pointer]:
+      - /url: https://testsmith-io.github.io/practice-software-testing/#/
+    - text: for this application.
+  - generic [ref=f2e5]:
+    - generic [ref=f2e7]:
+      - generic [ref=f2e8]: Practice Black Box Testing & Bug Hunting
+      - button "Testing Guide" [ref=f2e9] [cursor=pointer]
+    - navigation [ref=f2e10]:
+      - generic [ref=f2e11]:
+        - link "Practice Software Testing - Toolshop" [ref=f2e12] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e31]:
+          - menubar "Main menu" [ref=f2e32]:
+            - menuitem [ref=f2e33]:
+              - link "Home" [ref=f2e34] [cursor=pointer]:
+                - /url: /
+            - menuitem [ref=f2e35]:
+              - button "Categories" [ref=f2e36] [cursor=pointer]
+            - menuitem [ref=f2e37]:
+              - link "Contact" [ref=f2e38] [cursor=pointer]:
+                - /url: /contact
+            - menuitem [ref=f2e39]:
+              - link "Sign in" [ref=f2e40] [cursor=pointer]:
+                - /url: /auth/login
+            - menuitem [ref=f2e41]:
+              - link "cart" [ref=f2e42] [cursor=pointer]:
+                - /url: /checkout
+                - generic [ref=f2e46]: "3"
+          - button "Select language" [ref=f2e48] [cursor=pointer]: EN
+  - generic [ref=f2e72]:
+    - list [ref=f2e74]:
+      - listitem [ref=f2e128]:
+        - generic [ref=f2e129] [cursor=pointer]:
+          - generic [ref=f2e130]: Cart
+          - generic [ref=f2e131]: "1"
+      - listitem:
+        - generic:
+          - generic: Sign in
+          - generic: "2"
+      - listitem:
+        - generic:
+          - generic: Billing Address
+          - generic: "3"
+      - listitem:
+        - generic:
+          - generic: Payment
+          - generic: "4"
+    - generic [ref=f2e137]:
+      - tablist [ref=f2e139]:
+        - tab "Sign in" [ref=f2e141] [cursor=pointer]
+        - tab "Continue as Guest" [active] [selected] [ref=f2e143] [cursor=pointer]
+      - tabpanel [ref=f2e160]:
+        - heading "Continue as Guest" [level=3] [ref=f2e161]
+        - paragraph [ref=f2e162]: Checkout without creating an account
+        - generic [ref=f2e163]:
+          - generic [ref=f2e164]:
+            - generic [ref=f2e165]: Email address *
+            - textbox "Email address *" [ref=f2e166]:
+              - /placeholder: Your email
+          - generic [ref=f2e167]:
+            - generic [ref=f2e168]: First name *
+            - textbox "First name *" [ref=f2e169]:
+              - /placeholder: Your first name
+          - generic [ref=f2e170]:
+            - generic [ref=f2e171]: Last name *
+            - textbox "Last name *" [ref=f2e172]:
+              - /placeholder: Your last name
+          - button "Continue as Guest" [ref=f2e174] [cursor=pointer]
+  - contentinfo [ref=f2e53]:
+    - generic [ref=f2e54]:
+      - generic [ref=f2e55]:
+        - text: This is a DEMO application, used for software testing training purpose. |
+        - link "Privacy Policy" [ref=f2e56] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=f2e57] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=f2e58] [cursor=pointer]:
+          - /url: https://unsplash.com/photos/t5YUoHW6zRo
+        - text: .
+      - generic [ref=f2e59]: vdev | Built 2026-09-19 | Angular 20.0.5
+  - button "Open chat" [ref=f2e61] [cursor=pointer]
+  - button "Show live shop activity" [ref=f2e65] [cursor=pointer]

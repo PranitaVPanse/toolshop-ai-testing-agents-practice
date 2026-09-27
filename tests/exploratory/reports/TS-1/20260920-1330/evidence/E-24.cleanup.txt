@@ -1,0 +1,3 @@
+After the run, via API as the customer: GET /invoices total=160, created on 2026-09-20: 0. No order was created by this run.
+Cart 01m2zcxqzvng4ywvjazv217mk4 held 1 line, quantity 3. DELETE /carts/<id> => 204, then GET => 404.
+The DELETE needed no Authorization header.

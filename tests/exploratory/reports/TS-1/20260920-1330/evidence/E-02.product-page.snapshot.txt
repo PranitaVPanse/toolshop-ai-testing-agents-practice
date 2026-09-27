@@ -1,0 +1,10 @@
+Action 5, /product/<id> Combination Pliers, snapshot of app-detail (excerpt)
+- heading "Combination Pliers" [level=1]
+- generic: $14.15
+- button "Decrease quantity"
+- spinbutton "Quantity": "1"
+- button "Increase quantity"
+- button [ref=e457]   <- add to cart, NO accessible name
+- button [ref=e461]   <- NO accessible name
+- button [ref=e465]   <- NO accessible name
+MCP resolved the clicked controls to [data-test="increase-quantity"] and [data-test="add-to-cart"].
