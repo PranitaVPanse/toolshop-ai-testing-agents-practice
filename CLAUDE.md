@@ -5,7 +5,7 @@ the final decisions.
 
 ## Exploratory testing agent
 
-Run: `/exploratory-testing tests/exploratory/stories/<story>.md`
+Run: `/exploratory-testing <issue key>` (Jira) or `/exploratory-testing tests/exploratory/stories/<story>.md`
 
 - Skill: `.claude/skills/exploratory-testing/` (app-agnostic. Keep anything about Toolshop out of it)
 - Context file: `tests/exploratory/context.md`
@@ -13,7 +13,8 @@ Run: `/exploratory-testing tests/exploratory/stories/<story>.md`
 - Reports: `tests/exploratory/reports/<story-id>/<vX.Y>/`. Drafts are `vX.1`, `vX.2`, ...;
   a signed-off report is `vX.0`. `npm run report:explore -- <folder>` renders `report.html`.
 - Sign-off: `/exploratory-testing <story> sign-off` writes the signed version, appends the
-  decisions to `knowledge/decisions.md` and deletes the drafts' `evidence/` folders only.
+  decisions to `knowledge/decisions.md`, copies the evidence it cites into the signed version and
+  deletes the draft folders.
 - Browser: the `playwright` MCP server from `.mcp.json` only.
 - Jira: the `atlassian` MCP server from `.mcp.json` (OAuth, run `/mcp` once to sign in). Run the
   agent on an issue with `/exploratory-testing KAN-1`. Site, project and rules are in the context file.
