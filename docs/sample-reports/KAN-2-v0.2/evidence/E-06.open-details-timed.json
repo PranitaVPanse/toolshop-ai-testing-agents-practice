@@ -1,0 +1,14 @@
+{
+  "note": "run_code result, actions 28-31: wait for the Circular Saw card name (28), click it (29), wait for /product/ URL (30), wait for the h1 (31); DOM read at the end. Product id masked in url (ids change on reset).",
+  "cardVisibleMs": 21,
+  "cardCount": 1,
+  "href": "/product/<id>",
+  "clickIso": "2026-10-15T19:47:33.567Z",
+  "urlMs": 255,
+  "h1Ms": 23717,
+  "url": "http://localhost:4200/product/<id>",
+  "title": "Circular Saw - Practice Software Testing - Toolshop - v5.0",
+  "h1Count": 1,
+  "unitPrice": ["80.19"],
+  "category": ["Saw"]
+}

@@ -1,0 +1,2886 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automation-readiness report: TS-2 Customer browses and rents heavy equipment from the Rentals page</title>
+<style>
+  :root { --ink: #1f2933; --muted: #6b7280; --line: #e5e7eb; --bg: #f6f7f9; --card: #fff; --accent: #4f46e5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+  header { background: var(--card); border-bottom: 1px solid var(--line); padding: 20px 32px; }
+  header h1 { margin: 0 0 12px; font-size: 22px; }
+  .status { display: inline-block; margin-left: 12px; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; vertical-align: middle; }
+  .status.draft { background: #fef3c7; color: #92400e; }
+  .status.signed { background: #d1fae5; color: #065f46; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; font-size: 14px; }
+  .fact { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 6px 0; border-top: 1px solid var(--line); }
+  .fact span { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+  @media (max-width: 900px) { .facts { grid-template-columns: 1fr; } }
+  nav { position: sticky; top: 0; z-index: 1; background: var(--card); border-bottom: 1px solid var(--line); padding: 8px 32px; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+  nav a { color: var(--accent); text-decoration: none; }
+  main { max-width: 1400px; margin: 0 auto; padding: 24px 32px 64px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; margin: 0 0 16px; padding: 0 20px 4px; }
+  summary { cursor: pointer; font-size: 18px; font-weight: 600; padding: 14px 0; list-style: none; }
+  summary::before { content: "▸ "; color: var(--muted); font-size: 14px; }
+  details[open] > summary::before { content: "▾ "; }
+  details.appendix summary { font-size: 15px; color: var(--muted); }
+  details.scenario { border: 0; margin: 0; padding: 0; background: none; }
+  details.scenario summary { font-size: 14px; font-weight: 500; padding: 0; color: var(--accent); }
+  details.scenario pre { margin: 8px 0 4px; }
+  h3 { font-size: 15px; margin: 20px 0 8px; }
+  blockquote { margin: 12px 0; padding: 10px 16px; border-left: 4px solid var(--accent); background: #eef2ff; border-radius: 0 6px 6px 0; }
+  blockquote p { margin: 4px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 16px; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f3f4f6; font-weight: 600; white-space: nowrap; }
+  tr:nth-child(even) td { background: #fafafa; }
+  td.qa { background: #fffbeb !important; }
+  td.qa.empty { color: var(--muted); text-align: center; }
+  code { font: 13px/1.4 ui-monospace, Consolas, monospace; background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+  pre { background: #1f2933; color: #e5e7eb; padding: 14px; border-radius: 6px; overflow: auto; font-size: 13px; }
+  pre code { background: none; color: inherit; padding: 0; }
+  pre.comment { background: #f9fafb; color: var(--ink); border: 1px solid var(--line); white-space: pre-wrap; font: 14px/1.5 system-ui, sans-serif; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .tag-observed { background: #d1fae5; color: #065f46; }
+  .tag-inferred { background: #dbeafe; color: #1e40af; }
+  .tag-assumed { background: #fef3c7; color: #92400e; }
+  .ok, .dec-now, .grade-a { background: #d1fae5; color: #065f46; }
+  .warn, .dec-clarify, .grade-c { background: #fef3c7; color: #92400e; }
+  .bad, .grade-d { background: #fee2e2; color: #991b1b; }
+  .muted, .dec-no { background: #e5e7eb; color: #374151; }
+  .dec-explore, .grade-b { background: #dbeafe; color: #1e40af; }
+  .type-func { background: #ede9fe; color: #5b21b6; }
+  .type-reg { background: #ffedd5; color: #9a3412; }
+  .st-stable, .st-risk, .st-blocked { background: none; padding-left: 0; font-weight: 500; }
+  .st-stable::before { content: "✅ "; }
+  .st-risk::before { content: "⚠️ "; }
+  .st-blocked::before { content: "⛔ "; }
+  @media (max-width: 700px) { header, nav, main { padding-left: 16px; padding-right: 16px; } table { display: block; overflow-x: auto; } }
+  @media print { nav { display: none; } details { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Automation-readiness report: TS-2 Customer browses and rents heavy equipment from the Rentals page<span class="status draft">Draft</span></h1>
+  <div class="facts"><div class="facts-col"><div class="fact"><span>Version</span><div>v0.1 (draft)<br>previous: none</div></div><div class="fact"><span>Environment</span><div>local: UI <a href="http://localhost:4200">http://localhost:4200</a>, API <a href="http://localhost:8091">http://localhost:8091</a></div></div><div class="fact"><span>Run</span><div>2026-10-10, browser work 21:50 to 22:01</div></div></div><div class="facts-col"><div class="fact"><span>Budget</span><div>59 of 60 actions<br>11 of 20 minutes<br>stopped: new paths closed at 80 percent of the action budget (action 48), the rest went to cart locators and cleanup</div></div><div class="fact"><span>Story source</span><div><code>tests/exploratory/stories/rentals-overview.md</code> (status Draft)</div></div><div class="fact"><span>Inputs</span><div>story<br>context file<br>knowledge: e2e-flows.md, decisions.md (empty), rules.md, pages/rentals.md, pages/product-details.md, pages/cart-checkout.md, pages/account.md<br>OpenAPI Toolshop API 5.0.0<br>previous review: none</div></div></div></div>
+</header>
+<nav><a href="#s0">Summary</a><a href="#s1">Acceptance criteria</a><a href="#s2">Findings</a><a href="#s3">Open questions</a><a href="#s4">Test scenarios</a><a href="#s5">Locators and testability</a><a href="#s6">Test data and cleanup</a><a href="#s7">Next step</a></nav>
+<main>
+<details open id="s0"><summary>1. Summary</summary>
+<p>Look at these first:</p>
+<ul>
+<li><strong>The 10-hour limit holds on the details page only.</strong> The cart accepts 11 hours, and adding the same rental again sums the hours past 10 (F-17, F-27, Q-02).</li>
+<li><strong>Three criteria describe feedback that did not appear.</strong> No confirmation after Add to cart (2 of 2 adds), an &quot;Unauthorized&quot; alert instead of a sign-in request, and Compare with no visible result and no <code>/compare</code> route (AC 7, AC 10, F-24, Q-03, Q-08, Q-09).</li>
+<li><strong>Related products and category look like a data problem.</strong> Every rental lists four cordless drills before the other machines, and all three machines have the category &quot;Drill&quot; (AC 9, F-20, Q-06, Q-07).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Acceptance criteria</td>
+<td>5 met · 6 partly · 0 not met · 1 not explored</td>
+</tr>
+<tr>
+<td>Findings</td>
+<td>4 defects · 3 risks · 2 gaps</td>
+</tr>
+<tr>
+<td>Open questions</td>
+<td>12 open · 0 answered</td>
+</tr>
+<tr>
+<td>Scenarios</td>
+<td>8 automate now · 10 clarify first · 2 keep exploratory · 1 not worth automating</td>
+</tr>
+<tr>
+<td>Locators</td>
+<td>27 stable · 8 at risk · 2 blocked</td>
+</tr>
+<tr>
+<td>Your input</td>
+<td><code>qa-review.md</code>: 12 answers, 21 decisions</td>
+</tr>
+</tbody></table>
+</details><details open id="s1"><summary>2. Acceptance criteria</summary>
+<table>
+<thead>
+<tr>
+<th>AC</th>
+<th>Criterion</th>
+<th>Result</th>
+<th>Observed</th>
+<th>Tag</th>
+<th>Scenarios</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Navigation: menu entry, <code>/rentals</code>, heading, title</td>
+<td><span class="badge warn">partly</span></td>
+<td>Title is &quot;Rentals Overview - Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-01, S-02</td>
+<td><a class="ev" href="evidence/E-01.menu.snapshot.yml">E-01</a>, <a class="ev" href="evidence/E-02.rentals-overview.snapshot.yml">E-02</a>, <a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Overview: three cards with photo, name, description; rentals only</td>
+<td><span class="badge ok">met</span></td>
+<td></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-03</td>
+<td><a class="ev" href="evidence/E-02.rentals-overview.snapshot.yml">E-02</a>, <a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Card name or photo opens the matching details</td>
+<td><span class="badge ok">met</span></td>
+<td>Name tried on Excavator and Crane, photo on Bulldozer</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-04</td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-12.bulldozer-details.snapshot.yml">E-12</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Details: photo with credit, name, category, brand, CO2, description, &quot;$&lt;price&gt; per hour&quot;</td>
+<td><span class="badge ok">met</span></td>
+<td>Category value is &quot;Drill&quot; (F-20)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-05</td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-14.crane-details.snapshot.yml">E-14</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Duration 1 to 10 whole hours, default 1, label shows the value</td>
+<td><span class="badge ok">met</span></td>
+<td>Slider; bounds hold by keyboard</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-06, S-07</td>
+<td><a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a>, <a class="ev" href="evidence/E-05.excavator-duration-3.snapshot.yml">E-05</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Total = price x duration, two decimals, updates at once</td>
+<td><span class="badge ok">met</span></td>
+<td>$409.50 for Excavator, 3 hours</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-07</td>
+<td><a class="ev" href="evidence/E-05.excavator-duration-3.snapshot.yml">E-05</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Add to cart: confirmation message, cart count increases</td>
+<td><span class="badge warn">partly</span></td>
+<td>Count rises by the hours (3), about 3 s late; no confirmation message present</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-08, S-09</td>
+<td><a class="ev" href="evidence/E-06.after-add-to-cart.snapshot.yml">E-06</a>, <a class="ev" href="evidence/E-07.after-add-dom.json">E-07</a>, <a class="ev" href="evidence/E-21.second-add.snapshot.txt">E-21</a>, <a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Cart line: name, duration, line total; cart total includes it</td>
+<td><span class="badge warn">partly</span></td>
+<td>Duration is an unlabelled &quot;Quantity&quot; field; nothing says hours</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-08</td>
+<td><a class="ev" href="evidence/E-08.cart.snapshot.yml">E-08</a>, <a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Related products list the other rental items, not itself; item opens details</td>
+<td><span class="badge warn">partly</span></td>
+<td>Four cordless drills are listed before the two other rentals</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-12</td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-14.crane-details.snapshot.yml">E-14</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Favourites and Compare work; visitor is asked to sign in</td>
+<td><span class="badge warn">partly</span></td>
+<td>Customer favourite works. Visitor gets &quot;Unauthorized, can not add product to your favorite list.&quot;. Compare shows nothing (F-24)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-13, S-14, S-15</td>
+<td><a class="ev" href="evidence/E-15.favourite-visitor.snapshot.yml">E-15</a>, <a class="ev" href="evidence/E-17.after-compare-dom.json">E-17</a>, <a class="ev" href="evidence/E-30.favourites-with-crane.json">E-30</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Unavailable rental says so and cannot be added</td>
+<td><span class="badge muted">not explored</span></td>
+<td>No unavailable rental on local, and no way found to create one</td>
+<td><span class="badge tag-assumed">Assumed (rules.md)</span></td>
+<td>S-16</td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Fixed labels are translated</td>
+<td><span class="badge warn">partly</span></td>
+<td>German only: heading, &quot;pro Stunde&quot;, &quot;Dauer&quot;, &quot;Verwandte Produkte&quot; translated; &quot;Total&quot; unchanged</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-17</td>
+<td><a class="ev" href="evidence/E-19.rentals-de.snapshot.yml">E-19</a>, <a class="ev" href="evidence/E-20.excavator-de.snapshot.yml">E-20</a>, <a class="ev" href="evidence/E-25.rentals-mobile-dom.json">E-25</a></td>
+</tr>
+</tbody></table>
+<p>The story does not say: the page title suffix (Q-01); whether the cart enforces the 10 hours (Q-02); the confirmation text (Q-03); what the cart count counts (Q-04); how the cart shows a duration (Q-05); how a rental becomes unavailable (Q-10); which languages and whether the tab title counts (Q-11); what the mobile layout must do (Q-12). Empty and error states of <code>/rentals</code> and keyboard use are not covered by any question yet: see F-29 and the ledger&#39;s gap list.</p>
+</details><details open id="s2"><summary>3. Findings</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Finding</th>
+<th>Type</th>
+<th>Severity</th>
+<th>AC</th>
+<th>Tag</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F-17</td>
+<td>The cart accepts 11 hours for a rental ($1,501.50). The field allows 1 to 99</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge bad">high</span></td>
+<td>5</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.cart-qty-11.snapshot.yml">E-10</a>, <a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>F-27</td>
+<td>Adding the same rental again merges into one line and sums the hours: 11 + 1 = 12, $1,638.00</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge bad">high</span></td>
+<td>5, 7</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a>, <a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>F-24</td>
+<td><code>/compare</code> is not a route (redirect to home, console NG04002). No way to see a comparison was found</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>10</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-18.compare-route.txt">E-18</a></td>
+</tr>
+<tr>
+<td>F-29</td>
+<td>Rental cards have no link, role or <code>tabindex</code>, so a keyboard user cannot open one (inferred, Tab key not tried)</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>3</td>
+<td>Observed, consequence Inferred</td>
+<td><a class="ev" href="evidence/E-25.rentals-mobile-dom.json">E-25</a>, <a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>F-20</td>
+<td>All three machines show the category &quot;Drill&quot;; this is probably why drills are their related products</td>
+<td><span class="badge warn">risk</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>4, 9</td>
+<td>Observed, cause Inferred from F-06</td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-14.crane-details.snapshot.yml">E-14</a></td>
+</tr>
+<tr>
+<td>F-15</td>
+<td>Every cart load logs &quot;Cannot read properties of undefined (reading &#39;cart_items&#39;)&quot;; visitors also get 401 console errors on every page (F-16). Tests cannot assert a clean console</td>
+<td><span class="badge warn">risk</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>8</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.console-to-cart.log">E-09</a>, <a class="ev" href="evidence/E-34.console-cart-customer.txt">E-34</a></td>
+</tr>
+<tr>
+<td>F-13</td>
+<td>The cart badge is missing or stale right after an add and correct within 3 s; tests must wait for it</td>
+<td><span class="badge warn">risk</span></td>
+<td><span class="badge ok">low</span></td>
+<td>7</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-06.after-add-to-cart.snapshot.yml">E-06</a>, <a class="ev" href="evidence/E-07.after-add-dom.json">E-07</a>, <a class="ev" href="evidence/E-21.second-add.snapshot.txt">E-21</a>, <a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a></td>
+</tr>
+<tr>
+<td>F-11</td>
+<td>Money format differs: &quot;$1475.00&quot; on details, &quot;$1,501.50&quot; in the cart</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>6, 8</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-10.cart-qty-11.snapshot.yml">E-10</a></td>
+</tr>
+<tr>
+<td>F-28</td>
+<td>At 375 px there is no sideways scroll, but the chat button covers the start of the description</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>none</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-23.details-mobile-375.png">E-23</a>, <a class="ev" href="evidence/E-24.rentals-mobile-375.png">E-24</a>, <a class="ev" href="evidence/E-25.rentals-mobile-dom.json">E-25</a></td>
+</tr>
+</tbody></table>
+<p>Not explored: AC 11 (no data); a normal product&#39;s details and rentals on the home overview (dropped at the 80 percent mark); languages other than German; compare with two products; empty and error states of <code>/rentals</code>. Four statements in the knowledge files did not hold in this run (compare route, focusable cards, favourites test id, toast frequency): see F-35 in the ledger.</p>
+</details><details open id="s3"><summary>4. Open questions</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Question</th>
+<th>For</th>
+<th>Agent&#39;s assumption</th>
+<th>Blocks</th>
+<th>Answer (QA)</th></tr>
+</thead>
+<tbody><tr><td>Q-01</td>
+<td>Is the title with the app suffix acceptable for AC 1?</td>
+<td>product owner</td>
+<td>Yes; assert that the title starts with &quot;Rentals Overview&quot;</td>
+<td>S-02</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-02</td>
+<td>Must the cart keep a rental at 10 hours at most, both when the quantity is edited and when the same rental is added again?</td>
+<td>product owner</td>
+<td>Yes; F-17 and F-27 are defects</td>
+<td>S-10, S-11</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-03</td>
+<td>Which confirmation message must Add to cart show? None appeared in 2 of 2 adds</td>
+<td>product owner</td>
+<td>&quot;Product added to shopping cart.&quot; (product-details.md); its absence is a defect</td>
+<td>S-09</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-04</td>
+<td>Should the cart count show items or hours? One 3-hour rental shows 3</td>
+<td>product owner</td>
+<td>Hours are not intended; a rental counts as 1</td>
+<td>S-09</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-05</td>
+<td>How should the cart show the duration? Today it is a &quot;Quantity&quot; field with no unit</td>
+<td>product owner</td>
+<td>Label it as hours</td>
+<td>S-08 (label only)</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-06</td>
+<td>Should related products hold only the other rentals? Today drills come first</td>
+<td>product owner</td>
+<td>Only rentals, as AC 9 reads</td>
+<td>S-12</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-07</td>
+<td>Is &quot;Drill&quot; the intended category for the three machines?</td>
+<td>domain</td>
+<td>No; seed data error</td>
+<td>S-05 (value only), S-12</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-08</td>
+<td>Is the &quot;Unauthorized&quot; alert the intended way to ask a visitor to sign in?</td>
+<td>product owner</td>
+<td>No; a sign-in prompt or redirect is meant</td>
+<td>S-13</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-09</td>
+<td>Where does a customer see the comparison after selecting Compare?</td>
+<td>product owner</td>
+<td>A compare page should exist; it is missing on local</td>
+<td>S-15</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-10</td>
+<td>How can a rental be made unavailable on local, and what text must the page show?</td>
+<td>environment</td>
+<td>Seed one rental with <code>in_stock: false</code>; text &quot;Out of stock&quot; (rules.md)</td>
+<td>S-16</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-11</td>
+<td>Must &quot;Total&quot; and the browser title be translated, and which languages count for AC 12?</td>
+<td>product owner</td>
+<td>&quot;Total&quot; must be translated; all seven languages; title not required</td>
+<td>S-17</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-12</td>
+<td>What must the mobile layout satisfy? It is in scope without a criterion</td>
+<td>product owner</td>
+<td>No sideways scroll, nothing covered</td>
+<td>S-18</td>
+<td class="qa empty">—</td></tr>
+</tbody></table>
+</details><details open id="s4"><summary>5. Test scenarios</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Level</th>
+<th>Decision</th>
+<th>Reason</th>
+<th>Depends on</th>
+<th>QA decision</th></tr>
+</thead>
+<tbody><tr><td>S-01</td><td><details class="scenario"><summary>Rentals page opens from the Categories menu</summary><pre class="gherkin">  Scenario: S-01 Rentals page opens from the Categories menu
+    Given a visitor is on the home page
+    When the visitor selects "Rentals" in the "Categories" menu
+    Then the Rentals page is shown at "/rentals"
+    And the heading "Rentals" is shown
+
+  @S-02 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed, clear criterion, locators A and B</td>
+<td></td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-02</td><td><details class="scenario"><summary>Rentals page title</summary><pre class="gherkin">  Scenario: S-02 Rentals page title
+    Given a visitor is on the Rentals page
+    Then the page title is "Rentals Overview"
+
+  @S-03 @functional @automate-now</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Expected and observed title differ</td>
+<td>Q-01</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-03</td><td><details class="scenario"><summary>Rentals page lists only the three rental machines</summary><pre class="gherkin">  Scenario: S-03 Rentals page lists only the three rental machines
+    Given a visitor is on the Rentals page
+    Then exactly these rental cards are shown:
+      | Excavator |
+      | Bulldozer |
+      | Crane     |
+    And each card shows a photo, a name and a description
+
+  @S-04 @functional @automate-now</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>both: UI and <code>GET /products?is_rental=true</code></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed and stable; the &quot;only rentals&quot; rule is cheaper at API level</td>
+<td></td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-04</td><td><details class="scenario"><summary>A rental card opens its details page</summary><pre class="gherkin">  Scenario Outline: S-04 A rental card opens its details page
+    Given a visitor is on the Rentals page
+    When the visitor selects the &lt;part&gt; of the "&lt;item&gt;" card
+    Then the details page of "&lt;item&gt;" is shown
+
+    Examples:
+      | item      | part  |
+      | Excavator | name  |
+      | Bulldozer | photo |
+      | Crane     | name  |
+
+  @S-05 @functional @automate-now</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed for all three; name and photo locators grade A</td>
+<td></td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-05</td><td><details class="scenario"><summary>Rental details show the hourly price and product information</summary><pre class="gherkin">  Scenario Outline: S-05 Rental details show the hourly price and product information
+    Given a visitor is on the details page of the rental "&lt;item&gt;"
+    Then the price is shown as "$&lt;price&gt; per hour"
+    And the photo with its credit, the category, the brand, the CO2 rating and the description are shown
+
+    Examples:
+      | item      | price  |
+      | Excavator | 136.50 |
+      | Bulldozer | 147.50 |
+      | Crane     | 153.50 |
+
+  @S-06 @functional @automate-now</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed; assert the price number and that each field is shown; category value waits for Q-07</td>
+<td>T-06 for the unit and credit text</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-06</td><td><details class="scenario"><summary>Duration defaults to 1 hour and stays between 1 and 10</summary><pre class="gherkin">  Scenario: S-06 Duration defaults to 1 hour and stays between 1 and 10
+    Given a visitor is on the details page of the rental "Bulldozer"
+    Then the duration is 1 hour
+    When the visitor moves the duration to its maximum and one step further
+    Then the duration is 10 hours
+    When the visitor moves the duration to its minimum and one step further
+    Then the duration is 1 hour
+
+  @S-07 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed by keyboard; assert the slider&#39;s value</td>
+<td></td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-07</td><td><details class="scenario"><summary>Label and total follow the chosen duration</summary><pre class="gherkin">  Scenario Outline: S-07 Label and total follow the chosen duration
+    Given a visitor is on the details page of the rental "&lt;item&gt;"
+    When the visitor sets the duration to &lt;hours&gt; hours
+    Then the duration label reads "Duration (&lt;hours&gt; hour(s))"
+    And the total reads "(Total $&lt;total&gt;)"
+
+    Examples:
+      | item      | hours | total   |
+      | Excavator | 1     | 136.50  |
+      | Excavator | 3     | 409.50  |
+      | Bulldozer | 10    | 1475.00 |
+
+  @S-08 @functional @automate-now</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Behaviour is correct, but the label and total have grade C locators only</td>
+<td>T-02, T-03</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-08</td><td><details class="scenario"><summary>A rental is added to the cart with its duration and total</summary><pre class="gherkin">  Scenario: S-08 A rental is added to the cart with its duration and total
+    Given a visitor is on the details page of the rental "Excavator"
+    And the visitor sets the duration to 3 hours
+    When the visitor adds the rental to the cart
+    And the visitor opens the cart
+    Then the cart has one line for "Excavator" marked as a rental priced per hour
+    And the line shows 3 hours, the price "$136.50" and the line total "$409.50"
+    And the cart total is "$409.50"
+
+  @S-09 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI; cart cleanup by <code>DELETE /carts/{cartId}</code></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed; cart locators A and B; wait for the cart line, not the badge</td>
+<td>Q-05 and T-07 for the rental note only</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-09</td><td><details class="scenario"><summary>Adding a rental confirms and updates the cart count</summary><pre class="gherkin">  Scenario: S-09 Adding a rental confirms and updates the cart count
+    Given a visitor is on the details page of the rental "Excavator"
+    And the visitor sets the duration to 3 hours
+    When the visitor adds the rental to the cart
+    Then a confirmation message is shown
+    And the cart count in the header increases
+
+  @S-10 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>No message appeared; count shows hours</td>
+<td>Q-03, Q-04</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-10</td><td><details class="scenario"><summary>The cart does not allow a rental longer than 10 hours</summary><pre class="gherkin">  Scenario: S-10 The cart does not allow a rental longer than 10 hours
+    Given a visitor has the rental "Excavator" in the cart for 3 hours
+    When the visitor changes the rental's duration in the cart to 11
+    Then the change is rejected
+    And the line still shows 3 hours
+
+  @S-11 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>API: <code>PUT /carts/{cartId}/product/quantity</code>, one UI check</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Observed behaviour contradicts the story&#39;s limit</td>
+<td>Q-02</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-11</td><td><details class="scenario"><summary>Adding the same rental again does not pass 10 hours</summary><pre class="gherkin">  Scenario: S-11 Adding the same rental again does not pass 10 hours
+    Given a visitor has the rental "Excavator" in the cart for 10 hours
+    When the visitor adds the rental "Excavator" for 1 hour again
+    Then the cart does not hold more than 10 hours of "Excavator"
+
+  @S-12 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>API: <code>POST /carts/{id}</code></td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Same rule as S-10</td>
+<td>Q-02</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-12</td><td><details class="scenario"><summary>Related products list the other rentals</summary><pre class="gherkin">  Scenario: S-12 Related products list the other rentals
+    Given a visitor is on the details page of the rental "Excavator"
+    Then the related products are "Bulldozer" and "Crane"
+    And "Excavator" is not among the related products
+    When the visitor selects the related product "Crane"
+    Then the details page of "Crane" is shown
+
+  @S-13 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>both: UI and <code>GET /products/{productId}/related</code></td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Drills are listed too</td>
+<td>Q-06, Q-07</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-13</td><td><details class="scenario"><summary>A visitor is asked to sign in before adding a favourite</summary><pre class="gherkin">  Scenario: S-13 A visitor is asked to sign in before adding a favourite
+    Given a visitor is on the details page of the rental "Crane"
+    When the visitor selects "Add to favourites"
+    Then the visitor is asked to sign in
+    And the rental is not added to any favourites list
+
+  @S-14 @functional @automate-now</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI; <code>POST /favorites</code> 401 at API level</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Observed message differs from the criterion</td>
+<td>Q-08</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-14</td><td><details class="scenario"><summary>A logged-in customer adds a rental to favourites</summary><pre class="gherkin">  Scenario: S-14 A logged-in customer adds a rental to favourites
+    Given a logged-in customer is on the details page of the rental "Crane"
+    When the customer selects "Add to favourites"
+    Then "Crane" is listed under the customer's favourites
+    And the test removes "Crane" from the favourites afterwards
+
+  @S-15 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI; setup and cleanup by <code>/favorites</code></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed; cleanup possible; must remove the favourite on the shared account</td>
+<td></td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-15</td><td><details class="scenario"><summary>A rental can be compared</summary><pre class="gherkin">  Scenario: S-15 A rental can be compared
+    Given a visitor is on the details page of the rental "Crane"
+    When the visitor selects "Compare"
+    Then "Crane" is shown in the comparison
+
+  @S-16 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>No visible result, no compare page</td>
+<td>Q-09</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-16</td><td><details class="scenario"><summary>An unavailable rental cannot be added to the cart</summary><pre class="gherkin">  Scenario: S-16 An unavailable rental cannot be added to the cart
+    Given the rental "Crane" is not available
+    When a visitor opens the details page of "Crane"
+    Then the page says the rental is not available
+    And the rental cannot be added to the cart
+
+  @S-17 @functional @clarify-first</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Not reproducible on local</td>
+<td>Q-10</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-17</td><td><details class="scenario"><summary>Rental labels are translated</summary><pre class="gherkin">  Scenario: S-17 Rental labels are translated
+    Given a visitor has chosen the language "DE"
+    When the visitor opens the Rentals page and the details page of "Excavator"
+    Then the heading, "per hour", "Duration", "Total" and "Related products" are shown in German
+
+  @S-18 @functional @keep-exploratory</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>&quot;Total&quot; unchanged; scope of languages open; tests run in English</td>
+<td>Q-11</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-18</td><td><details class="scenario"><summary>Rentals pages are usable at mobile width</summary><pre class="gherkin">  Scenario: S-18 Rentals pages are usable at mobile width
+    Given a visitor uses a viewport 375 pixels wide
+    When the visitor opens the Rentals page and the details page of "Excavator"
+    Then nothing is cut off, overlapped or scrolls sideways
+
+  @S-19 @regression @not-worth-automating</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-explore">Keep exploratory</span></td>
+<td>Visual judgment; no criterion</td>
+<td>Q-12</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-19</td><td><details class="scenario"><summary>The Rentals page opens from a direct link and keeps the cart</summary><pre class="gherkin">  Scenario: S-19 The Rentals page opens from a direct link and keeps the cart
+    Given a visitor has a rental in the cart
+    When the visitor opens "/rentals" directly
+    Then the Rentals page is shown
+    And the cart still holds the rental
+
+  @S-20 @regression @automate-now</pre></details></td>
+<td><span class="badge type-reg">regression</span></td>
+<td>UI</td>
+<td><span class="badge dec-no">Not worth automating</span></td>
+<td>Low risk; S-01 and S-20 cover the route and the cart</td>
+<td></td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-20</td><td><details class="scenario"><summary>A visitor&#39;s cart with a rental survives login</summary><pre class="gherkin">  Scenario: S-20 A visitor's cart with a rental survives login
+    Given a visitor has the rental "Excavator" in the cart for 3 hours
+    When the visitor logs in as a customer
+    And the customer opens the cart
+    Then the cart still has "Excavator" for 3 hours with the line total "$409.50"
+
+  @S-21 @regression @keep-exploratory</pre></details></td>
+<td><span class="badge type-reg">regression</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed; login page object exists; cart is session data</td>
+<td></td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-21</td><td><details class="scenario"><summary>A normal product still uses a quantity, not a duration</summary><pre class="gherkin">  Scenario: S-21 A normal product still uses a quantity, not a duration
+    Given a visitor is on the details page of a normal product
+    Then a quantity control is shown
+    And no duration, "per hour" or rental total is shown</pre></details></td>
+<td><span class="badge type-reg">regression</span></td>
+<td>UI</td>
+<td><span class="badge dec-explore">Keep exploratory</span></td>
+<td>Not reached in this run; explore it in the next one</td>
+<td></td>
+<td class="qa empty">—</td></tr>
+</tbody></table>
+</details><details open id="s5"><summary>6. Locators and testability</summary>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Status</th>
+<th>Best locator found</th>
+<th>Why it is at risk</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Total on details</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>getByText(/\(Total \$[\d.,]+\)/)</code></td>
+<td>Text with data; no test id (<code>id=&quot;total-price&quot;</code> exists, not counted)</td>
+</tr>
+<tr>
+<td>Duration label</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>getByText(/^Duration \(\d+ hour\(s\)\)$/)</code></td>
+<td>Translated text with data; not tied to the slider</td>
+</tr>
+<tr>
+<td>&quot;per hour&quot; unit</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>getByText(&#39;per hour&#39;, { exact: true })</code></td>
+<td>Translated bare text node</td>
+</tr>
+<tr>
+<td>Active CO2 letter</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>locator(&#39;.co2-letter.active&#39;)</code></td>
+<td>CSS class only</td>
+</tr>
+<tr>
+<td>Photo credit</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>getByRole(&#39;figure&#39;).getByText(/Photo by/)</code></td>
+<td>Translated text</td>
+</tr>
+<tr>
+<td>Card description on <code>/rentals</code></td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>locator(&#39;.card&#39;).filter({ has: &lt;name&gt; }).locator(&#39;p&#39;)</code></td>
+<td>Bootstrap class and tag</td>
+</tr>
+<tr>
+<td>Rental note in the cart</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>&lt;row&gt;.getByText(&#39;Item for rent, price per hour&#39;)</code></td>
+<td>Translated text</td>
+</tr>
+<tr>
+<td>Remove cart line</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>&lt;row&gt;.locator(&#39;.btn-danger&#39;)</code></td>
+<td>Anchor without role or name; style class</td>
+</tr>
+<tr>
+<td>Add-to-cart confirmation</td>
+<td><span class="badge st-blocked">blocked (D)</span></td>
+<td>none</td>
+<td>No element appeared</td>
+</tr>
+<tr>
+<td>Compare result</td>
+<td><span class="badge st-blocked">blocked (D)</span></td>
+<td>none</td>
+<td>No element appeared, no route</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Element</th>
+<th>Request</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T-01</td>
+<td>Rental cards and their description</td>
+<td>Make the name and photo a real link; add test id &quot;rental-description&quot;</td>
+<td>Keyboard access; stable card locator</td>
+</tr>
+<tr>
+<td>T-02</td>
+<td>Duration label</td>
+<td>Associate the label with the slider (<code>aria-labelledby</code>)</td>
+<td>Slider gets the name &quot;Duration&quot;; <code>getByLabel</code> works</td>
+</tr>
+<tr>
+<td>T-03</td>
+<td>Total on details</td>
+<td>Add test id &quot;total-price&quot; to the existing span and announce changes</td>
+<td>Exact total assertion; screen reader hears the new total</td>
+</tr>
+<tr>
+<td>T-04</td>
+<td>Remove cart line</td>
+<td>Use a button named &quot;Remove &lt;item&gt;&quot;</td>
+<td>Role locator; usable by keyboard and screen reader</td>
+</tr>
+<tr>
+<td>T-05</td>
+<td>Active CO2 letter</td>
+<td>Expose the rating as text or <code>aria-current</code></td>
+<td>Rating assertable and not colour-only</td>
+</tr>
+<tr>
+<td>T-06</td>
+<td>&quot;per hour&quot; unit and photo credit</td>
+<td>Add test ids &quot;price-unit&quot; and &quot;photo-credit&quot;</td>
+<td>Language-independent checks of AC 4</td>
+</tr>
+<tr>
+<td>T-07</td>
+<td>Rental note in the cart</td>
+<td>Add test id &quot;rental-note&quot; (wording after Q-05)</td>
+<td>Language-independent check of AC 8</td>
+</tr>
+<tr>
+<td>T-08</td>
+<td>Favourite&#39;s delete button</td>
+<td>Add the accessible name &quot;Remove &lt;item&gt; from favourites&quot;</td>
+<td>Role locator; screen reader users know what it deletes</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Keyboard and screen reader users are blocked or misled in four places: cards cannot be opened by keyboard (T-01), the slider is announced as &quot;ngx-slider&quot; (T-02), cart remove and favourites delete are unnamed icons (T-04, T-08), the CO2 rating is colour only (T-05).</li>
+<li>The two blocked elements wait on Q-03 and Q-09, not on a locator request. Compare gives no feedback at all.</li>
+</ul>
+</details><details open id="s6"><summary>7. Test data and cleanup</summary>
+<table>
+<thead>
+<tr>
+<th>Data created</th>
+<th>Cleaned up</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cart line Excavator (3 h, edited to 11, then 12)</td>
+<td>Yes: removed, cart confirmed empty (<a class="ev" href="evidence/E-35.cart-after-cleanup.json">E-35</a>)</td>
+</tr>
+<tr>
+<td>Favourite &quot;Crane&quot; on the shared demo customer</td>
+<td>Yes: deleted, the 3 seeded favourites confirmed untouched (<a class="ev" href="evidence/E-32.favourites-after-delete.json">E-32</a>)</td>
+</tr>
+<tr>
+<td>Compare selection &quot;Crane&quot; (session storage); language German (local storage)</td>
+<td>Yes: selection removed, language set back to English, customer signed out</td>
+</tr>
+<tr>
+<td>Records with a free-text name, orders</td>
+<td>None created, so no <code>ETA-</code> record exists</td>
+</tr>
+</tbody></table>
+</details><details open id="s7"><summary>8. Next step</summary>
+<p>Fill in <code>qa-review.md</code>: 12 answers and 21 decisions. Q-02, Q-03, Q-06 and Q-09 need the product owner and decide 5 scenarios; Q-10 needs test data before AC 11 can be explored. Then ask for a re-run (v0.2), which will also cover S-21.</p>
+</details>
+
+<details class="appendix"><summary>Appendix: QA review (your answers, decisions and Jira comment) <code>qa-review.md</code></summary><h1>QA review: TS-2 v0.1</h1>
+<p>Fill in the two tables. Leave a cell empty to keep the item pending. The next run reads this
+file; nothing else in the report needs editing.</p>
+<h2>Answers</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q-01</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-02</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-03</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-04</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-05</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-06</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-07</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-08</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-09</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-10</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-11</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-12</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Decisions</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Agent&#39;s decision</th>
+<th>QA decision</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S-01</td>
+<td>Rentals page opens from the Categories menu</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-02</td>
+<td>Rentals page title</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-03</td>
+<td>Rentals page lists only the three rental machines</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-04</td>
+<td>A rental card opens its details page</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-05</td>
+<td>Rental details show the hourly price and product information</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-06</td>
+<td>Duration defaults to 1 hour and stays between 1 and 10</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-07</td>
+<td>Label and total follow the chosen duration</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-08</td>
+<td>A rental is added to the cart with its duration and total</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-09</td>
+<td>Adding a rental confirms and updates the cart count</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-10</td>
+<td>The cart does not allow a rental longer than 10 hours</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-11</td>
+<td>Adding the same rental again does not pass 10 hours</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-12</td>
+<td>Related products list the other rentals</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-13</td>
+<td>A visitor is asked to sign in before adding a favourite</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-14</td>
+<td>A logged-in customer adds a rental to favourites</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-15</td>
+<td>A rental can be compared</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-16</td>
+<td>An unavailable rental cannot be added to the cart</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-17</td>
+<td>Rental labels are translated</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-18</td>
+<td>Rentals pages are usable at mobile width</td>
+<td><span class="badge dec-explore">Keep exploratory</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-19</td>
+<td>The Rentals page opens from a direct link and keeps the cart</td>
+<td><span class="badge dec-no">Not worth automating</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-20</td>
+<td>A visitor&#39;s cart with a rental survives login</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-21</td>
+<td>A normal product still uses a quantity, not a duration</td>
+<td><span class="badge dec-explore">Keep exploratory</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Sign-off</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Signed off by ____________ on __________</li>
+</ul>
+</details>
+<details class="appendix"><summary>Appendix: Full locator table <code>locators.md</code></summary><h1>Locators: TS-2 v0.1</h1>
+<p>Counts were taken with Playwright <code>locator.count()</code> in read-only code-run calls (actions 44, 46,
+53), in the state named. The browser tool does not use the project&#39;s <code>testIdAttribute</code>, so
+<code>getByTestId(&#39;x&#39;)</code> was counted as <code>locator(&#39;[data-test=&quot;x&quot;]&#39;)</code>, which the project config makes
+equivalent. Grades follow the rubric; role-and-name and text locators lose one grade because the
+app is multilingual. Product names are data from the story and are not translated (<a class="ev" href="evidence/E-19.rentals-de.snapshot.yml">E-19</a>).</p>
+<p>Summary: 27 stable (A or B), 8 at risk (C), 2 blocked (D).</p>
+<h2>Rentals overview (<code>/rentals</code>, logged-in customer, English, <a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a>)</h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>State</th>
+<th>Recommended locator</th>
+<th>Strategy</th>
+<th>Matches</th>
+<th>Role / accessible name</th>
+<th>Grade</th>
+<th>Tag</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Categories menu</td>
+<td>menu closed</td>
+<td><code>getByRole(&#39;button&#39;, { name: &#39;Categories&#39; })</code></td>
+<td>1</td>
+<td>1</td>
+<td>button &quot;Categories&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a>, <a class="ev" href="evidence/E-01.menu.snapshot.yml">E-01</a></td>
+</tr>
+<tr>
+<td>Rentals menu entry</td>
+<td>in DOM, menu closed</td>
+<td><code>getByTestId(&#39;nav-rentals&#39;)</code></td>
+<td>5</td>
+<td>1</td>
+<td>link &quot;Rentals&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a>, <a class="ev" href="evidence/E-01.menu.snapshot.yml">E-01</a></td>
+</tr>
+<tr>
+<td>Page heading</td>
+<td>page loaded</td>
+<td><code>getByRole(&#39;heading&#39;, { name: &#39;Rentals&#39;, level: 1 })</code></td>
+<td>1</td>
+<td>1</td>
+<td>heading &quot;Rentals&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>Card name (each of 3)</td>
+<td>cards rendered</td>
+<td><code>getByRole(&#39;heading&#39;, { name: &#39;&lt;item&gt;&#39;, exact: true })</code></td>
+<td>1</td>
+<td>1 each</td>
+<td>heading level 5</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>Card photo (each of 3)</td>
+<td>cards rendered</td>
+<td><code>getByRole(&#39;img&#39;, { name: &#39;&lt;item&gt;&#39;, exact: true })</code></td>
+<td>1</td>
+<td>1 each</td>
+<td>img &quot;&lt;item&gt;&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>Card count</td>
+<td>cards rendered</td>
+<td><code>getByRole(&#39;heading&#39;, { level: 5 })</code></td>
+<td>1</td>
+<td>3 (expected 3)</td>
+<td></td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>Card description</td>
+<td>cards rendered</td>
+<td><code>locator(&#39;.card&#39;).filter({ has: &lt;card name&gt; }).locator(&#39;p&#39;)</code></td>
+<td>6</td>
+<td>1</td>
+<td>paragraph, no name</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>Language selector</td>
+<td>any page</td>
+<td><code>getByTestId(&#39;language-select&#39;)</code></td>
+<td>5</td>
+<td>1</td>
+<td>button &quot;Select language&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+</tbody></table>
+<p>The Rentals entry&#39;s role candidate <code>getByRole(&#39;link&#39;, { name: &#39;Rentals&#39; })</code> was not counted in this
+run (proposed, not verified, Assumed from <a class="ev" href="evidence/E-01.menu.snapshot.yml">E-01</a>). The entry is only visible after the Categories menu is opened.</p>
+<h2>Rental details (Crane, logged-in customer, English, duration 1, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a>)</h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>State</th>
+<th>Recommended locator</th>
+<th>Strategy</th>
+<th>Matches</th>
+<th>Role / accessible name</th>
+<th>Grade</th>
+<th>Tag</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Name</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;heading&#39;, { name: &#39;&lt;item&gt;&#39;, level: 1 })</code></td>
+<td>1</td>
+<td>1</td>
+<td>heading level 1</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Category</td>
+<td>details loaded</td>
+<td><code>getByLabel(&#39;category&#39;)</code></td>
+<td>2</td>
+<td>1</td>
+<td>generic &quot;category&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Brand</td>
+<td>details loaded</td>
+<td><code>getByLabel(&#39;brand&#39;)</code></td>
+<td>2</td>
+<td>1</td>
+<td>generic &quot;brand&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Hourly price</td>
+<td>details loaded</td>
+<td><code>getByLabel(&#39;unit-price&#39;)</code></td>
+<td>2</td>
+<td>1</td>
+<td>&quot;unit-price&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>&quot;per hour&quot; unit</td>
+<td>details loaded</td>
+<td><code>getByText(&#39;per hour&#39;, { exact: true })</code></td>
+<td>4</td>
+<td>1</td>
+<td>text</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Total</td>
+<td>details loaded</td>
+<td><code>getByText(/\(Total \$[\d.,]+\)/)</code></td>
+<td>4</td>
+<td>1</td>
+<td>text, holds data</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Duration label</td>
+<td>details loaded</td>
+<td><code>getByText(/^Duration \(\d+ hour\(s\)\)$/)</code></td>
+<td>4</td>
+<td>1</td>
+<td>text, not associated with the slider</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Duration slider</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;slider&#39;)</code></td>
+<td>1</td>
+<td>1</td>
+<td>slider &quot;ngx-slider&quot; (generic name)</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a>, <a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a></td>
+</tr>
+<tr>
+<td>Add to cart</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;button&#39;, { name: &#39;Add to cart&#39; })</code></td>
+<td>1</td>
+<td>1</td>
+<td>button &quot;Add to cart&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Add to favourites</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;button&#39;, { name: &#39;Add to favourites&#39; })</code></td>
+<td>1</td>
+<td>1</td>
+<td>button</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Compare</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;button&#39;, { name: &#39;Compare&#39; })</code></td>
+<td>1</td>
+<td>1</td>
+<td>button</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Description</td>
+<td>details loaded</td>
+<td><code>getByTestId(&#39;product-description&#39;)</code></td>
+<td>5</td>
+<td>1</td>
+<td>paragraph</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>CO2 rating scale</td>
+<td>details loaded</td>
+<td><code>getByTestId(&#39;co2-rating-badge&#39;)</code></td>
+<td>5</td>
+<td>1</td>
+<td>generic with a long description</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Active CO2 letter</td>
+<td>details loaded</td>
+<td><code>locator(&#39;.co2-letter.active&#39;)</code></td>
+<td>6</td>
+<td>1</td>
+<td>none</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a>, <a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a></td>
+</tr>
+<tr>
+<td>Photo</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;figure&#39;).getByRole(&#39;img&#39;, { name: &#39;&lt;item&gt;&#39; })</code></td>
+<td>1 scoped</td>
+<td>1</td>
+<td>img &quot;&lt;item&gt;&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Photo credit</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;figure&#39;).getByText(/Photo by/)</code></td>
+<td>4 scoped</td>
+<td>1</td>
+<td>text</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Related products heading</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;heading&#39;, { name: &#39;Related products&#39; })</code></td>
+<td>1</td>
+<td>1</td>
+<td>heading level 2</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Related item</td>
+<td>details loaded</td>
+<td><code>getByRole(&#39;link&#39;, { name: /&lt;item&gt;/ })</code></td>
+<td>1</td>
+<td>1</td>
+<td>link &quot;&lt;item&gt; More information&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>Add-to-cart confirmation</td>
+<td>after add</td>
+<td>none: no element appeared</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td><span class="badge grade-d">D</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-06.after-add-to-cart.snapshot.yml">E-06</a>, <a class="ev" href="evidence/E-07.after-add-dom.json">E-07</a>, <a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a></td>
+</tr>
+<tr>
+<td>Compare result or indicator</td>
+<td>after Compare</td>
+<td>none: no element appeared, <code>/compare</code> is not a route</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td><span class="badge grade-d">D</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-17.after-compare-dom.json">E-17</a>, <a class="ev" href="evidence/E-18.compare-route.txt">E-18</a></td>
+</tr>
+</tbody></table>
+<p>Also counted: <code>getByTestId(&#39;add-to-cart&#39;)</code>, <code>getByTestId(&#39;add-to-favorites&#39;)</code>, <code>getByTestId(&#39;add-to-compare&#39;)</code>,
+<code>getByTestId(&#39;unit-price&#39;)</code>, <code>getByTestId(&#39;product-name&#39;)</code>: 1 each (grade A fallbacks). <code>getByTestId(&#39;total-price&#39;)</code>
+0 and <code>getByLabel(/Duration/)</code> 0. The total&#39;s number sits in <code>&lt;span id=&quot;total-price&quot;&gt;</code>;
+<code>locator(&#39;#total-price&#39;)</code> is proposed, not verified (count not taken, Assumed from the DOM read in <a class="ev" href="evidence/E-28.locators-details.json">E-28</a>).</p>
+<h2>Cart (<code>/checkout</code>, logged-in customer, one line, <a class="ev" href="evidence/E-33.locators-cart.json">E-33</a>)</h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>State</th>
+<th>Recommended locator</th>
+<th>Strategy</th>
+<th>Matches</th>
+<th>Role / accessible name</th>
+<th>Grade</th>
+<th>Tag</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cart link</td>
+<td>header</td>
+<td><code>getByRole(&#39;link&#39;, { name: &#39;cart&#39; })</code></td>
+<td>1</td>
+<td>1</td>
+<td>link &quot;cart&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>Cart badge</td>
+<td>cart not empty</td>
+<td><code>getByTestId(&#39;cart-quantity&#39;)</code></td>
+<td>5</td>
+<td>1</td>
+<td>none</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>Cart line</td>
+<td>one line</td>
+<td><code>getByRole(&#39;row&#39;, { name: /&lt;item&gt;/ })</code></td>
+<td>1</td>
+<td>1</td>
+<td>row</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>Line quantity (hours)</td>
+<td>one line</td>
+<td><code>getByRole(&#39;spinbutton&#39;, { name: &#39;Quantity for &lt;item&gt;&#39; })</code></td>
+<td>1</td>
+<td>1</td>
+<td>spinbutton</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>Unit price</td>
+<td>one line</td>
+<td><code>getByTestId(&#39;product-price&#39;)</code></td>
+<td>5</td>
+<td>1</td>
+<td>cell</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>Line total</td>
+<td>one line</td>
+<td><code>getByTestId(&#39;line-price&#39;)</code></td>
+<td>5</td>
+<td>1</td>
+<td>cell</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>Cart total</td>
+<td>one line</td>
+<td><code>getByTestId(&#39;cart-total&#39;)</code></td>
+<td>5</td>
+<td>1</td>
+<td>cell</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>Rental note</td>
+<td>one line</td>
+<td><code>&lt;row&gt;.getByText(&#39;Item for rent, price per hour&#39;)</code></td>
+<td>4 scoped</td>
+<td>1</td>
+<td>text</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>Remove line</td>
+<td>one line</td>
+<td><code>&lt;row&gt;.locator(&#39;.btn-danger&#39;)</code></td>
+<td>6</td>
+<td>1</td>
+<td>anchor, no role, no name (<code>&lt;row&gt;.getByRole(&#39;button&#39;)</code> 0)</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+</tbody></table>
+<p><code>product-price</code> and <code>line-price</code> were counted with one line in the cart. With several lines they
+must be scoped to the row; that state was not checked.</p>
+<h2>Favourites (<code>/account/favorites</code>, <a class="ev" href="evidence/E-30.favourites-with-crane.json">E-30</a>)</h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>State</th>
+<th>Recommended locator</th>
+<th>Strategy</th>
+<th>Matches</th>
+<th>Role / accessible name</th>
+<th>Grade</th>
+<th>Tag</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Delete a favourite</td>
+<td>4 favourites</td>
+<td><code>locator(&#39;[data-test^=&quot;favorite-&quot;]&#39;).filter({ has: &lt;heading &#39;&lt;item&gt;&#39;&gt; }).getByTestId(&#39;delete&#39;)</code></td>
+<td>5 scoped</td>
+<td>1 (strict-mode click on the equivalent selector succeeded, action 50)</td>
+<td>button, no name</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-30.favourites-with-crane.json">E-30</a>, <a class="ev" href="evidence/E-32.favourites-after-delete.json">E-32</a></td>
+</tr>
+</tbody></table>
+</details>
+<details class="appendix"><summary>Appendix: Console, network and accessibility <code>technical.md</code></summary><h1>Technical notes: TS-2 v0.1</h1>
+<h2>Console</h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Page</th>
+<th>Level</th>
+<th>Message</th>
+<th>Count</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1, 12, 20, 21</td>
+<td>every full page load as visitor</td>
+<td>error</td>
+<td><code>GET /users/me</code> 401, then &quot;ERROR {message: Unauthorized}&quot;</td>
+<td>2 + 1 per load</td>
+<td><a class="ev" href="evidence/E-09.console-to-cart.log">E-09</a></td>
+</tr>
+<tr>
+<td>10, 52</td>
+<td><code>/checkout</code></td>
+<td>error</td>
+<td>&quot;TypeError: Cannot read properties of undefined (reading &#39;cart_items&#39;)&quot; at <code>CartComponent_Template</code></td>
+<td>3 as visitor, 7 as customer</td>
+<td><a class="ev" href="evidence/E-09.console-to-cart.log">E-09</a>, <a class="ev" href="evidence/E-34.console-cart-customer.txt">E-34</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>/checkout</code> after quantity change</td>
+<td>warning</td>
+<td>Angular NG0956: tracking expression re-creates the whole collection</td>
+<td>1</td>
+<td>action 11 output</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Crane details, visitor</td>
+<td>error</td>
+<td><code>POST /favorites</code> 401</td>
+<td>1</td>
+<td><a class="ev" href="evidence/E-15.favourite-visitor.snapshot.yml">E-15</a></td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>/compare</code></td>
+<td>error</td>
+<td>&quot;NG04002: Cannot match any routes. URL Segment: &#39;compare&#39;&quot;</td>
+<td>1</td>
+<td><a class="ev" href="evidence/E-18.compare-route.txt">E-18</a></td>
+</tr>
+<tr>
+<td>several</td>
+<td>any</td>
+<td>warning</td>
+<td>Preloaded <code>barn-2400x1600.avif</code> not used</td>
+<td>1 per load</td>
+<td>action 14 output</td>
+</tr>
+</tbody></table>
+<p>A test that asserts a clean console fails on every visitor page (401) and on the cart (TypeError).
+No console error was logged on <code>/rentals</code> or on a rental details page for a logged-in customer.</p>
+<h2>Network</h2>
+<p>Read once, at the end of the cart path as the customer (action 56, <a class="ev" href="evidence/E-36.network-cart-path.txt">E-36</a>): no failed call.
+<code>GET /carts/&lt;id&gt;</code> 200, <code>DELETE /carts/&lt;id&gt;/product/&lt;id&gt;</code> 204, <code>GET /users/me</code> 200.
+Failed calls known from the console: <code>GET /users/me</code> 401 (visitor), <code>POST /favorites</code> 401 (visitor).
+The network list was not read on the other paths; this is a gap of this run.</p>
+<h2>API level notes (OpenAPI: Toolshop API 5.0.0)</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Endpoint</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Only rentals are listed</td>
+<td><code>GET /products?is_rental=true</code></td>
+<td>S-03: assert the three names and that every item has <code>is_rental: true</code></td>
+</tr>
+<tr>
+<td>Related products rule</td>
+<td><code>GET /products/{productId}/related</code></td>
+<td>S-12, once Q-06 is answered</td>
+</tr>
+<tr>
+<td>Duration limit in the cart</td>
+<td><code>POST /carts/{id}</code>, <code>PUT /carts/{cartId}/product/quantity</code></td>
+<td>S-10, S-11, once Q-02 is answered</td>
+</tr>
+<tr>
+<td>Favourite needs login</td>
+<td><code>POST /favorites</code> without a token returns 401</td>
+<td>S-13</td>
+</tr>
+<tr>
+<td>Favourite setup and cleanup</td>
+<td><code>POST /favorites</code>, <code>DELETE /favorites/{favoriteId}</code></td>
+<td>S-14</td>
+</tr>
+<tr>
+<td>Cart setup and cleanup</td>
+<td><code>POST /carts</code>, <code>POST /carts/{id}</code>, <code>DELETE /carts/{cartId}</code></td>
+<td>S-08, S-20</td>
+</tr>
+<tr>
+<td>Availability</td>
+<td><code>ProductResponse.in_stock</code> is read-only: <code>ProductRequest</code> has no <code>in_stock</code></td>
+<td>S-16, Q-10</td>
+</tr>
+</tbody></table>
+<p>No API call was made in this run. The endpoints are Assumed from the OpenAPI document.</p>
+<h2>Accessibility observations</h2>
+<p>These come from the snapshots and DOM reads of this run. They are observations, not an audit.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Observation</th>
+<th>Evidence</th>
+<th>Request</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Rental cards are plain <code>div</code>s: no link, no role, no <code>tabindex</code>. Mouse click works; nothing for keyboard or screen reader users to activate</td>
+<td><a class="ev" href="evidence/E-25.rentals-mobile-dom.json">E-25</a>, <a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+<td>T-01</td>
+</tr>
+<tr>
+<td>2</td>
+<td>The duration slider&#39;s accessible name is &quot;ngx-slider&quot;; the visible &quot;Duration&quot; label is not associated with it</td>
+<td><a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+<td>T-02</td>
+</tr>
+<tr>
+<td>3</td>
+<td>The total next to the price is plain text in a <code>&lt;small&gt;</code>; it changes without a live region</td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+<td>T-03</td>
+</tr>
+<tr>
+<td>4</td>
+<td>The active CO2 letter is conveyed by colour and CSS class only</td>
+<td><a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a>, <a class="ev" href="evidence/E-23.details-mobile-375.png">E-23</a></td>
+<td>T-05</td>
+</tr>
+<tr>
+<td>5</td>
+<td>The cart&#39;s remove control is an anchor without <code>href</code>, role or name, holding only an icon</td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+<td>T-04</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The favourite&#39;s delete button has no accessible name</td>
+<td><a class="ev" href="evidence/E-30.favourites-with-crane.json">E-30</a></td>
+<td>T-08</td>
+</tr>
+<tr>
+<td>7</td>
+<td>The Compare button gives no feedback and has no pressed state</td>
+<td><a class="ev" href="evidence/E-17.after-compare-dom.json">E-17</a></td>
+<td>Q-09</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Snapshots show the three action buttons on details without names, yet role-and-name locators match them. Likely a tool artefact (icon inside the button); not confirmed as a real accessibility problem</td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+<td>none</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Category and brand badges and the price use <code>aria-label</code> values that are developer words (&quot;category&quot;, &quot;unit-price&quot;), which replace the visible text for screen readers</td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+<td>none raised</td>
+</tr>
+<tr>
+<td>10</td>
+<td>At 375 px the floating chat button covers the first lines of the description</td>
+<td><a class="ev" href="evidence/E-23.details-mobile-375.png">E-23</a></td>
+<td>Q-12</td>
+</tr>
+</tbody></table>
+<h2>Tool observations</h2>
+<ul>
+<li>The click and navigate tools save their snapshot to a file at once, often before the app has
+rendered data (cards at action 12, cart badge at 8 and 25, favourites list at 50). Evidence for
+those states is a later DOM read.</li>
+<li>One selector of mine failed (action 28). It counts as an action and is not an app finding.</li>
+</ul>
+</details>
+<details class="appendix"><summary>Appendix: Ledger <code>ledger.md</code></summary><h1>Ledger: TS-2 Rentals overview, v0.1</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Story</td>
+<td>TS-2 Customer browses and rents heavy equipment from the Rentals page (<code>tests/exploratory/stories/rentals-overview.md</code>, status Draft)</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>v0.1 (first draft)</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>local: UI <a href="http://localhost:4200">http://localhost:4200</a>, API <a href="http://localhost:8091">http://localhost:8091</a></td>
+</tr>
+<tr>
+<td>Run started</td>
+<td>2026-10-10 21:47</td>
+</tr>
+<tr>
+<td>Test data prefix</td>
+<td><code>ETA-20261010-2147</code></td>
+</tr>
+<tr>
+<td>Budget</td>
+<td>20 minutes, 60 browser actions</td>
+</tr>
+</tbody></table>
+<h2>Step 0. Previous version</h2>
+<p>No <code>vX.Y</code> folder exists under <code>tests/exploratory/reports/TS-2/</code>. This run is <code>v0.1</code>, a full run.
+<code>knowledge/decisions.md</code> has no lines yet, so nothing overrides an assumption.</p>
+<h2>Step 1. Read and restate</h2>
+<h3>Documents read outside the browser (not browser actions)</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>What it gave</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Story file</td>
+<td>12 acceptance criteria, scope, assumptions</td>
+</tr>
+<tr>
+<td><code>tests/exploratory/context.md</code></td>
+<td>Environment, roles, budgets, test data rules</td>
+</tr>
+<tr>
+<td><code>knowledge/e2e-flows.md</code>, <code>decisions.md</code>, <code>rules.md</code></td>
+<td>Flows F2, F3, F4, impact map, rental rules</td>
+</tr>
+<tr>
+<td><code>knowledge/pages/rentals.md</code>, <code>product-details.md</code>, <code>cart-checkout.md</code>, <code>account.md</code></td>
+<td>Page behaviour, earlier locators, quirks</td>
+</tr>
+<tr>
+<td>OpenAPI <code>http://localhost:8091/docs?api-docs.json</code> (Toolshop API 5.0.0)</td>
+<td><code>GET /products?is_rental=</code>, <code>GET /products/{id}</code>, <code>GET /products/{id}/related</code>, <code>POST /carts</code>, <code>POST /carts/{id}</code>, <code>PUT /carts/{cartId}/product/quantity</code>, <code>DELETE /carts/{cartId}/product/{productId}</code>, <code>GET/POST /favorites</code>, <code>DELETE /favorites/{id}</code>. <code>ProductResponse</code> has <code>is_rental</code> and <code>in_stock</code>; <code>ProductRequest</code> has <code>is_rental</code> but no <code>in_stock</code></td>
+</tr>
+</tbody></table>
+<p>Everything below that comes from a knowledge file is <strong>Assumed</strong> with that file as source.</p>
+<h3>Expected workflow</h3>
+<ol>
+<li>Visitor opens the home page and opens <strong>Categories</strong> in the main menu (story AC 1).</li>
+<li>Selects <strong>Rentals</strong>; the app goes to <code>/rentals</code>, heading &quot;Rentals&quot;, title &quot;Rentals Overview&quot; (AC 1).</li>
+<li>The page shows exactly three cards, Excavator, Bulldozer and Crane, each with photo, name and description; no normal products (AC 2).</li>
+<li>Selects the Excavator card by name or photo; the Excavator details page opens (AC 3).</li>
+<li>Details show photo with credit, name, category, brand, CO2 rating, description and &quot;$136.50 per hour&quot; (AC 4).</li>
+<li>Duration control defaults to 1; label &quot;Duration (1 hour(s))&quot; (AC 5).</li>
+<li>Sets duration to 3; label &quot;Duration (3 hour(s))&quot;, total &quot;(Total $409.50)&quot; at once (AC 5, 6).</li>
+<li>Selects <strong>Add to cart</strong>; confirmation message, cart count increases (AC 7).</li>
+<li>Opens the cart; the rental line shows the name, the duration and the line total $409.50; the cart total includes it (AC 8).</li>
+<li>Back on the details page, &quot;Related products&quot; lists Bulldozer and Crane, not Excavator; selecting one opens its details (AC 9).</li>
+<li><strong>Compare</strong> adds the rental to the comparison; <strong>Add to favourites</strong> as a visitor asks to sign in; as a logged-in customer it adds the favourite (AC 10).</li>
+<li>A rental that is not available says so and cannot be added to the cart (AC 11).</li>
+<li>Changing the language translates heading, &quot;per hour&quot;, &quot;Duration&quot;, &quot;Total&quot;, &quot;Related products&quot; (AC 12).</li>
+</ol>
+<h3>Acceptance criteria to steps</h3>
+<table>
+<thead>
+<tr>
+<th>AC</th>
+<th>Steps</th>
+<th>AC</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 Navigation</td>
+<td>1, 2</td>
+<td>7 Add to cart</td>
+<td>8</td>
+</tr>
+<tr>
+<td>2 Overview content</td>
+<td>3</td>
+<td>8 Cart</td>
+<td>9</td>
+</tr>
+<tr>
+<td>3 Open details</td>
+<td>4</td>
+<td>9 Related products</td>
+<td>10</td>
+</tr>
+<tr>
+<td>4 Details content</td>
+<td>5</td>
+<td>10 Favourites and compare</td>
+<td>11</td>
+</tr>
+<tr>
+<td>5 Duration</td>
+<td>6, 7</td>
+<td>11 Availability</td>
+<td>12</td>
+</tr>
+<tr>
+<td>6 Total price</td>
+<td>7</td>
+<td>12 Language</td>
+<td>13</td>
+</tr>
+</tbody></table>
+<h3>Story against knowledge files: differences to raise</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Story says</th>
+<th>Knowledge file says</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D-1</td>
+<td>Page title is &quot;Rentals Overview&quot; (AC 1)</td>
+<td>Title carries the suffix &quot; - Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td><code>pages/rentals.md</code></td>
+</tr>
+<tr>
+<td>D-2</td>
+<td>Customer sees a confirmation message on add to cart (AC 7)</td>
+<td>The toast was seen on 1 of 3 adds</td>
+<td><code>pages/product-details.md</code></td>
+</tr>
+<tr>
+<td>D-3</td>
+<td>Related products lists the other rental items (AC 9)</td>
+<td>On local the list is driven by category (inferred)</td>
+<td><code>pages/product-details.md</code></td>
+</tr>
+<tr>
+<td>D-4</td>
+<td>Duration is 1 to 10 hours; over 10 is out of scope (AC 5)</td>
+<td>Duration is stored as the cart line quantity, an editable field with max 99</td>
+<td><code>pages/cart-checkout.md</code>, <code>rules.md</code> (Q-02 open)</td>
+</tr>
+<tr>
+<td>D-5</td>
+<td>Cart line shows the duration (AC 8)</td>
+<td>Line shows &quot;Item for rent, price per hour&quot; and a quantity field; no word &quot;hours&quot; recorded</td>
+<td><code>pages/cart-checkout.md</code></td>
+</tr>
+<tr>
+<td>D-6</td>
+<td>Total to two decimals (AC 6)</td>
+<td>Money format differs: &quot;$1365.00&quot; on details, &quot;$1,365.00&quot; in the cart</td>
+<td><code>pages/cart-checkout.md</code></td>
+</tr>
+</tbody></table>
+<h3>What the story does not say</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Gap</th>
+<th>What I would have assumed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>G-1</td>
+<td>How the duration is chosen (slider, dropdown, field) and whether the keyboard must work</td>
+<td>Slider, operable with arrow keys (<code>pages/product-details.md</code>)</td>
+</tr>
+<tr>
+<td>G-2</td>
+<td>Adding the same rental twice: one line with summed hours, or two lines; what if the sum passes 10</td>
+<td>One line, hours summed, capped at 10</td>
+</tr>
+<tr>
+<td>G-3</td>
+<td>Whether the cart may change a rental&#39;s duration, and its limits</td>
+<td>Editable, limited to 1 to 10</td>
+</tr>
+<tr>
+<td>G-4</td>
+<td>Exact confirmation text, and the unavailable text for AC 11</td>
+<td>&quot;Product added to shopping cart.&quot;; &quot;Out of stock&quot; (<code>rules.md</code>)</td>
+</tr>
+<tr>
+<td>G-5</td>
+<td>How a rental becomes unavailable on local, so AC 11 can be tested</td>
+<td>No seeded unavailable rental; <code>ProductRequest</code> has no <code>in_stock</code>, so not settable by admin</td>
+</tr>
+<tr>
+<td>G-6</td>
+<td>Empty state of <code>/rentals</code> when no rental exists; error state when the API fails</td>
+<td>A &quot;no rentals&quot; message; an error message</td>
+</tr>
+<tr>
+<td>G-7</td>
+<td>Direct URL access to <code>/rentals</code> and to a rental details page; back button returns to <code>/rentals</code></td>
+<td>All work</td>
+</tr>
+<tr>
+<td>G-8</td>
+<td>Whether rentals also appear on the home overview, in search and in category pages</td>
+<td>Not excluded there (AC 2 only restricts <code>/rentals</code>)</td>
+</tr>
+<tr>
+<td>G-9</td>
+<td>Which languages AC 12 covers and whether item names and descriptions are translated</td>
+<td>All languages in the header selector; product data stays English</td>
+</tr>
+<tr>
+<td>G-10</td>
+<td>Mobile layout is in scope but has no acceptance criterion</td>
+<td>Cards stack in one column, nothing cut off</td>
+</tr>
+<tr>
+<td>G-11</td>
+<td>Compare with a mix of rental and normal products; per-hour price shown in compare and favourites</td>
+<td>Allowed; price shown without unit</td>
+</tr>
+<tr>
+<td>G-12</td>
+<td>Rounding and thousands separator for totals of $1,000 and more</td>
+<td>Two decimals; separator not specified</td>
+</tr>
+<tr>
+<td>G-13</td>
+<td>Whether the cart and its rental line survive login and reload</td>
+<td>Yes (<code>e2e-flows.md</code>)</td>
+</tr>
+</tbody></table>
+<h3>Regression areas from the impact map</h3>
+<p>Product details change → cart line and totals, cart badge, favourites page, compare page, related
+products of a neighbouring normal product, a normal product&#39;s quantity control (must still be
+quantity, not duration), Categories menu entries, home overview (same product data). Invoices and
+checkout totals are out of scope for this story (TS-1) and are not explored.</p>
+<h3>Charter</h3>
+<p><strong>Mission:</strong> find out whether a visitor and a logged-in customer can find, inspect, price and add
+a rental machine to the cart as TS-2 describes, and which of those behaviours are stable enough
+to automate.</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Area</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Positive path: menu → <code>/rentals</code> → Excavator details → duration 3 → add to cart → cart (AC 1 to 8)</td>
+<td>16</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Related products, compare, favourites as visitor and as customer (AC 9, 10)</td>
+<td>9</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Negative and edge: duration bounds 1 and 10, cart quantity over 10, same rental added twice, availability (AC 5, 11; G-2, G-3)</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Language and mobile width (AC 12, G-10)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Regression: a normal product&#39;s details, home overview</td>
+<td>3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Console and network reads</td>
+<td>2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Locator verification (20 percent)</td>
+<td>12</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Cleanup: empty cart, remove the favourite I added (10 percent)</td>
+<td>6</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Total</strong></td>
+<td><strong>60</strong></td>
+</tr>
+</tbody></table>
+<p>Test data this run can create: cart lines (session only), one favourite on the shared customer
+(removed in the run), a compare selection (session only). No orders, no admin edits.</p>
+<h2>Action log</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Time</th>
+<th>Action</th>
+<th>Result</th>
+<th>Evidence</th>
+<th>Finding</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>21:50</td>
+<td>Navigate to <code>http://localhost:4200</code> (visitor)</td>
+<td>Home loads, title &quot;Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>21:50</td>
+<td>Click <strong>Categories</strong> in the main menu (<code>[data-test=&quot;nav-categories&quot;]</code>)</td>
+<td>Menu opens; 3 console errors logged on home</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>21:50</td>
+<td>Click <strong>Rentals</strong> (<code>[data-test=&quot;nav-rentals&quot;]</code>)</td>
+<td>URL <code>/rentals</code>; title &quot;Rentals Overview - Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td><a class="ev" href="evidence/E-01.menu.snapshot.yml">E-01</a>, <a class="ev" href="evidence/E-02.rentals-overview.snapshot.yml">E-02</a></td>
+<td>F-01, F-02</td>
+</tr>
+<tr>
+<td>4</td>
+<td>21:51</td>
+<td>Click the Excavator card name (heading)</td>
+<td>Details page <code>/product/&lt;id&gt;</code> opens, title &quot;Excavator - Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td><a class="ev" href="evidence/E-02.rentals-overview.snapshot.yml">E-02</a>, <a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a></td>
+<td>F-03, F-04</td>
+</tr>
+<tr>
+<td>5</td>
+<td>21:51</td>
+<td>Focus the duration slider and press ArrowRight twice (one code-run call, one key sequence)</td>
+<td><code>aria-valuenow</code> 3, min 1, max 10; slider accessible name is &quot;ngx-slider&quot;</td>
+<td><a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a></td>
+<td>F-07, F-08</td>
+</tr>
+<tr>
+<td>6</td>
+<td>21:51</td>
+<td>Wait 300 ms inside the same call, then DOM read of buttons, price and CO2 scale</td>
+<td>Three buttons have text and <code>data-test</code> but were unnamed in snapshot <a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>; active CO2 letter is E, marked by CSS class only</td>
+<td><a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a></td>
+<td>F-09, F-10</td>
+</tr>
+<tr>
+<td>7</td>
+<td>21:52</td>
+<td>Snapshot of the details component</td>
+<td>&quot;Duration (3 hour(s))&quot;, &quot;/ (Total $409.50)&quot;, &quot;$136.50 per hour&quot;</td>
+<td><a class="ev" href="evidence/E-05.excavator-duration-3.snapshot.yml">E-05</a></td>
+<td>F-05, F-07, F-11</td>
+</tr>
+<tr>
+<td>8</td>
+<td>21:52</td>
+<td>Click <strong>Add to cart</strong> (<code>[data-test=&quot;add-to-cart&quot;]</code>), duration 3</td>
+<td>Snapshot right after the click shows no confirmation message and no cart link or badge</td>
+<td><a class="ev" href="evidence/E-06.after-add-to-cart.snapshot.yml">E-06</a></td>
+<td>F-12</td>
+</tr>
+<tr>
+<td>9</td>
+<td>21:52</td>
+<td>DOM read: cart badge, toast containers, session storage</td>
+<td>Badge &quot;3&quot; (hours, not items); no toast element present; <code>cart_id</code> and <code>cart_quantity=3</code> in session storage</td>
+<td><a class="ev" href="evidence/E-07.after-add-dom.json">E-07</a></td>
+<td>F-12, F-13</td>
+</tr>
+<tr>
+<td>10</td>
+<td>21:52</td>
+<td>Click the cart link in the header</td>
+<td><code>/checkout</code>; line &quot;Excavator / Item for rent, price per hour&quot;, Quantity 3, Price $136.50, Total $409.50, cart total $409.50. Console: &quot;Cannot read properties of undefined (reading &#39;cart_items&#39;)&quot; 3 times</td>
+<td><a class="ev" href="evidence/E-08.cart.snapshot.yml">E-08</a>, <a class="ev" href="evidence/E-09.console-to-cart.log">E-09</a></td>
+<td>F-14, F-15, F-16</td>
+</tr>
+<tr>
+<td>11</td>
+<td>21:52</td>
+<td>Type 11 in &quot;Quantity for Excavator&quot; and press Enter (boundary: just above 10)</td>
+<td>Accepted. Alert &quot;Product quantity updated.&quot;; line total and cart total &quot;$1,501.50&quot;; badge &quot;11&quot;</td>
+<td><a class="ev" href="evidence/E-10.cart-qty-11.snapshot.yml">E-10</a></td>
+<td>F-17, F-18</td>
+</tr>
+<tr>
+<td>12</td>
+<td>21:53</td>
+<td>Navigate directly to <code>/rentals</code> (deep link, full reload)</td>
+<td>Page loads with the same title; cards and cart badge checked from the snapshot</td>
+<td><a class="ev" href="evidence/E-11.rentals-deeplink.snapshot.yml">E-11</a></td>
+<td>F-19</td>
+</tr>
+<tr>
+<td>13</td>
+<td>21:53</td>
+<td>Click the Bulldozer card photo (<code>img[alt=&quot;Bulldozer&quot;]</code>)</td>
+<td>Bulldozer details open, title &quot;Bulldozer - Practice Software Testing - Toolshop - v5.0&quot;. The snapshot at action 12 was taken before the cards rendered; the cart link was still in the header after the reload</td>
+<td><a class="ev" href="evidence/E-11.rentals-deeplink.snapshot.yml">E-11</a>, <a class="ev" href="evidence/E-12.bulldozer-details.snapshot.yml">E-12</a></td>
+<td>F-04, F-19</td>
+</tr>
+<tr>
+<td>14</td>
+<td>21:53</td>
+<td>Slider: End, then ArrowRight (boundary: maximum and just above), DOM read</td>
+<td>Stays at 10; &quot;Duration (10 hour(s))&quot;; &quot;$147.50 per hour / (Total $1475.00)&quot;; category &quot;Drill&quot;; related: 4 cordless drills, Excavator, Crane</td>
+<td><a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a></td>
+<td>F-05, F-06, F-08, F-11, F-20</td>
+</tr>
+<tr>
+<td>15</td>
+<td>21:53</td>
+<td>Slider: Home, then ArrowLeft (boundary: minimum and just below), DOM read</td>
+<td>Stays at 1; &quot;Duration (1 hour(s))&quot;; total $147.50</td>
+<td><a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a></td>
+<td>F-08</td>
+</tr>
+<tr>
+<td>16</td>
+<td>21:53</td>
+<td>Click the related product Crane on the Bulldozer page</td>
+<td>Crane details open, title &quot;Crane - Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td><a class="ev" href="evidence/E-14.crane-details.snapshot.yml">E-14</a></td>
+<td>F-21</td>
+</tr>
+<tr>
+<td>17</td>
+<td>21:53</td>
+<td>Click <strong>Add to favourites</strong> on Crane as a visitor</td>
+<td>Alert &quot;Unauthorized, can not add product to your favorite list.&quot;; stays on the page, no sign-in prompt or redirect; <code>POST /favorites</code> 401 in console</td>
+<td><a class="ev" href="evidence/E-15.favourite-visitor.snapshot.yml">E-15</a></td>
+<td>F-22</td>
+</tr>
+<tr>
+<td>18</td>
+<td>21:54</td>
+<td>Click <strong>Compare</strong> on Crane</td>
+<td>Snapshot unchanged apart from focus on the button; no alert in the snapshot</td>
+<td><a class="ev" href="evidence/E-16.after-compare.diff.txt">E-16</a></td>
+<td>F-23</td>
+</tr>
+<tr>
+<td>19</td>
+<td>21:54</td>
+<td>DOM read: compare button, session storage, alerts</td>
+<td><code>compare_ids</code> in session storage holds the Crane id; no alert, no link to <code>/compare</code>, button unchanged</td>
+<td><a class="ev" href="evidence/E-17.after-compare-dom.json">E-17</a></td>
+<td>F-23</td>
+</tr>
+<tr>
+<td>20</td>
+<td>21:54</td>
+<td>Navigate to <code>/compare</code> (route named in <code>e2e-flows.md</code>)</td>
+<td>Redirected to <code>/</code>. Console: &quot;NG04002: Cannot match any routes. URL Segment: &#39;compare&#39;&quot;. No compare element on the home page. Check at 21:55: 20 actions, 5 minutes</td>
+<td><a class="ev" href="evidence/E-18.compare-route.txt">E-18</a></td>
+<td>F-24</td>
+</tr>
+<tr>
+<td>21</td>
+<td>21:54</td>
+<td>Navigate to <code>/rentals</code></td>
+<td>Loads</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>22</td>
+<td>21:54</td>
+<td>Click the language selector (<code>[data-test=&quot;language-select&quot;]</code>)</td>
+<td>Language menu opens</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>23</td>
+<td>21:55</td>
+<td>Click menu item <strong>DE</strong></td>
+<td>Language switches; browser tab title stays &quot;Rentals Overview - ...&quot; in English; heading read from the snapshot</td>
+<td><a class="ev" href="evidence/E-19.rentals-de.snapshot.yml">E-19</a></td>
+<td>F-25</td>
+</tr>
+<tr>
+<td>24</td>
+<td>21:55</td>
+<td>Click the Excavator card name with German active</td>
+<td>Details in German: &quot;pro Stunde&quot;, &quot;Dauer (1 Stunde(n))&quot;, &quot;Verwandte Produkte&quot;; &quot;/ (Total $136.50)&quot; keeps the word &quot;Total&quot;; <code>/rentals</code> heading was &quot;Mieten&quot;</td>
+<td><a class="ev" href="evidence/E-19.rentals-de.snapshot.yml">E-19</a>, <a class="ev" href="evidence/E-20.excavator-de.snapshot.yml">E-20</a></td>
+<td>F-25, F-26</td>
+</tr>
+<tr>
+<td>25</td>
+<td>21:55</td>
+<td>Click <strong>Add to cart</strong> on Excavator again, duration 1, German active (same rental twice)</td>
+<td>Snapshot right after: no alert, badge still &quot;11&quot;</td>
+<td><a class="ev" href="evidence/E-21.second-add.snapshot.txt">E-21</a></td>
+<td>F-12, F-27</td>
+</tr>
+<tr>
+<td>26</td>
+<td>21:55</td>
+<td>Wait 3 s (code-run), then DOM read</td>
+<td>Badge &quot;12&quot; (11 + 1); no alert present; buttons read &quot;Zum Einkaufswagen hinzufügen&quot;, &quot;Zu Favoriten hinzufügen&quot;, &quot;Vergleichen&quot;</td>
+<td><a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a></td>
+<td>F-12, F-13, F-25, F-27</td>
+</tr>
+<tr>
+<td>27</td>
+<td>21:56</td>
+<td>Click the language selector</td>
+<td>Menu opens</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>28</td>
+<td>21:56</td>
+<td>Click menu item EN with <code>[role=&quot;menuitem&quot;]:has-text(&quot;EN&quot;)</code></td>
+<td><strong>Failed</strong>: my selector matched 3 elements (&quot;Kategorien&quot;, &quot;Einloggen&quot;, &quot;EN&quot;). Tool error, not an app finding. Language still German</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>29</td>
+<td>21:56</td>
+<td>Resize the viewport to 375 x 812 (platform: mobile width)</td>
+<td>Resized</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>30</td>
+<td>21:56</td>
+<td>Full-page screenshot of Excavator details at 375 px (German). Check: 30 actions, 7 minutes</td>
+<td>Single column; buttons wrap to three in a row; the floating chat button covers the first lines of the description; description text runs to the right edge</td>
+<td><a class="ev" href="evidence/E-23.details-mobile-375.png">E-23</a></td>
+<td>F-28</td>
+</tr>
+<tr>
+<td>31</td>
+<td>21:56</td>
+<td>Navigate to <code>/rentals</code> at 375 px</td>
+<td>Loads</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>32</td>
+<td>21:57</td>
+<td>Wait for the first card heading (code-run)</td>
+<td>Cards rendered</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>33</td>
+<td>21:57</td>
+<td>Full-page screenshot and DOM read of <code>/rentals</code> at 375 px</td>
+<td>No horizontal scroll (scrollWidth 375); cards 351 px wide in one column; cards are <code>div.card</code> with no role, tabindex or test id; German kept after reload (<code>language</code> in local storage); heading &quot;Mieten&quot;</td>
+<td><a class="ev" href="evidence/E-24.rentals-mobile-375.png">E-24</a>, <a class="ev" href="evidence/E-25.rentals-mobile-dom.json">E-25</a></td>
+<td>F-25, F-28, F-29</td>
+</tr>
+<tr>
+<td>34</td>
+<td>21:57</td>
+<td>Resize the viewport back to 1280 x 800</td>
+<td>Resized</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>35</td>
+<td>21:57</td>
+<td>Click the language selector</td>
+<td>Menu opens</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>36</td>
+<td>21:57</td>
+<td>Click EN (<code>[data-test=&quot;lang-en&quot;]</code>)</td>
+<td>Back to English</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>37</td>
+<td>21:57</td>
+<td>Navigate to <code>/auth/login</code></td>
+<td>Login page loads</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>38</td>
+<td>21:58</td>
+<td>Fill the email field with the demo customer (<code>AUT_CUSTOMER_EMAIL</code>), in one code-run call with 39 to 42 so that no snapshot is taken while the password field holds a value</td>
+<td>Filled</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>39</td>
+<td>21:58</td>
+<td>Fill the password field (<code>AUT_CUSTOMER_PASSWORD</code>)</td>
+<td>Filled</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>40</td>
+<td>21:58</td>
+<td>Click the login button</td>
+<td>Submitted</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>41</td>
+<td>21:58</td>
+<td>Wait for the URL to leave <code>/auth/login</code></td>
+<td><code>/account</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>42</td>
+<td>21:58</td>
+<td>Wait for the account menu, then read</td>
+<td>Logged in; no password field on the page; cart badge still &quot;12&quot; (visitor cart survived login). Check: 42 actions, 8 minutes</td>
+<td><a class="ev" href="evidence/E-26.after-login.json">E-26</a></td>
+<td>F-30</td>
+</tr>
+<tr>
+<td>43</td>
+<td>21:57</td>
+<td>Navigate to <code>/rentals</code> as the logged-in customer</td>
+<td>Loads</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>44</td>
+<td>21:58</td>
+<td>Wait for cards, then count 18 locators on <code>/rentals</code> (read-only code-run)</td>
+<td>All key locators match 1; 3 cards; 0 links inside cards; test ids <code>page-title</code> and <code>product-&lt;id&gt;</code> exist on the page</td>
+<td><a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+<td>F-03, F-29</td>
+</tr>
+<tr>
+<td>45</td>
+<td>21:58</td>
+<td>Click the Crane card name</td>
+<td>Crane details open (third item of AC 3)</td>
+<td></td>
+<td>F-04</td>
+</tr>
+<tr>
+<td>46</td>
+<td>21:59</td>
+<td>Count 32 locators on Crane details (read-only code-run) and read the total element</td>
+<td>Key locators match 1; total is <code>&lt;span id=&quot;total-price&quot;&gt;</code> with no test id; <code>getByLabel(/Duration/)</code> 0; related links 6 (4 drills, Excavator, Bulldozer); no &quot;Out of stock&quot;; add to cart enabled</td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+<td>F-06, F-08, F-09, F-31</td>
+</tr>
+<tr>
+<td>47</td>
+<td>21:59</td>
+<td>Click <strong>Add to favourites</strong> on Crane as the logged-in customer</td>
+<td>No alert in the snapshot taken right after the click; result checked on the favourites page</td>
+<td><a class="ev" href="evidence/E-29.favourite-customer.snapshot.txt">E-29</a></td>
+<td>F-32</td>
+</tr>
+<tr>
+<td>48</td>
+<td>21:59</td>
+<td>Navigate to <code>/account/favorites</code></td>
+<td>Loads. <strong>80 percent of the action budget reached (48 of 60, 9 minutes).</strong> No new paths from here: the regression check on a normal product is dropped and listed as not explored. Remaining actions go to cart locators and cleanup</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>49</td>
+<td>21:59</td>
+<td>Wait for the favourites list, then DOM read</td>
+<td>4 favourites: 3 seeded (Combination Pliers, Slip Joint Pliers, Belt Sander) plus Crane. Delete button has <code>data-test=&quot;delete&quot;</code>, no accessible name, no text</td>
+<td><a class="ev" href="evidence/E-30.favourites-with-crane.json">E-30</a></td>
+<td>F-32, F-33</td>
+</tr>
+<tr>
+<td>50</td>
+<td>21:59</td>
+<td>Cleanup: click delete on the Crane favourite only (scoped to the item with heading &quot;Crane&quot;)</td>
+<td>Snapshot right after the click still lists Crane</td>
+<td><a class="ev" href="evidence/E-31.favourites-after-delete.snapshot.txt">E-31</a></td>
+<td>F-33</td>
+</tr>
+<tr>
+<td>51</td>
+<td>22:00</td>
+<td>DOM read of the favourites list</td>
+<td>Crane removed; the 3 seeded favourites remain; no alert</td>
+<td><a class="ev" href="evidence/E-32.favourites-after-delete.json">E-32</a></td>
+<td>F-33</td>
+</tr>
+<tr>
+<td>52</td>
+<td>21:59</td>
+<td>Navigate to <code>/checkout</code> as the logged-in customer</td>
+<td>Loads</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>53</td>
+<td>22:00</td>
+<td>Wait for the Excavator row, count 13 cart locators, read the lines</td>
+<td>One line: Excavator, quantity 12 (the second add merged into the same line), $136.50, $1,638.00; cart total $1,638.00; field min 1, max 99; remove control is <code>&lt;a class=&quot;btn btn-danger&quot;&gt;</code> with no role or name</td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a>, <a class="ev" href="evidence/E-34.console-cart-customer.txt">E-34</a></td>
+<td>F-14, F-17, F-27, F-34</td>
+</tr>
+<tr>
+<td>54</td>
+<td>22:00</td>
+<td>Cleanup: click the remove control of the Excavator line</td>
+<td>Clicked; result read in action 55</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>55</td>
+<td>22:00</td>
+<td>Cleanup: remove my <code>compare_ids</code> from session storage, then DOM read of the cart</td>
+<td>Alert &quot;Product deleted.&quot;; &quot;The cart is empty. Nothing to display.&quot;; badge gone; <code>cart_quantity</code> 0; compare selection cleared</td>
+<td><a class="ev" href="evidence/E-35.cart-after-cleanup.json">E-35</a></td>
+<td>F-34</td>
+</tr>
+<tr>
+<td>56</td>
+<td>22:00</td>
+<td>Read network requests for the cart path</td>
+<td>No failed call. <code>DELETE /carts/&lt;id&gt;/product/&lt;id&gt;</code> 204, <code>GET /carts/&lt;id&gt;</code> 200, <code>GET /users/me</code> 200</td>
+<td><a class="ev" href="evidence/E-36.network-cart-path.txt">E-36</a></td>
+<td></td>
+</tr>
+<tr>
+<td>57</td>
+<td>22:00</td>
+<td>Cleanup: click the account menu (<code>[data-test=&quot;nav-menu&quot;]</code>)</td>
+<td>Menu opens</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>58</td>
+<td>22:01</td>
+<td>Cleanup: click <strong>Sign out</strong> (<code>[data-test=&quot;nav-sign-out&quot;]</code>)</td>
+<td>Signed out; &quot;Sign in&quot; back in the menu</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>59</td>
+<td>22:01</td>
+<td>Close the browser page</td>
+<td>Closed. <strong>Browser work ended: 59 of 60 actions, 21:50 to 22:01 (11 of 20 minutes)</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Action 28 failed (my selector) and still counts. Actions 5-6, 14-15, 32-33 and 38-42 were code-run
+calls counted per interaction inside them. Locator counts at 44, 46 and 53 were read-only code-run
+calls, one action each (53 includes its wait).</p>
+<h2>Findings</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Finding</th>
+<th>Tag</th>
+<th>Evidence / basis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F-01</td>
+<td><strong>Categories &gt; Rentals</strong> exists and opens <code>/rentals</code></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-01.menu.snapshot.yml">E-01</a>, <a class="ev" href="evidence/E-02.rentals-overview.snapshot.yml">E-02</a></td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>Heading is &quot;Rentals&quot; (h1). Browser title is &quot;Rentals Overview - Practice Software Testing - Toolshop - v5.0&quot;, not the bare &quot;Rentals Overview&quot; of AC 1</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.rentals-overview.snapshot.yml">E-02</a>, <a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>F-03</td>
+<td><code>/rentals</code> shows exactly three cards, Excavator, Bulldozer, Crane, each with an image, a name heading and a description paragraph; no other product</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.rentals-overview.snapshot.yml">E-02</a>, <a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>F-04</td>
+<td>Card name opens the right details (Excavator, Crane); card photo opens the right details (Bulldozer)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-12.bulldozer-details.snapshot.yml">E-12</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>F-05</td>
+<td>Details show photo with credit, name, category, brand, CO2 scale, description, and &quot;$136.50 per hour&quot; / &quot;$147.50 per hour&quot; / &quot;$153.50 per hour&quot; as in the story&#39;s table</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-14.crane-details.snapshot.yml">E-14</a></td>
+</tr>
+<tr>
+<td>F-06</td>
+<td>Related products on each rental list four cordless drills first, then the other two rentals; the item itself is not listed</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>F-07</td>
+<td>Duration defaults to 1; label reads &quot;Duration (1 hour(s))&quot; and &quot;Duration (3 hour(s))&quot; after two steps</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-05.excavator-duration-3.snapshot.yml">E-05</a></td>
+</tr>
+<tr>
+<td>F-08</td>
+<td>Duration control is a slider, keyboard operable, <code>aria-valuemin</code> 1, <code>aria-valuemax</code> 10; End + ArrowRight stays at 10, Home + ArrowLeft stays at 1. Its accessible name is &quot;ngx-slider&quot;; the visible label is not associated (<code>for=&quot;&quot;</code>, <code>getByLabel(/Duration/)</code> 0)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>F-09</td>
+<td>Tool observation: accessibility snapshots show the three action buttons without names, but <code>getByRole(&#39;button&#39;, { name })</code> matches each exactly once. DOM reads used for them</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a>, <a class="ev" href="evidence/E-28.locators-details.json">E-28</a></td>
+</tr>
+<tr>
+<td>F-10</td>
+<td>The active CO2 letter (E on all three rentals) is marked by CSS class <code>active</code> only</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a></td>
+</tr>
+<tr>
+<td>F-11</td>
+<td>Total = hourly price x duration with two decimals: $409.50 (Excavator, 3), $1475.00 (Bulldozer, 10), $147.50 (Bulldozer, 1). Details page has no thousands separator; the cart shows &quot;$1,501.50&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.excavator-duration-3.snapshot.yml">E-05</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-10.cart-qty-11.snapshot.yml">E-10</a></td>
+</tr>
+<tr>
+<td>F-12</td>
+<td>No confirmation message was present after Add to cart, on 2 of 2 adds, in the snapshot right after the click and in a DOM read 3 s and about 15 s later</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-06.after-add-to-cart.snapshot.yml">E-06</a>, <a class="ev" href="evidence/E-07.after-add-dom.json">E-07</a>, <a class="ev" href="evidence/E-21.second-add.snapshot.txt">E-21</a>, <a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a></td>
+</tr>
+<tr>
+<td>F-12a</td>
+<td>So the app shows no confirmation for add to cart. The same reads did catch &quot;Product quantity updated.&quot;, the favourites &quot;Unauthorized&quot; alert and &quot;Product deleted.&quot;</td>
+<td><span class="badge tag-inferred">Inferred</span></td>
+<td>F-12, F-18, F-22, F-34: other alerts were visible to the same method</td>
+</tr>
+<tr>
+<td>F-13</td>
+<td>Cart badge counts hours, not items: &quot;3&quot; after one rental of 3 hours, &quot;12&quot; after 11 + 1. The badge was missing or stale in the snapshot right after each add and correct within 3 s</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-06.after-add-to-cart.snapshot.yml">E-06</a>, <a class="ev" href="evidence/E-07.after-add-dom.json">E-07</a>, <a class="ev" href="evidence/E-21.second-add.snapshot.txt">E-21</a>, <a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a></td>
+</tr>
+<tr>
+<td>F-14</td>
+<td>Cart line: &quot;Excavator&quot;, note &quot;Item for rent, price per hour&quot;, a &quot;Quantity&quot; number field holding the duration, price $136.50, line total $409.50; cart total $409.50. Nothing says &quot;hours&quot; or &quot;duration&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-08.cart.snapshot.yml">E-08</a>, <a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>F-15</td>
+<td>Every cart load logs &quot;TypeError: Cannot read properties of undefined (reading &#39;cart_items&#39;)&quot; (3 times as visitor, 7 as customer); the cart still renders</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.console-to-cart.log">E-09</a>, <a class="ev" href="evidence/E-34.console-cart-customer.txt">E-34</a></td>
+</tr>
+<tr>
+<td>F-16</td>
+<td>As a visitor every full page load logs two 401s on <code>GET /users/me</code> and an &quot;Unauthorized&quot; console error</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.console-to-cart.log">E-09</a></td>
+</tr>
+<tr>
+<td>F-17</td>
+<td>The cart accepts 11 hours for a rental: line total $1,501.50. The field has min 1, max 99</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.cart-qty-11.snapshot.yml">E-10</a>, <a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>F-18</td>
+<td>Changing the cart quantity shows the alert &quot;Product quantity updated.&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.cart-qty-11.snapshot.yml">E-10</a></td>
+</tr>
+<tr>
+<td>F-19</td>
+<td><code>/rentals</code> works as a direct link, and the cart is still in the header after the reload</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-11.rentals-deeplink.snapshot.yml">E-11</a>, <a class="ev" href="evidence/E-12.bulldozer-details.snapshot.yml">E-12</a></td>
+</tr>
+<tr>
+<td>F-20</td>
+<td>All three machines show the category &quot;Drill&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-03.excavator-details.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-13.bulldozer-duration-bounds.json">E-13</a>, <a class="ev" href="evidence/E-14.crane-details.snapshot.yml">E-14</a></td>
+</tr>
+<tr>
+<td>F-21</td>
+<td>Selecting a related rental opens its details (Bulldozer page, Crane)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-14.crane-details.snapshot.yml">E-14</a></td>
+</tr>
+<tr>
+<td>F-22</td>
+<td>Visitor, Add to favourites: alert &quot;Unauthorized, can not add product to your favorite list.&quot;; no sign-in prompt, no redirect; <code>POST /favorites</code> 401</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-15.favourite-visitor.snapshot.yml">E-15</a></td>
+</tr>
+<tr>
+<td>F-23</td>
+<td>Compare gives no visible feedback. The product id is stored in session storage <code>compare_ids</code>; no link or indicator appears</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-16.after-compare.diff.txt">E-16</a>, <a class="ev" href="evidence/E-17.after-compare-dom.json">E-17</a></td>
+</tr>
+<tr>
+<td>F-24</td>
+<td><code>/compare</code> is not a route: &quot;NG04002: Cannot match any routes&quot;, redirect to <code>/</code>. No way to view a comparison was found</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-18.compare-route.txt">E-18</a></td>
+</tr>
+<tr>
+<td>F-25</td>
+<td>German: heading &quot;Mieten&quot;, &quot;pro Stunde&quot;, &quot;Dauer (1 Stunde(n))&quot;, &quot;Verwandte Produkte&quot;, buttons translated; choice kept after reload (<code>language</code> in local storage). The browser title stays English</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-19.rentals-de.snapshot.yml">E-19</a>, <a class="ev" href="evidence/E-20.excavator-de.snapshot.yml">E-20</a>, <a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a>, <a class="ev" href="evidence/E-25.rentals-mobile-dom.json">E-25</a></td>
+</tr>
+<tr>
+<td>F-26</td>
+<td>In German the total still reads &quot;/ (Total $136.50)&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-20.excavator-de.snapshot.yml">E-20</a></td>
+</tr>
+<tr>
+<td>F-27</td>
+<td>Adding the same rental again merges into the one cart line and sums the hours (11 + 1 = 12, $1,638.00)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-22.second-add-dom.json">E-22</a>, <a class="ev" href="evidence/E-33.locators-cart.json">E-33</a></td>
+</tr>
+<tr>
+<td>F-28</td>
+<td>At 375 px both pages are one column with no horizontal scroll. On details the floating chat button covers the start of the description</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-23.details-mobile-375.png">E-23</a>, <a class="ev" href="evidence/E-24.rentals-mobile-375.png">E-24</a>, <a class="ev" href="evidence/E-25.rentals-mobile-dom.json">E-25</a></td>
+</tr>
+<tr>
+<td>F-29</td>
+<td>Rental cards are <code>div.card</code> with no role, no <code>tabindex</code> and no link inside (<code>getByRole(&#39;link&#39;)</code> 0)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-25.rentals-mobile-dom.json">E-25</a>, <a class="ev" href="evidence/E-27.locators-rentals.json">E-27</a></td>
+</tr>
+<tr>
+<td>F-29a</td>
+<td>So a keyboard-only user cannot open a rental from <code>/rentals</code></td>
+<td><span class="badge tag-inferred">Inferred</span></td>
+<td>F-29: nothing focusable in the cards. Not tried with the Tab key</td>
+</tr>
+<tr>
+<td>F-30</td>
+<td>A visitor&#39;s cart (badge 12) is still there after login</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-26.after-login.json">E-26</a></td>
+</tr>
+<tr>
+<td>F-31</td>
+<td>No rental is unavailable on local: add to cart enabled, no &quot;Out of stock&quot; text on Crane. AC 11 could not be exercised</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-28.locators-details.json">E-28</a>, <a class="ev" href="evidence/E-04.details-dom-after-duration-3.json">E-04</a></td>
+</tr>
+<tr>
+<td>F-32</td>
+<td>Logged-in customer, Add to favourites: no alert in the snapshot right after; Crane then appears under Account &gt; Favourites</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-29.favourite-customer.snapshot.txt">E-29</a>, <a class="ev" href="evidence/E-30.favourites-with-crane.json">E-30</a></td>
+</tr>
+<tr>
+<td>F-33</td>
+<td>The favourite&#39;s delete button works; it has <code>data-test=&quot;delete&quot;</code>, no accessible name and no text</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-30.favourites-with-crane.json">E-30</a>, <a class="ev" href="evidence/E-31.favourites-after-delete.snapshot.txt">E-31</a>, <a class="ev" href="evidence/E-32.favourites-after-delete.json">E-32</a></td>
+</tr>
+<tr>
+<td>F-34</td>
+<td>Cart remove shows &quot;Product deleted.&quot; and &quot;The cart is empty. Nothing to display.&quot;; the control is <code>&lt;a class=&quot;btn btn-danger&quot;&gt;</code> with no role, name or test id</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-33.locators-cart.json">E-33</a>, <a class="ev" href="evidence/E-35.cart-after-cleanup.json">E-35</a></td>
+</tr>
+<tr>
+<td>F-35</td>
+<td>Knowledge files differ from this run: <code>/compare</code> route (e2e-flows.md) does not exist; cards are not focusable (rentals.md says focusable); favourites delete has a usable test id (account.md says none); add-to-cart toast seen 0 of 2 (product-details.md says 1 of 3)</td>
+<td><span class="badge tag-inferred">Inferred</span></td>
+<td>F-24, F-29, F-33, F-12</td>
+</tr>
+</tbody></table>
+<p>Heuristics behind the ideas: boundaries (actions 11, 14, 15), interfaces (cart field against the
+slider rule, 11), operations (same rental twice 25; keyboard on the slider 5, 14, 15), state and
+role changes (visitor and customer favourites 17, 47; cart across login 42), interruptions (deep
+link and reload 12), platform (language 23-26; viewport 29-33).</p>
+<h2>Not explored</h2>
+<ul>
+<li>AC 11 availability: no unavailable rental exists on local and <code>ProductRequest</code> has no <code>in_stock</code> field.</li>
+<li>Regression: a normal product&#39;s details (quantity control), rentals on the home overview and in search. Dropped at the 80 percent mark.</li>
+<li>Languages other than German; the German Categories menu entry.</li>
+<li>Compare with two or more products; favourites and compare from the keyboard.</li>
+<li>Empty and error states of <code>/rentals</code>.</li>
+</ul>
+<h2>Test data created</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Data</th>
+<th>Where</th>
+<th>Cleanup</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Cart line Excavator (3 h, edited to 11, then +1 = 12)</td>
+<td>session cart, visitor then customer</td>
+<td>Removed at action 54, confirmed empty at 55 (<a class="ev" href="evidence/E-35.cart-after-cleanup.json">E-35</a>)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Compare selection: Crane</td>
+<td>session storage <code>compare_ids</code></td>
+<td>Removed at action 55</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Favourite: Crane on the shared demo customer</td>
+<td>Account &gt; Favourites</td>
+<td>Deleted at action 50, confirmed at 51 (<a class="ev" href="evidence/E-32.favourites-after-delete.json">E-32</a>). The 3 seeded favourites are untouched</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Language set to German</td>
+<td>local storage</td>
+<td>Set back to English at action 36</td>
+</tr>
+</tbody></table>
+<p>No record needed the <code>ETA-</code> prefix: nothing with a free-text name was created. No order was placed.</p>
+<h2>Credential check</h2>
+<p>Searched the run folder for the customer email and password values from <code>.env</code>: no match. Login
+was done in one scripted call that returned only the URL, so no snapshot holds a filled password field.</p>
+</details>
+</main>
+</body>
+</html>

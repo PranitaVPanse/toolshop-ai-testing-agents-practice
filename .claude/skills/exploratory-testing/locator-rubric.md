@@ -21,6 +21,10 @@ note the deviation.
 Scoping with a parent (`getByRole('row', { name: 'Hammer' }).getByRole('button', { name: 'Delete' })`)
 is allowed at any level and is often the right answer for repeated elements.
 
+A role without a name (`getByRole('alert')`) is not strategy 1: it is unique only by accident of
+the current state. Add the name, a text filter (`getByRole('alert').filter({ hasText: '...' })`)
+or use the test id. When several candidates matched 1, recommend the most specific one.
+
 ## 2. Uniqueness check
 
 For each candidate, in the application state where the test would use it:

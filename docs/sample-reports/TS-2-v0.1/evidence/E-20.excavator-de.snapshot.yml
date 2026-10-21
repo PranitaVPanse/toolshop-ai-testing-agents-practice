@@ -1,0 +1,48 @@
+  - generic [ref=f3e122]:
+    - generic [ref=f3e123]:
+      - figure [ref=f3e125]:
+        - img "Excavator" [ref=f3e127]
+        - generic [ref=f3e128]:
+          - text: Foto von
+          - link "John Kakuk" [ref=f3e129] [cursor=pointer]:
+            - /url: https://unsplash.com/@mgnfy
+          - text: am
+          - link "Unsplash" [ref=f3e130] [cursor=pointer]:
+            - /url: https://unsplash.com/photos/HvvPceHYLOg
+          - text: .
+      - generic [ref=f3e131]:
+        - heading "Excavator" [level=1] [ref=f3e132]
+        - paragraph [ref=f3e133]:
+          - generic "category" [ref=f3e134]: Drill
+          - generic "brand" [ref=f3e135]: ForgeFlex Tools
+        - generic [ref=f3e136]:
+          - generic [ref=f3e137]: $136.50
+          - text: pro Stunde
+          - generic [ref=f3e138]: / (Total $136.50)
+        - generic "A = am umweltfreundlichsten, E = höhere Umweltbelastung" [ref=f3e139]:
+          - text: "CO₂:"
+          - generic [ref=f3e140]: A
+          - generic [ref=f3e141]: B
+          - generic [ref=f3e142]: C
+          - generic [ref=f3e143]: D
+          - generic [ref=f3e144]: E
+        - paragraph [ref=f3e145]: Heavy-duty tracked excavator available for hourly rental, designed for professional foundation digging, trenching, utility installation, and general earthmoving opera
+        - generic [ref=f3e146]:
+          - generic [ref=f3e147]: Dauer (1 Stunde(n))
+          - generic "ngx-slider" [ref=f3e148]:
+            - slider "ngx-slider" [ref=f3e157] [cursor=pointer]
+            - generic [ref=f3e158]: "1"
+            - generic [ref=f3e159]: "10"
+            - generic [ref=f3e160]: "1"
+        - generic [ref=f3e162]:
+          - button [ref=f3e163] [cursor=pointer]
+          - button [ref=f3e167] [cursor=pointer]
+          - button [ref=f3e171] [cursor=pointer]
+    - separator [ref=f3e175]
+    - generic [ref=f3e176]:
+      - heading "Verwandte Produkte" [level=2] [ref=f3e177]
+      - generic [ref=f3e179]:
+        - link [ref=f3e180] [cursor=pointer]:
+          - /url: /product/01M2XDJW3CCYH6SX8QY1D12WKB
+          - img "Cordless Drill 20V" [ref=f3e182]
+          - generic [ref=f3e183]:

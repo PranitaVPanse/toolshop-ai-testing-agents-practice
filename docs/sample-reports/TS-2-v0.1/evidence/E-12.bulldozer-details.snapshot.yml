@@ -1,0 +1,106 @@
+              - link "cart" [ref=f1e42] [cursor=pointer]:
+                - /url: /checkout
+                - generic [ref=f1e46]: "11"
+          - button "Select language" [ref=f1e48] [cursor=pointer]: EN
+  - generic [ref=f1e71]:
+    - generic [ref=f1e72]:
+      - figure [ref=f1e74]:
+        - img "Bulldozer" [ref=f1e76]
+        - generic [ref=f1e77]:
+          - text: Photo by
+          - link "Zac Edmonds" [ref=f1e78] [cursor=pointer]:
+            - /url: https://unsplash.com/@zacedmo
+          - text: "on"
+          - link "Unsplash" [ref=f1e79] [cursor=pointer]:
+            - /url: https://unsplash.com/photos/N1LBcqLP9ec
+          - text: .
+      - generic [ref=f1e80]:
+        - heading "Bulldozer" [level=1] [ref=f1e81]
+        - paragraph [ref=f1e82]:
+          - generic "category" [ref=f1e83]: Drill
+          - generic "brand" [ref=f1e84]: ForgeFlex Tools
+        - generic [ref=f1e85]:
+          - generic [ref=f1e86]: $147.50
+          - text: per hour
+          - generic [ref=f1e87]: / (Total $147.50)
+        - generic "A = most environmentally friendly, E = higher environmental impact" [ref=f1e88]:
+          - text: "CO₂:"
+          - generic [ref=f1e89]: A
+          - generic [ref=f1e90]: B
+          - generic [ref=f1e91]: C
+          - generic [ref=f1e92]: D
+          - generic [ref=f1e93]: E
+        - paragraph [ref=f1e94]: Robust tracked bulldozer available for hourly rental, built for heavy-duty grading, site clearing, land leveling, and large-volume earthmoving operations on construction and infrastructure projects. The wide-blade dozer pushes enormous volumes of soil, sand, gravel, and debris with ease, while the optional rear-mounted ripper attachment fractures compacted ground, asphalt, and embedded tree roots ahead of the blade pass. Ergonomic joystick cab controls and a fully automatic hydrostatic transmission allow operators of all experience levels to work efficiently and precisely from the first hour of rental. The enclosed cab features climate control, a suspension seat, and panoramic visibility for comfortable, fatigue-free operation during extended shifts. Integrated GPS rough-grading guidance is available as an optional add-on for projects requiring precise elevation control. Ideal for subdivision site preparation, road subgrade construction, agricultural land reclamation, and large-scale commercial landscaping projects.
+        - generic [ref=f1e95]:
+          - generic [ref=f1e96]: Duration (1 hour(s))
+          - generic "ngx-slider" [ref=f1e97]:
+            - slider "ngx-slider" [ref=f1e106] [cursor=pointer]
+            - generic [ref=f1e107]: "1"
+            - generic [ref=f1e108]: "10"
+            - generic [ref=f1e109]: "1"
+        - generic [ref=f1e111]:
+          - button [ref=f1e112] [cursor=pointer]
+          - button [ref=f1e116] [cursor=pointer]
+          - button [ref=f1e120] [cursor=pointer]
+    - separator [ref=f1e124]
+    - generic [ref=f1e125]:
+      - heading "Related products" [level=2] [ref=f1e126]
+      - generic [ref=f1e128]:
+        - link [ref=f1e129] [cursor=pointer]:
+          - /url: /product/01M2XDJW3CCYH6SX8QY1D12WKB
+          - img "Cordless Drill 20V" [ref=f1e131]
+          - generic [ref=f1e132]:
+            - heading "Cordless Drill 20V" [level=5] [ref=f1e133]
+            - link "More information" [ref=f1e134]:
+              - /url: "#"
+        - link [ref=f1e135] [cursor=pointer]:
+          - /url: /product/01M2XDJW3EFFSK1P5SFS4G7VCE
+          - img "Cordless Drill 24V" [ref=f1e137]
+          - generic [ref=f1e138]:
+            - heading "Cordless Drill 24V" [level=5] [ref=f1e139]
+            - link "More information" [ref=f1e140]:
+              - /url: "#"
+        - link [ref=f1e141] [cursor=pointer]:
+          - /url: /product/01M2XDJW3F8PXKZ7KY332NXB4Z
+          - img "Cordless Drill 18V" [ref=f1e143]
+          - generic [ref=f1e144]:
+            - heading "Cordless Drill 18V" [level=5] [ref=f1e145]
+            - link "More information" [ref=f1e146]:
+              - /url: "#"
+        - link [ref=f1e147] [cursor=pointer]:
+          - /url: /product/01M2XDJW3HXX7T1BCKX1ZF7YEA
+          - img "Cordless Drill 12V" [ref=f1e149]
+          - generic [ref=f1e150]:
+            - heading "Cordless Drill 12V" [level=5] [ref=f1e151]
+            - link "More information" [ref=f1e152]:
+              - /url: "#"
+        - link [ref=f1e153] [cursor=pointer]:
+          - /url: /product/01M2XDJW3K8DGCP5EFCWR2T6GZ
+          - img "Excavator" [ref=f1e155]
+          - generic [ref=f1e156]:
+            - heading "Excavator" [level=5] [ref=f1e157]
+            - link "More information" [ref=f1e158]:
+              - /url: "#"
+        - link [ref=f1e159] [cursor=pointer]:
+          - /url: /product/01M2XDJW3RK7SE5D8CXATRPKQN
+          - img "Crane" [ref=f1e161]
+          - generic [ref=f1e162]:
+            - heading "Crane" [level=5] [ref=f1e163]
+            - link "More information" [ref=f1e164]:
+              - /url: "#"
+  - contentinfo [ref=f1e53]:
+    - generic [ref=f1e54]:
+      - generic [ref=f1e55]:
+        - text: This is a DEMO application, used for software testing training purpose. |
+        - link "Privacy Policy" [ref=f1e56] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=f1e57] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=f1e58] [cursor=pointer]:
+          - /url: https://unsplash.com/photos/t5YUoHW6zRo
+        - text: .
+      - generic [ref=f1e59]: vdev | Built 2026-09-27 | Angular 20.0.5
+  - button "Open chat" [ref=f1e61] [cursor=pointer]
+  - button "Show live shop activity" [ref=f1e65] [cursor=pointer]

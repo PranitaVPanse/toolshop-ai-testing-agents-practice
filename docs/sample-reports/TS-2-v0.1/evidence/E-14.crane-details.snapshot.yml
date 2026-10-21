@@ -1,0 +1,106 @@
+              - link "cart" [ref=f1e42] [cursor=pointer]:
+                - /url: /checkout
+                - generic [ref=f1e46]: "11"
+          - button "Select language" [ref=f1e48] [cursor=pointer]: EN
+  - generic [ref=f1e71]:
+    - generic [ref=f1e72]:
+      - figure [ref=f1e165]:
+        - img "Crane" [ref=f1e166]
+        - generic [ref=f1e77]:
+          - text: Photo by
+          - link "Ade Adebowale" [ref=f1e167] [cursor=pointer]:
+            - /url: https://unsplash.com/@adebowax
+          - text: "on"
+          - link "Unsplash" [ref=f1e79] [cursor=pointer]:
+            - /url: https://unsplash.com/photos/DKr6BEdI2sE
+          - text: .
+      - generic [ref=f1e80]:
+        - heading "Crane" [level=1] [ref=f1e168]
+        - paragraph [ref=f1e82]:
+          - generic "category" [ref=f1e83]: Drill
+          - generic "brand" [ref=f1e84]: MightyCraft Hardware
+        - generic [ref=f1e85]:
+          - generic [ref=f1e86]: $153.50
+          - text: per hour
+          - generic [ref=f1e87]: / (Total $153.50)
+        - generic "A = most environmentally friendly, E = higher environmental impact" [ref=f1e88]:
+          - text: "CO₂:"
+          - generic [ref=f1e89]: A
+          - generic [ref=f1e90]: B
+          - generic [ref=f1e91]: C
+          - generic [ref=f1e92]: D
+          - generic [ref=f1e93]: E
+        - paragraph [ref=f1e94]: Mobile hydraulic crane available for hourly rental, purpose-engineered for lifting, positioning, and placing heavy loads on active construction sites, industrial facilities, and infrastructure projects. The multi-section telescoping boom extends smoothly to reach elevated installation positions while the four-point hydraulic outrigger system provides a rock-solid, perfectly level base on uneven, sloped, or soft terrain. The precision proportional load control system allows millimeter-accurate positioning of suspended loads, while the rated capacity indicator and automatic overload cutoff ensure every lift is performed safely within the machines certified working limits. The fully enclosed operators cab features ergonomic controls, climate management, and unobstructed boom-tip visibility for confident operation in all weather conditions. Extensive safety systems including anti-two-block, swing-limit, and wind-speed monitoring protect both the operator and surrounding workers on busy sites. Perfect for structural steel erection, precast concrete placement, HVAC rooftop installation, and any material handling task that exceeds the reach or capacity of standard jobsite equipment.
+        - generic [ref=f1e95]:
+          - generic [ref=f1e96]: Duration (1 hour(s))
+          - generic "ngx-slider" [ref=f1e97]:
+            - slider "ngx-slider" [ref=f1e106] [cursor=pointer]
+            - generic [ref=f1e107]: "1"
+            - generic [ref=f1e108]: "10"
+            - generic [ref=f1e109]: "1"
+        - generic [ref=f1e111]:
+          - button [ref=f1e112] [cursor=pointer]
+          - button [ref=f1e116] [cursor=pointer]
+          - button [ref=f1e120] [cursor=pointer]
+    - separator [ref=f1e124]
+    - generic [ref=f1e125]:
+      - heading "Related products" [level=2] [ref=f1e126]
+      - generic [ref=f1e128]:
+        - link [ref=f1e169] [cursor=pointer]:
+          - /url: /product/01M2XDJW3CCYH6SX8QY1D12WKB
+          - img "Cordless Drill 20V" [ref=f1e171]
+          - generic [ref=f1e172]:
+            - heading "Cordless Drill 20V" [level=5] [ref=f1e173]
+            - link "More information" [ref=f1e174]:
+              - /url: "#"
+        - link [ref=f1e175] [cursor=pointer]:
+          - /url: /product/01M2XDJW3EFFSK1P5SFS4G7VCE
+          - img "Cordless Drill 24V" [ref=f1e177]
+          - generic [ref=f1e178]:
+            - heading "Cordless Drill 24V" [level=5] [ref=f1e179]
+            - link "More information" [ref=f1e180]:
+              - /url: "#"
+        - link [ref=f1e181] [cursor=pointer]:
+          - /url: /product/01M2XDJW3F8PXKZ7KY332NXB4Z
+          - img "Cordless Drill 18V" [ref=f1e183]
+          - generic [ref=f1e184]:
+            - heading "Cordless Drill 18V" [level=5] [ref=f1e185]
+            - link "More information" [ref=f1e186]:
+              - /url: "#"
+        - link [ref=f1e187] [cursor=pointer]:
+          - /url: /product/01M2XDJW3HXX7T1BCKX1ZF7YEA
+          - img "Cordless Drill 12V" [ref=f1e189]
+          - generic [ref=f1e190]:
+            - heading "Cordless Drill 12V" [level=5] [ref=f1e191]
+            - link "More information" [ref=f1e192]:
+              - /url: "#"
+        - link [ref=f1e193] [cursor=pointer]:
+          - /url: /product/01M2XDJW3K8DGCP5EFCWR2T6GZ
+          - img "Excavator" [ref=f1e195]
+          - generic [ref=f1e196]:
+            - heading "Excavator" [level=5] [ref=f1e197]
+            - link "More information" [ref=f1e198]:
+              - /url: "#"
+        - link [ref=f1e199] [cursor=pointer]:
+          - /url: /product/01M2XDJW3P466W1FTJHK9BCJ1F
+          - img "Bulldozer" [ref=f1e201]
+          - generic [ref=f1e202]:
+            - heading "Bulldozer" [level=5] [ref=f1e203]
+            - link "More information" [ref=f1e204]:
+              - /url: "#"
+  - contentinfo [ref=f1e53]:
+    - generic [ref=f1e54]:
+      - generic [ref=f1e55]:
+        - text: This is a DEMO application, used for software testing training purpose. |
+        - link "Privacy Policy" [ref=f1e56] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=f1e57] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=f1e58] [cursor=pointer]:
+          - /url: https://unsplash.com/photos/t5YUoHW6zRo
+        - text: .
+      - generic [ref=f1e59]: vdev | Built 2026-09-27 | Angular 20.0.5
+  - button "Open chat" [ref=f1e61] [cursor=pointer]
+  - button "Show live shop activity" [ref=f1e65] [cursor=pointer]

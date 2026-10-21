@@ -1,0 +1,5 @@
+{"actions":"44-46","note":"Send as the logged-in demo customer: subject Warranty, message exactly 50 characters, no attachment",
+"POST /messages status":200,"requestFields":["name","subject","message"],"responseFields":["name","subject","message","user_id","status","id","created_at"],
+"msToResponse":14880,"rightAfterResponse":{"formPresent":false},"msToOutcome":14891,
+"dom":{"formPresent":false,"heading":"Contact","alerts":[{"text":"Thanks for your message! We will contact you shortly.","role":"alert","data-test":null,"class":"alert alert-success mt-3"}]},
+"counts (confirmation state)":{"getByRole('alert')":1,"getByText('Thanks for your message! We will contact you shortly.')":1,"getByRole('alert').filter({hasText:'Thanks for your message'})":1,"getByRole('button',{name:'Send'})":0,"getByTestId('contact-submit')":0}}

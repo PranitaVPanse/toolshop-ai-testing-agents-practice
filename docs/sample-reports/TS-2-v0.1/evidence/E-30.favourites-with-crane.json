@@ -1,0 +1,4 @@
+{"action":49,"note":"DOM read of /account/favorites after adding Crane as the demo customer","url":"/account/favorites","h1":"Favorites",
+"names":["Combination Pliers","Slip Joint Pliers","Belt Sander","Crane"],
+"itemContainer":"[data-test=\"favorite-<id>\"]",
+"deleteButton":{"data-test":"delete","aria-label":null,"text":"","class":"btn-danger btn mb-3"}}

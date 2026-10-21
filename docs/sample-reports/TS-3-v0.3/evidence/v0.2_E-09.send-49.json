@@ -1,0 +1,16 @@
+{
+  "t": 1791752823669,
+  "errors": [
+    "message-error: Message must be minimal 50 characters"
+  ],
+  "fields": [
+    "first_name len=3 form-control ng-dirty ng-valid ng-touched",
+    "last_name len=20 form-control ng-touched ng-dirty ng-valid",
+    "email len=24 form-control ng-dirty ng-valid ng-touched",
+    "subject len=9 form-select ng-untouched ng-dirty ng-valid",
+    "message len=49 form-control ng-invalid is-invalid ng-touched ng-dirty"
+  ],
+  "focus": "INPUT",
+  "formPresent": true,
+  "messagePosts": []
+}

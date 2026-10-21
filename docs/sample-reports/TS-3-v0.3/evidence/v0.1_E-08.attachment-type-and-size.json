@@ -1,0 +1,3 @@
+{"actions":"16-17","note":"DOM reads after choosing each file on an otherwise valid, already submitted form",
+"emptyPdf":{"file":"ETA-empty.pdf, 0 bytes, application/pdf","alerts":[{"text":"File should have a txt extension.","data-test":"attachment-error"}],"formClass":"ng-submitted ng-dirty ng-touched ng-invalid"},
+"nonEmptyTxt":{"file":"ETA-nonempty.txt, 25 bytes, text/plain","alerts":[{"text":"File should be empty.","data-test":"attachment-error"}],"formClass":"ng-submitted ng-dirty ng-touched ng-invalid"}}

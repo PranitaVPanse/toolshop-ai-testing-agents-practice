@@ -1,0 +1,2150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automation-readiness report: KAN-2 Power Tools category page</title>
+<style>
+  :root { --ink: #1f2933; --muted: #6b7280; --line: #e5e7eb; --bg: #f6f7f9; --card: #fff; --accent: #4f46e5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+  header { background: var(--card); border-bottom: 1px solid var(--line); padding: 20px 32px; }
+  header h1 { margin: 0 0 12px; font-size: 22px; }
+  .status { display: inline-block; margin-left: 12px; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; vertical-align: middle; }
+  .status.draft { background: #fef3c7; color: #92400e; }
+  .status.signed { background: #d1fae5; color: #065f46; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; font-size: 14px; }
+  .fact { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 6px 0; border-top: 1px solid var(--line); }
+  .fact span { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+  @media (max-width: 900px) { .facts { grid-template-columns: 1fr; } }
+  nav { position: sticky; top: 0; z-index: 1; background: var(--card); border-bottom: 1px solid var(--line); padding: 8px 32px; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+  nav a { color: var(--accent); text-decoration: none; }
+  main { max-width: 1400px; margin: 0 auto; padding: 24px 32px 64px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; margin: 0 0 16px; padding: 0 20px 4px; }
+  summary { cursor: pointer; font-size: 18px; font-weight: 600; padding: 14px 0; list-style: none; }
+  summary::before { content: "▸ "; color: var(--muted); font-size: 14px; }
+  details[open] > summary::before { content: "▾ "; }
+  details.appendix summary { font-size: 15px; color: var(--muted); }
+  details.scenario { border: 0; margin: 0; padding: 0; background: none; }
+  details.scenario summary { font-size: 14px; font-weight: 500; padding: 0; color: var(--accent); }
+  details.scenario pre { margin: 8px 0 4px; }
+  h3 { font-size: 15px; margin: 20px 0 8px; }
+  blockquote { margin: 12px 0; padding: 10px 16px; border-left: 4px solid var(--accent); background: #eef2ff; border-radius: 0 6px 6px 0; }
+  blockquote p { margin: 4px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 16px; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f3f4f6; font-weight: 600; white-space: nowrap; }
+  tr:nth-child(even) td { background: #fafafa; }
+  td.qa { background: #fffbeb !important; }
+  td.qa.empty { color: var(--muted); text-align: center; }
+  code { font: 13px/1.4 ui-monospace, Consolas, monospace; background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+  pre { background: #1f2933; color: #e5e7eb; padding: 14px; border-radius: 6px; overflow: auto; font-size: 13px; }
+  pre code { background: none; color: inherit; padding: 0; }
+  pre.comment { background: #f9fafb; color: var(--ink); border: 1px solid var(--line); white-space: pre-wrap; font: 14px/1.5 system-ui, sans-serif; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .tag-observed { background: #d1fae5; color: #065f46; }
+  .tag-inferred { background: #dbeafe; color: #1e40af; }
+  .tag-assumed { background: #fef3c7; color: #92400e; }
+  .ok, .dec-now, .grade-a { background: #d1fae5; color: #065f46; }
+  .warn, .dec-clarify, .grade-c { background: #fef3c7; color: #92400e; }
+  .bad, .grade-d { background: #fee2e2; color: #991b1b; }
+  .muted, .dec-no { background: #e5e7eb; color: #374151; }
+  .dec-explore, .grade-b { background: #dbeafe; color: #1e40af; }
+  .type-func { background: #ede9fe; color: #5b21b6; }
+  .type-reg { background: #ffedd5; color: #9a3412; }
+  .st-stable, .st-risk, .st-blocked { background: none; padding-left: 0; font-weight: 500; }
+  .st-stable::before { content: "✅ "; }
+  .st-risk::before { content: "⚠️ "; }
+  .st-blocked::before { content: "⛔ "; }
+  @media (max-width: 700px) { header, nav, main { padding-left: 16px; padding-right: 16px; } table { display: block; overflow-x: auto; } }
+  @media print { nav { display: none; } details { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Automation-readiness report: KAN-2 Power Tools category page<span class="status draft">Draft</span></h1>
+  <div class="facts"><div class="facts-col"><div class="fact"><span>Version</span><div>v0.2 (draft)<br>previous: v0.1 (draft)</div></div><div class="fact"><span>Environment</span><div>local: UI <a href="http://localhost:4200">http://localhost:4200</a>, API <a href="http://localhost:8091">http://localhost:8091</a></div></div><div class="fact"><span>Run</span><div>2026-10-15<br>ledger started 19:42Z<br>browser 19:43:39Z to 19:50:17Z</div></div></div><div class="facts-col"><div class="fact"><span>Budget</span><div>52 of 60 actions<br>7 of 20 minutes<br>stopped: 80 percent of the action budget reached at action 48, then locators, console and network only</div></div><div class="fact"><span>Story source</span><div>Jira KAN-2, https://&lt;your-site&gt;.atlassian.net/browse/KAN-2, last updated 2026-10-13 21:52 (+0100), unchanged since v0.1</div></div><div class="fact"><span>Inputs</span><div>story<br>context file<br>knowledge: e2e-flows, decisions (empty), rules, pages/product-overview, pages/product-details, pages/rentals<br>OpenAPI: v0.1 reading carried<br>previous review: <code>v0.1/qa-review.md</code></div></div></div></div>
+</header>
+<nav><a href="#s0">Summary</a><a href="#s1">Acceptance criteria</a><a href="#s2">Findings</a><a href="#s3">Open questions</a><a href="#s4">Test scenarios</a><a href="#s5">Locators and testability</a><a href="#s6">Test data and cleanup</a><a href="#s7">Next step</a><a href="#jira">Jira comment</a></nav>
+<main>
+<details open id="s0"><summary>1. Summary</summary>
+<blockquote>
+<p>Applied from v0.1&#39;s review: answers Q-01, Q-02, Q-03, Q-04, Q-05, Q-08 are now rules; no scenario
+had a QA decision yet. Re-explored: unticking Power Tools (your Q-03 note), the loading sign (Q-08),
+and everything v0.1 did not reach: clearing filters, opening details, comparison page, German,
+logged-in customer. Resolved: F-05, F-06, F-07. New: F-15, F-16, Q-10, S-20. Still open: Q-06,
+Q-07, Q-09, Q-10 and all 20 decisions.</p>
+</blockquote>
+<p>Look at these first:</p>
+<ul>
+<li>The loading sign you required in Q-08 does not exist: during a 46 s wait for the Sander list the old eight cards stayed on screen with nothing marking the refresh (F-02, Q-10, S-20).</li>
+<li>Cordless Drill 12V still shows &quot;$46.5&quot;, for visitors and logged-in customers alike (F-01).</li>
+<li>In German, the category and sub-category names stay English (&quot;Kategorie: Power Tools&quot;, Grinder, Sander, Saw, Drill); whether that is accepted is Q-09 (F-15).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Acceptance criteria</td>
+<td>5 met · 6 partly · 1 not met · 0 not explored</td>
+</tr>
+<tr>
+<td>Findings</td>
+<td>2 defects · 2 risks · 2 gaps · 7 observations · 3 resolved</td>
+</tr>
+<tr>
+<td>Open questions</td>
+<td>4 open · 6 answered</td>
+</tr>
+<tr>
+<td>Scenarios</td>
+<td>16 automate now · 2 clarify first · 2 keep exploratory · 0 not worth automating</td>
+</tr>
+<tr>
+<td>Locators</td>
+<td>19 stable · 1 at risk · 0 blocked · 1 not verified</td>
+</tr>
+<tr>
+<td>Your input</td>
+<td><code>qa-review.md</code>: 4 answers, 20 decisions</td>
+</tr>
+</tbody></table>
+</details><details open id="s1"><summary>2. Acceptance criteria</summary>
+<table>
+<thead>
+<tr>
+<th>AC</th>
+<th>Criterion</th>
+<th>Result</th>
+<th>Observed</th>
+<th>Tag</th>
+<th>Scenarios</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Navigation: Categories &gt; Power Tools, URL, heading, title</td>
+<td><span class="badge ok">met</span></td>
+<td>Menu, URL, heading carried from v0.1; title starts with &quot;Power Tools&quot;, accepted by Q-01</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-01, S-02</td>
+<td><a class="ev" href="evidence/v0.1_E-01.power-tools-page.snapshot.yml">v0.1/E-01</a>, <a class="ev" href="evidence/v0.1_E-03.page-dom.json">v0.1/E-03</a>, <a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Lists every power tool and nothing else</td>
+<td><span class="badge ok">met</span></td>
+<td>Eight tools for visitor and customer; rentals left out (carried)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-03, S-17, S-18</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>, <a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a>, <a class="ev" href="evidence/v0.1_E-06.filters-timed.json">v0.1/E-06</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Card: photo, name, CO₂ rating, price with two decimals</td>
+<td><span class="badge bad">not met</span></td>
+<td>Cordless Drill 12V &quot;$46.5&quot; (F-01)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-04, S-05</td>
+<td><a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a>, <a class="ev" href="evidence/v0.1_E-03.page-dom.json">v0.1/E-03</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Selecting a card opens its details page</td>
+<td><span class="badge ok">met</span></td>
+<td>Circular Saw details open; heading appears after 23.7 s (F-03)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-06</td>
+<td><a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Each sort option reorders correctly</td>
+<td><span class="badge warn">partly</span></td>
+<td>Six orders correct (carried); no loading sign while the list refreshes (F-02)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-07, S-20</td>
+<td><a class="ev" href="evidence/v0.1_E-05.sort-timed.json">v0.1/E-05</a>, <a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Sub-category filter; clearing restores all</td>
+<td><span class="badge warn">partly</span></td>
+<td>Filter and clearing correct; no loading sign (F-02)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-08, S-11, S-14</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Brand filter; clearing restores all</td>
+<td><span class="badge warn">partly</span></td>
+<td>Filter and clearing correct; no loading sign (F-02)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-09, S-11</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Eco-friendly shows only eco-friendly power tools</td>
+<td><span class="badge warn">partly</span></td>
+<td>No-results message as Q-02 expects (carried); no loading sign (F-02)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-12</td>
+<td><a class="ev" href="evidence/v0.1_E-06.filters-timed.json">v0.1/E-06</a>, <a class="ev" href="evidence/v0.1_E-09.testid-and-no-results.json">v0.1/E-09</a>, <a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Filters combine; sort order kept</td>
+<td><span class="badge warn">partly</span></td>
+<td>Drill + MightyCraft with CO₂ (E - A) kept (carried); no loading sign (F-02)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-10</td>
+<td><a class="ev" href="evidence/v0.1_E-06.filters-timed.json">v0.1/E-06</a>, <a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>No match shows a &quot;no products found&quot; message</td>
+<td><span class="badge ok">met</span></td>
+<td>&quot;There are no products found.&quot; (agreed text, Q-04); German text shown too</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-13</td>
+<td><a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>, <a class="ev" href="evidence/v0.1_E-09.testid-and-no-results.json">v0.1/E-09</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Compare adds the product to the comparison</td>
+<td><span class="badge ok">met</span></td>
+<td>Comparison page shows the Circular Saw column</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-15, S-19</td>
+<td><a class="ev" href="evidence/E-03.after-compare-click.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-05.comparison-loaded.json">E-05</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Labels translated on language change</td>
+<td><span class="badge warn">partly</span></td>
+<td>German heading prefix, sort, filter headings, eco label, message translated; category names English (F-15)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-16</td>
+<td><a class="ev" href="evidence/E-07.german-labels.json">E-07</a>, <a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a></td>
+</tr>
+</tbody></table>
+<p>The story does not say: default order (Q-06); which brands are listed (Q-07); which languages and whether category names are translated (Q-09); what the loading sign looks like and whether the old list stays visible (Q-10). Gaps G-05, G-07, G-09, G-13, G-15, G-16 in the ledger were not reached.</p>
+</details><details open id="s2"><summary>3. Findings</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Where</th>
+<th>Finding</th>
+<th>Type</th>
+<th>Severity</th>
+<th>AC</th>
+<th>Status</th>
+<th>Tag</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F-01</td>
+<td>Power Tools &gt; Cordless Drill 12V card &gt; price</td>
+<td>Price shows &quot;$46.5&quot;, not &quot;$46.50&quot;, in every sort and filter state and for a logged-in customer. The API sends <code>46.5</code>; the card does not format it</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>3</td>
+<td>carried, re-observed</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a>, <a class="ev" href="evidence/v0.1_E-03.page-dom.json">v0.1/E-03</a>, <a class="ev" href="evidence/v0.1_E-05.sort-timed.json">v0.1/E-05</a></td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>Power Tools &gt; product grid, after a sort or filter change</td>
+<td>No loading sign while the list refreshes, against the Q-08 answer: 46,016 ms after ticking Sander the old eight cards were still shown, and 185 samples at 250 ms found no spinner, progress bar, aria-busy, loading or skeleton element. The comparison page does show &quot;Loading...&quot;</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>5-9</td>
+<td>changed (was risk F-03)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>, <a class="ev" href="evidence/E-04.comparison-page.json">E-04</a></td>
+</tr>
+<tr>
+<td>F-03</td>
+<td>Power Tools &gt; product grid; product details heading</td>
+<td>Answers are slow on local: list 977 ms to 46,016 ms, details heading 23,717 ms after the URL changed. Per Q-05 an environment matter; tests must wait for the API answer or the element, never a fixed time</td>
+<td><span class="badge warn">risk</span></td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td>carried, updated</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>, <a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a></td>
+</tr>
+<tr>
+<td>F-04</td>
+<td>Power Tools &gt; filter checkboxes</td>
+<td>Every click sends its own request, none cancelled. With slow answers an older answer could arrive last and show the wrong list. Not reproduced</td>
+<td><span class="badge warn">risk</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>9</td>
+<td>carried from v0.1</td>
+<td><span class="badge tag-inferred">Inferred</span></td>
+<td><a class="ev" href="evidence/v0.1_E-11.network.txt">v0.1/E-11</a>, <a class="ev" href="evidence/v0.1_E-06.filters-timed.json">v0.1/E-06</a></td>
+</tr>
+<tr>
+<td>F-05</td>
+<td>Power Tools &gt; browser tab title</td>
+<td>Title &quot;Power Tools - Practice Software Testing - Toolshop - v5.0&quot;; accepted by Q-01</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>1</td>
+<td><span class="badge ok">resolved</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a></td>
+</tr>
+<tr>
+<td>F-06</td>
+<td>Power Tools &gt; Show only eco-friendly products</td>
+<td>No power tool is eco-friendly, so AC 8 can only show the no-results message; accepted by Q-02 as the launch state</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>8</td>
+<td><span class="badge ok">resolved</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-04.api-power-tools.md">v0.1/E-04</a>, <a class="ev" href="evidence/v0.1_E-06.filters-timed.json">v0.1/E-06</a></td>
+</tr>
+<tr>
+<td>F-07</td>
+<td>Power Tools &gt; By category &gt; Power Tools checkbox</td>
+<td>Ticking it ticks all four sub-categories; unticking clears all five and shows all eight, as Q-03 requires</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>6</td>
+<td><span class="badge ok">resolved</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>F-08</td>
+<td>Power Tools &gt; By category &gt; Drill</td>
+<td>In the API the Drill sub-category also holds the three rentals; the page leaves them out without sending <code>is_rental</code>. If that server default changes, rentals appear here</td>
+<td>observation</td>
+<td><span class="badge ok">low</span></td>
+<td>2</td>
+<td>carried from v0.1</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-04.api-power-tools.md">v0.1/E-04</a>, <a class="ev" href="evidence/v0.1_E-06.filters-timed.json">v0.1/E-06</a></td>
+</tr>
+<tr>
+<td>F-09</td>
+<td>Power Tools &gt; Sort dropdown</td>
+<td>No accessible name (no label, aria-label or aria-labelledby); the same control on the home page is named &quot;sort&quot;</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td>carried, re-observed</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a>, <a class="ev" href="evidence/v0.1_E-12.home-page.snapshot.yml">v0.1/E-12</a></td>
+</tr>
+<tr>
+<td>F-10</td>
+<td>Power Tools &gt; &quot;There are no products found.&quot;</td>
+<td>Message has no role or live region in English or German, so screen readers are not told the list emptied</td>
+<td>observation</td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td>carried, re-observed</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a></td>
+</tr>
+<tr>
+<td>F-11</td>
+<td>Power Tools &gt; product card &gt; CO₂ scale</td>
+<td>The product&#39;s letter is marked by CSS class only; the card&#39;s accessible name reads &quot;CO₂: A B C D E&quot; for every product</td>
+<td>observation</td>
+<td><span class="badge warn">medium</span></td>
+<td>3</td>
+<td>carried from v0.1</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-01.power-tools-page.snapshot.yml">v0.1/E-01</a>, <a class="ev" href="evidence/v0.1_E-03.page-dom.json">v0.1/E-03</a></td>
+</tr>
+<tr>
+<td>F-12</td>
+<td>Power Tools &gt; Compare Now link</td>
+<td>Opens <code>/comparison</code>, which lists the product; <code>knowledge/e2e-flows.md</code> F4 says <code>/compare</code></td>
+<td>observation</td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td>carried, comparison now opened</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.comparison-loaded.json">E-05</a>, <a class="ev" href="evidence/v0.1_E-07.compare-after-click.json">v0.1/E-07</a></td>
+</tr>
+<tr>
+<td>F-13</td>
+<td>API documentation for <code>/products</code></td>
+<td>The page calls <code>QUERY /products</code> with <code>eco_friendly</code> and <code>by_category_slug</code>; the OpenAPI GET /products lists neither</td>
+<td>observation</td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td>carried from v0.1</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-05.sort-timed.json">v0.1/E-05</a>, <a class="ev" href="evidence/v0.1_E-06.filters-timed.json">v0.1/E-06</a></td>
+</tr>
+<tr>
+<td>F-14</td>
+<td>Power Tools page, browser console</td>
+<td>Angular NG0956 on each re-render, image preload warnings, and the known 401 <code>users/me</code> errors for visitors. A test that fails on console warnings would fail here</td>
+<td>observation</td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td>carried, updated</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-11.console-all.log">E-11</a></td>
+</tr>
+<tr>
+<td>F-15</td>
+<td>Power Tools in German &gt; heading and By category filter</td>
+<td>&quot;Kategorie: Power Tools&quot;; filter keeps Power Tools, Grinder, Sander, Saw, Drill in English; browser title stays English. Everything else checked is translated</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>12</td>
+<td><span class="badge muted">new</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-07.german-labels.json">E-07</a></td>
+</tr>
+<tr>
+<td>F-16</td>
+<td>Power Tools &gt; Compare, then Sign in</td>
+<td>A comparison chosen as a visitor survives the login</td>
+<td>observation</td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td><span class="badge muted">new</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+</tbody></table>
+<p>Not explored: R-01 rentals overview, R-02 home overview, R-04 cart badge after an add, sort and filters as a logged-in customer, other languages than German; action budget reached 80 percent at action 48.</p>
+</details><details open id="s3"><summary>4. Open questions</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Question</th>
+<th>For</th>
+<th>Agent&#39;s assumption</th>
+<th>Blocks</th>
+<th>Answer (QA)</th></tr>
+</thead>
+<tbody><tr><td>Q-06</td>
+<td>With no sort chosen, the order is Sheet Sander, Belt Sander, Random Orbit Sander, Circular Saw, Cordless Drill 20V, 24V, 18V, 12V. Is any default order required?</td>
+<td>product owner</td>
+<td>None; tests must not assert it</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-07</td>
+<td>Should the brand filter list only brands that have power tools, or all brands? The seed data has only two brands, so the two cannot be told apart</td>
+<td>product owner</td>
+<td>Only brands with power tools</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-09</td>
+<td>Which languages must AC 12 cover, and are sub-category names (Grinder, Sander, Saw, Drill) translated?</td>
+<td>product owner</td>
+<td>The seven in the selector (DE, EL, EN, ES, FR, NL, TR); category names come from the API and stay English, as seen in German (F-15)</td>
+<td>S-16</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-10</td>
+<td>What should the required loading sign be (for example a &quot;Loading...&quot; text as on the comparison page, or a spinner), and should the old list stay visible or be hidden while it shows?</td>
+<td>product owner</td>
+<td>A text or spinner with <code>role=&quot;status&quot;</code>; old list hidden</td>
+<td>S-20</td>
+<td class="qa empty">—</td></tr>
+</tbody></table>
+</details><details open id="s4"><summary>5. Test scenarios</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Level</th>
+<th>Decision</th>
+<th>Reason</th>
+<th>Depends on</th>
+<th>QA decision</th></tr>
+</thead>
+<tbody><tr><td>S-01</td><td><details class="scenario"><summary>Visitor opens Power Tools from the Categories menu</summary><pre class="gherkin">  Scenario: S-01 Visitor opens Power Tools from the Categories menu
+    When the visitor opens "Categories" in the main menu
+    And selects "Power Tools"
+    Then the URL path is "/category/power-tools"
+    And the heading "Category: Power Tools" is shown
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Carried; menu and heading locators A and B</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-02</td><td><details class="scenario"><summary>Power Tools page title</summary><pre class="gherkin">  Scenario: S-02 Power Tools page title
+    When the visitor opens the Power Tools category page
+    Then the page title starts with "Power Tools"
+
+  @automate-now @functional @api @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Q-01 answered; title Observed</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-03</td><td><details class="scenario"><summary>Page lists exactly the eight power tools</summary><pre class="gherkin">  Scenario: S-03 Page lists exactly the eight power tools
+    When the visitor opens the Power Tools category page
+    Then exactly these products are listed:
+      | Sheet Sander        |
+      | Belt Sander         |
+      | Random Orbit Sander |
+      | Circular Saw        |
+      | Cordless Drill 12V  |
+      | Cordless Drill 18V  |
+      | Cordless Drill 20V  |
+      | Cordless Drill 24V  |
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>API <code>QUERY /products</code> with <code>by_category_slug</code>, plus one UI count</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Carried; re-observed</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-04</td><td><details class="scenario"><summary>Every card price shows two decimals</summary><pre class="gherkin">  Scenario: S-04 Every card price shows two decimals
+    When the visitor opens the Power Tools category page
+    Then every product card shows its price with two decimals
+    And the card "Cordless Drill 12V" shows the price "$46.50"
+
+  @keep-exploratory @functional @ui @T-03</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Clear rule; fails until F-01 is fixed</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-05</td><td><details class="scenario"><summary>Card highlights the product&#39;s CO₂ rating</summary><pre class="gherkin">  Scenario: S-05 Card highlights the product's CO2 rating
+    When the visitor opens the Power Tools category page
+    Then the card "Circular Saw" highlights CO2 rating "D"
+    And the card "Sheet Sander" highlights CO2 rating "E"
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-explore">keep exploratory</span></td>
+<td>Carried; CSS class only (grade C)</td>
+<td>T-03</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-06</td><td><details class="scenario"><summary>Selecting a card opens its details page</summary><pre class="gherkin">  Scenario: S-06 Selecting a card opens its details page
+    Given the visitor is on the Power Tools category page
+    When the visitor selects the card "Circular Saw"
+    Then the product details page for "Circular Saw" is shown
+
+  @automate-now @functional @api @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Observed; card B, details heading A; wait for the heading (F-03)</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-07</td><td><details class="scenario"><summary>Each sort option orders the list</summary><pre class="gherkin">  Scenario Outline: S-07 Each sort option orders the list
+    Given the visitor is on the Power Tools category page
+    When the visitor sorts by "&lt;option&gt;"
+    Then the listed products are ordered by &lt;key&gt; &lt;direction&gt;
+
+    # Ties (seven products rated E) have no agreed order (gap G-05): assert the order of the key only.
+    Examples:
+      | option             | key        | direction  |
+      | Name (A - Z)       | name       | ascending  |
+      | Name (Z - A)       | name       | descending |
+      | Price (Low - High) | price      | ascending  |
+      | Price (High - Low) | price      | descending |
+      | CO₂ Rating (A - E) | CO2 rating | ascending  |
+      | CO₂ Rating (E - A) | CO2 rating | descending |
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>API <code>QUERY /products</code> with <code>sort</code>, plus one UI sort</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td><span class="badge muted">Carried</span></td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-08</td><td><details class="scenario"><summary>Sander filter shows only sanders</summary><pre class="gherkin">  Scenario: S-08 Sander filter shows only sanders
+    Given the visitor is on the Power Tools category page
+    When the visitor ticks the sub-category "Sander"
+    Then exactly these products are listed:
+      | Sheet Sander        |
+      | Belt Sander         |
+      | Random Orbit Sander |
+
+  @automate-now @functional @api @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Re-observed</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-09</td><td><details class="scenario"><summary>Brand filter shows only that brand</summary><pre class="gherkin">  Scenario: S-09 Brand filter shows only that brand
+    Given the visitor is on the Power Tools category page
+    When the visitor ticks the brand "MightyCraft Hardware"
+    Then exactly these products are listed:
+      | Belt Sander        |
+      | Cordless Drill 12V |
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>API <code>QUERY /products</code> with <code>by_brand</code>, plus UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Re-observed</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-10</td><td><details class="scenario"><summary>Sub-category and brand combine and keep the sort</summary><pre class="gherkin">  Scenario: S-10 Sub-category and brand combine and keep the sort
+    Given the visitor is on the Power Tools category page
+    And the visitor has sorted by "CO₂ Rating (E - A)"
+    When the visitor ticks the sub-category "Drill"
+    And ticks the brand "MightyCraft Hardware"
+    Then exactly these products are listed:
+      | Cordless Drill 12V |
+    And the sort shows "CO₂ Rating (E - A)"
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td><span class="badge muted">Carried</span></td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-11</td><td><details class="scenario"><summary>Clearing a filter restores all eight</summary><pre class="gherkin">  Scenario Outline: S-11 Clearing a filter restores all eight
+    Given the visitor is on the Power Tools category page
+    And the visitor has ticked the &lt;filter&gt; "&lt;value&gt;"
+    When the visitor unticks the &lt;filter&gt; "&lt;value&gt;"
+    Then all eight power tools are listed
+
+    Examples:
+      | filter       | value                |
+      | sub-category | Sander               |
+      | brand        | MightyCraft Hardware |
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Observed for sub-category and brand</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-12</td><td><details class="scenario"><summary>Eco-friendly filter shows the no-results message at launch</summary><pre class="gherkin">  Scenario: S-12 Eco-friendly filter shows the no-results message at launch
+    # Q-02: no seed power tool is eco-friendly; check AC 8 through the no-results message until one is.
+    Given the visitor is on the Power Tools category page
+    When the visitor ticks "Show only eco-friendly products"
+    Then no product card is shown
+    And the message "There are no products found." is shown
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Q-02 answered; message test id A</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-13</td><td><details class="scenario"><summary>Grinder shows the no-results message</summary><pre class="gherkin">  Scenario: S-13 Grinder shows the no-results message
+    Given the visitor is on the Power Tools category page
+    When the visitor ticks the sub-category "Grinder"
+    Then no product card is shown
+    And the message "There are no products found." is shown
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Q-04 answered; <code>category-empty</code> counted 1</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-14</td><td><details class="scenario"><summary>Power Tools checkbox selects and clears all sub-categories</summary><pre class="gherkin">  Scenario: S-14 Power Tools checkbox selects and clears all sub-categories
+    Given the visitor is on the Power Tools category page
+    When the visitor ticks the category "Power Tools"
+    Then the sub-categories "Grinder", "Sander", "Saw" and "Drill" are ticked
+    And all eight power tools are listed
+    When the visitor unticks the category "Power Tools"
+    Then no sub-category is ticked
+    And all eight power tools are listed
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Q-03 answered; ticking and unticking Observed</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-15</td><td><details class="scenario"><summary>Compare on a card adds the product</summary><pre class="gherkin">  Scenario: S-15 Compare on a card adds the product
+    Given the visitor is on the Power Tools category page
+    When the visitor selects Compare on the card "Circular Saw"
+    Then the Compare button on "Circular Saw" is pressed
+    And the "Compare Now" link is shown
+    And the visitor stays on the Power Tools category page
+
+  @clarify-first @functional @ui @Q-09</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Carried; re-observed</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-16</td><td><details class="scenario"><summary>Labels are translated on language change</summary><pre class="gherkin">  Scenario: S-16 Labels are translated on language change
+    Given the visitor is on the Power Tools category page
+    When the visitor changes the language to "DE"
+    Then the heading starts with "Kategorie:"
+    And the sort options, filter headings and eco-friendly label are in German
+    And product names are unchanged
+    When the visitor ticks the sub-category "Grinder"
+    Then the message "Es wurden keine passenden Produkte gefunden." is shown
+
+  @automate-now @functional @ui</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">clarify first</span></td>
+<td>German Observed; scope and category names open</td>
+<td>Q-09</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-17</td><td><details class="scenario"><summary>Logged-in customer sees the eight power tools</summary><pre class="gherkin">  Scenario: S-17 Logged-in customer sees the eight power tools
+    Given a logged-in customer
+    When the customer opens the Power Tools category page
+    Then all eight power tools are listed
+
+  @automate-now @regression @api</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Observed; one cheap check of the in-scope role</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-18</td><td><details class="scenario"><summary>Rentals stay off the page when Drill is selected</summary><pre class="gherkin">  Scenario: S-18 Rentals stay off the page when Drill is selected
+    Given the visitor is on the Power Tools category page
+    When the visitor ticks the sub-category "Drill"
+    Then exactly these products are listed:
+      | Cordless Drill 12V |
+      | Cordless Drill 18V |
+      | Cordless Drill 20V |
+      | Cordless Drill 24V |
+    And "Excavator", "Bulldozer" and "Crane" are not listed
+
+  @keep-exploratory @regression @ui</pre></details></td>
+<td><span class="badge type-reg">regression</span></td>
+<td>API <code>QUERY /products</code> with <code>by_category_slug</code> and Drill</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td>Carried; guards F-08</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-19</td><td><details class="scenario"><summary>Compare selection reaches the comparison page</summary><pre class="gherkin">  Scenario: S-19 Compare selection reaches the comparison page
+    Given the visitor has selected Compare on the card "Circular Saw"
+    When the visitor selects "Compare Now"
+    Then the comparison page shows "Circular Saw"
+
+  @clarify-first @functional @ui @Q-10 @T-04</pre></details></td>
+<td><span class="badge type-reg">regression</span></td>
+<td>UI</td>
+<td><span class="badge dec-explore">keep exploratory</span></td>
+<td>Observed, but the comparison page&#39;s product locator was not counted</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-20</td><td><details class="scenario"><summary>A loading sign shows while the list refreshes</summary><pre class="gherkin">  Scenario: S-20 A loading sign shows while the list refreshes
+    # Q-08: a loading sign is required. Fails today (F-02).
+    Given the visitor is on the Power Tools category page
+    When the visitor ticks the sub-category "Sander"
+    Then a loading sign is shown until the list is refreshed
+    And then exactly the three sanders are listed</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">clarify first</span></td>
+<td>Fails today (F-02); form of the sign unknown</td>
+<td>Q-10, T-04</td>
+<td class="qa empty">—</td></tr>
+</tbody></table>
+<p>Click a scenario for its steps. Your decision goes in <code>qa-review.md</code>.</p>
+</details><details open id="s5"><summary>6. Locators and testability</summary>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Status</th>
+<th>Best locator found</th>
+<th>Why it is at risk</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Card &gt; highlighted CO₂ letter</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>card.locator(&#39;.co2-letter.active&#39;)</code>, 1 match (carried)</td>
+<td>Styling class only (F-11)</td>
+</tr>
+<tr>
+<td>Comparison page &gt; product column</td>
+<td>not verified</td>
+<td>proposed <code>getByRole(&#39;columnheader&#39;, { name: &#39;Circular Saw&#39; })</code></td>
+<td>Count not taken (budget)</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Element</th>
+<th>Request</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T-01</td>
+<td>Sort dropdown (F-09), carried</td>
+<td>Add the accessible name &quot;sort&quot; as on the home page, or associate the &quot;Sort&quot; heading as its label</td>
+<td>Role-based locator; screen readers announce the control</td>
+</tr>
+<tr>
+<td>T-02</td>
+<td>No-results message (F-10), carried</td>
+<td>Give it <code>role=&quot;status&quot;</code> and keep <code>data-test=&quot;category-empty&quot;</code></td>
+<td>Message announced; test id already verified</td>
+</tr>
+<tr>
+<td>T-03</td>
+<td>Card CO₂ letter (F-11), carried</td>
+<td>Expose the rating, for example <code>aria-label=&quot;CO₂ rating D&quot;</code> on the scale or <code>aria-current=&quot;true&quot;</code> on the active letter</td>
+<td>Assert the rating without CSS; screen reader users hear it</td>
+</tr>
+<tr>
+<td>T-04</td>
+<td>Loading sign (F-02), new</td>
+<td>When it is built, give it <code>role=&quot;status&quot;</code> and <code>data-test=&quot;products-loading&quot;</code></td>
+<td>Tests can wait on it; refresh announced</td>
+</tr>
+</tbody></table>
+<p>Accessibility observations (full list in <code>technical.md</code>; observations, not an audit): sort dropdown unnamed (T-01); no-results message not announced in either language checked (T-02); CO₂ rating not exposed (T-03); list refresh silent, nothing visual or announced (T-04, Q-10).</p>
+</details><details open id="s6"><summary>7. Test data and cleanup</summary>
+<table>
+<thead>
+<tr>
+<th>Data created</th>
+<th>Cleaned up</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>No records; the shared customer was only logged in</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Language choice DE in local storage</td>
+<td>Yes, set back to EN in the run (<a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>)</td>
+</tr>
+<tr>
+<td>Compare selection, login token</td>
+<td>Yes, discarded when the isolated browser closed</td>
+</tr>
+</tbody></table>
+</details><details open id="s7"><summary>8. Next step</summary>
+<p>Fill in <code>qa-review.md</code> (Q-06, Q-07, Q-09, Q-10 and 20 decisions), then sign off or ask for a re-run. Nothing blocks the 16 &quot;automate now&quot; rows except your decisions; S-04 and S-20 fail until F-01 and F-02 are fixed.</p>
+<p>Jira comment: 4 questions and 3 findings drafted in <code>qa-review.md</code>; posted in the next run if you tick its box there.</p>
+<p>Knowledge to add at sign-off:</p>
+<ul>
+<li><code>pages/category.md</code> (new): route <code>/category/&lt;slug&gt;</code>, filters, sort, Power Tools select-all, no-results text and <code>category-empty</code>, stable locators from <code>locators.md</code> (v0.1/O-01, O-03, O-12).</li>
+<li><code>e2e-flows.md</code> F4: the compare link goes to <code>/comparison</code>, which shows &quot;Loading...&quot; until the API answers (F-12, O-06); the selection survives login (F-16).</li>
+<li><code>rules.md</code>: rentals share sub-categories with power tools and must be left out of category pages (F-08); no seed power tool is eco-friendly (Q-02); category names are API data and stay English (F-15, pending Q-09).</li>
+<li><code>pages/product-overview.md</code> quirks: the MCP browser&#39;s <code>getByTestId</code> matches <code>data-testid</code>, so count <code>data-test</code> ids with CSS (v0.1/O-27); list answers on local can take over 45 s (F-03); <code>wait_for</code> text times out at 5 s (O-18).</li>
+</ul>
+</details>
+<details open id="jira"><summary>Jira comment</summary><p><span class="badge muted">Not approved: tick the box in qa-review.md to post it</span></p><p>Edit the text and tick the box in <code>qa-review.md</code>. It is posted exactly as written.</p><pre class="comment">Exploratory testing of KAN-2, report v0.2 (draft), local environment.
+
+Answered by QA since v0.1: page title may carry the app suffix; no eco-friendly power tool at launch is expected; "Power Tools" is a select-all; "There are no products found." is the agreed text; a loading sign is required while the list refreshes.
+
+Open questions (the agent's working assumption in brackets):
+Q-06 (product owner): With no sort chosen, the order is Sheet Sander, Belt Sander, Random Orbit Sander, Circular Saw, Cordless Drill 20V, 24V, 18V, 12V. Is any default order required? [None]
+Q-07 (product owner): Should the brand filter list only brands that have power tools, or all brands? The seed data has only two brands, so the two cannot be told apart. [Only brands with power tools]
+Q-09 (product owner): Which languages must AC 12 cover, and are sub-category names (Grinder, Sander, Saw, Drill) translated? [The seven languages in the selector; category names stay English, as they do today in German]
+Q-10 (product owner): What should the required loading sign be (for example a "Loading..." text as on the comparison page, or a spinner), and should the old list stay visible or be hidden while it shows? [A text or spinner announced to screen readers; old list hidden]
+
+Findings worth your attention:
+F-01: The Cordless Drill 12V card shows "$46.5" instead of "$46.50" (AC 3), for visitors and logged-in customers.
+F-02: There is no loading sign while the list refreshes after a sort or filter change; in one case the old list stayed on screen for 46 seconds.
+F-15: In German the heading reads "Kategorie: Power Tools" and the category filter keeps Power Tools, Grinder, Sander, Saw and Drill in English (see Q-09).</pre></details>
+<details class="appendix"><summary>Appendix: QA review (your answers, decisions and Jira comment) <code>qa-review.md</code></summary><h1>QA review: KAN-2 v0.2</h1>
+<p>Fill in the two tables, and the Jira comment if you want it posted. Leave a cell empty to keep
+the item pending. The next run reads this
+file; nothing else in the report needs editing.</p>
+<h2>Answers</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q-01</td>
+<td>The page title is &quot;Power Tools - Practice Software Testing - Toolshop - v5.0&quot;. Should AC 1 say the title starts with &quot;Power Tools&quot;, or must it be exactly &quot;Power Tools&quot;?</td>
+<td>A title that starts with &quot;Power Tools&quot; is accepted; the app suffix is fine.</td>
+</tr>
+<tr>
+<td>Q-02</td>
+<td>No power tool in the seed data is eco-friendly. What makes a product eco-friendly, and should the seed data get at least one eco-friendly power tool so AC 8 can be shown, or is an empty result the expected launch state?</td>
+<td>Eco-friendly means the product&#39;s eco-friendly flag. An empty result is correct for launch: check AC 8 through the no-results message until the seed data has an eco-friendly power tool.</td>
+</tr>
+<tr>
+<td>Q-03</td>
+<td>Ticking &quot;Power Tools&quot; under By category ticks all four sub-categories. Is that intended, and what should unticking it do?</td>
+<td>Yes, &quot;Power Tools&quot; is a select-all. Unticking it must clear all four sub-categories and show all power tools again. Please re-check unticking.</td>
+</tr>
+<tr>
+<td>Q-04</td>
+<td>Is &quot;There are no products found.&quot; the agreed text for AC 10, in English and the other languages?</td>
+<td>Yes, &quot;There are no products found.&quot; is the agreed English text.</td>
+</tr>
+<tr>
+<td>Q-05</td>
+<td>Product list answers on local took 1.4 s to 42.8 s, and a direct API call took 13 s. Is the local stack expected to be this slow, and what response time should the page meet?</td>
+<td>Slow answers on local are an environment matter, not a product rule. Tests must wait for the API answer, never a fixed time.</td>
+</tr>
+<tr>
+<td>Q-06</td>
+<td>With no sort chosen, the order is Sheet Sander, Belt Sander, Random Orbit Sander, Circular Saw, Cordless Drill 20V, 24V, 18V, 12V. Is any default order required?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-07</td>
+<td>Should the brand filter list only brands that have power tools, or all brands? The seed data has only two brands, so the two cannot be told apart</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-08</td>
+<td>Should the page show a loading sign while the list refreshes after a sort or filter change?</td>
+<td>Yes, a loading sign is required while the list refreshes after a sort or filter change.</td>
+</tr>
+<tr>
+<td>Q-09</td>
+<td>Which languages must AC 12 cover, and are sub-category names (Grinder, Sander, Saw, Drill) translated?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-10</td>
+<td>What should the required loading sign be (for example a &quot;Loading...&quot; text as on the comparison page, or a spinner), and should the old list stay visible or be hidden while it shows?</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Decisions</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Agent&#39;s decision</th>
+<th>QA decision</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S-01</td>
+<td>Visitor opens Power Tools from the Categories menu</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-02</td>
+<td>Power Tools page title</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-03</td>
+<td>Page lists exactly the eight power tools</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-04</td>
+<td>Every card price shows two decimals</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-05</td>
+<td>Card highlights the product&#39;s CO₂ rating</td>
+<td><span class="badge dec-explore">keep exploratory</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-06</td>
+<td>Selecting a card opens its details page</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-07</td>
+<td>Each sort option orders the list</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-08</td>
+<td>Sander filter shows only sanders</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-09</td>
+<td>Brand filter shows only that brand</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-10</td>
+<td>Sub-category and brand combine and keep the sort</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-11</td>
+<td>Clearing a filter restores all eight</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-12</td>
+<td>Eco-friendly filter shows the no-results message at launch</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-13</td>
+<td>Grinder shows the no-results message</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-14</td>
+<td>Power Tools checkbox selects and clears all sub-categories</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-15</td>
+<td>Compare on a card adds the product</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-16</td>
+<td>Labels are translated on language change</td>
+<td><span class="badge dec-clarify">clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-17</td>
+<td>Logged-in customer sees the eight power tools</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-18</td>
+<td>Rentals stay off the page when Drill is selected</td>
+<td><span class="badge dec-now">automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-19</td>
+<td>Compare selection reaches the comparison page</td>
+<td><span class="badge dec-explore">keep exploratory</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-20</td>
+<td>A loading sign shows while the list refreshes</td>
+<td><span class="badge dec-clarify">clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Jira comment</h2>
+<p>Only for stories from an issue tracker. Edit the text as you like: it is posted exactly as
+written. Tick the box and the next run posts it; leave it unticked and nothing is posted.</p>
+<ul>
+<li><input disabled="" type="checkbox"> Post this comment to KAN-2 in the next run</li>
+<li>Posted: no (the v0.1 comment was not posted)</li>
+</ul>
+<pre><code class="language-text">Exploratory testing of KAN-2, report v0.2 (draft), local environment.
+
+Answered by QA since v0.1: page title may carry the app suffix; no eco-friendly power tool at launch is expected; &quot;Power Tools&quot; is a select-all; &quot;There are no products found.&quot; is the agreed text; a loading sign is required while the list refreshes.
+
+Open questions (the agent&#39;s working assumption in brackets):
+Q-06 (product owner): With no sort chosen, the order is Sheet Sander, Belt Sander, Random Orbit Sander, Circular Saw, Cordless Drill 20V, 24V, 18V, 12V. Is any default order required? [None]
+Q-07 (product owner): Should the brand filter list only brands that have power tools, or all brands? The seed data has only two brands, so the two cannot be told apart. [Only brands with power tools]
+Q-09 (product owner): Which languages must AC 12 cover, and are sub-category names (Grinder, Sander, Saw, Drill) translated? [The seven languages in the selector; category names stay English, as they do today in German]
+Q-10 (product owner): What should the required loading sign be (for example a &quot;Loading...&quot; text as on the comparison page, or a spinner), and should the old list stay visible or be hidden while it shows? [A text or spinner announced to screen readers; old list hidden]
+
+Findings worth your attention:
+F-01: The Cordless Drill 12V card shows &quot;$46.5&quot; instead of &quot;$46.50&quot; (AC 3), for visitors and logged-in customers.
+F-02: There is no loading sign while the list refreshes after a sort or filter change; in one case the old list stayed on screen for 46 seconds.
+F-15: In German the heading reads &quot;Kategorie: Power Tools&quot; and the category filter keeps Power Tools, Grinder, Sander, Saw and Drill in English (see Q-09).
+</code></pre>
+<h2>Sign-off</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Signed off by ____________ on __________</li>
+</ul>
+</details>
+<details class="appendix"><summary>Appendix: Full locator table <code>locators.md</code></summary><h1>Locators: KAN-2 v0.2</h1>
+<p>Counts in this run: <a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a> (19:50:09Z, logged-in customer on <code>/category/power-tools</code>, list shown, no
+filter, Circular Saw in the comparison), <a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a> (no-results state, German and English), <a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a> (details
+page), <a class="ev" href="evidence/E-07.german-labels.json">E-07</a> (language menu open). Rows marked &quot;carried&quot; keep their v0.1 count and evidence
+(<code><a class="ev" href="evidence/v0.1_E-08.locator-counts.json">v0.1/E-08</a></code> at 17:28:42Z and <code><a class="ev" href="evidence/v0.1_E-09.testid-and-no-results.json">v0.1/E-09</a></code> at 17:29:03Z on 2026-10-14, visitor).</p>
+<p>Tool note (v0.1/O-27): in the MCP browser <code>getByTestId</code> matches <code>data-testid</code>, so test ids were
+counted as <code>locator(&#39;[data-test=&quot;x&quot;]&#39;)</code>, which is what <code>getByTestId(&#39;x&#39;)</code> means in the framework
+(<code>testIdAttribute: &#39;data-test&#39;</code>).</p>
+<p>Translated text is downgraded one grade (context file: the app is multilingual).</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>State</th>
+<th>Recommended locator</th>
+<th>Strategy</th>
+<th>Matches</th>
+<th>Role / accessible name</th>
+<th>Grade</th>
+<th>Tag</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Categories menu</td>
+<td>any page</td>
+<td><code>getByTestId(&#39;nav-categories&#39;)</code></td>
+<td>5 test id</td>
+<td>1</td>
+<td>button &quot;Categories&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Power Tools menu entry</td>
+<td>menu closed (count); clicked with menu open in v0.1</td>
+<td><code>getByTestId(&#39;nav-power-tools&#39;)</code></td>
+<td>5 test id</td>
+<td>1</td>
+<td>link &quot;Power Tools&quot; (menu open)</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a>, <a class="ev" href="evidence/v0.1_E-09.testid-and-no-results.json">v0.1/E-09</a></td>
+</tr>
+<tr>
+<td>Page heading</td>
+<td>page loaded</td>
+<td><code>getByRole(&#39;heading&#39;, { name: &#39;Category: Power Tools&#39;, level: 2 })</code></td>
+<td>1 role</td>
+<td>1</td>
+<td>heading &quot;Category: Power Tools&quot;</td>
+<td><span class="badge grade-b">B (translated)</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Sort dropdown</td>
+<td>page loaded</td>
+<td><code>getByTestId(&#39;sort&#39;)</code></td>
+<td>5 test id</td>
+<td>1; role combobox &quot;sort&quot; 0</td>
+<td>combobox, no name (F-09)</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Sub-category checkbox</td>
+<td>page loaded</td>
+<td><code>getByRole(&#39;checkbox&#39;, { name: &#39;Sander&#39;, exact: true })</code> (same for Grinder, Saw, Drill)</td>
+<td>1 role</td>
+<td>1 (Sander <a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a>; Grinder used <a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>)</td>
+<td>checkbox &quot;Sander&quot;</td>
+<td><span class="badge grade-b">B (translated)</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Power Tools checkbox</td>
+<td>page loaded</td>
+<td><code>getByRole(&#39;checkbox&#39;, { name: &#39;Power Tools&#39;, exact: true })</code></td>
+<td>1 role</td>
+<td>1</td>
+<td>checkbox &quot;Power Tools&quot;</td>
+<td><span class="badge grade-b">B (translated)</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Brand checkbox</td>
+<td>page loaded</td>
+<td><code>getByRole(&#39;checkbox&#39;, { name: &#39;MightyCraft Hardware&#39;, exact: true })</code></td>
+<td>1 role</td>
+<td>1 each for both brands (carried)</td>
+<td>checkbox &quot;MightyCraft Hardware&quot;</td>
+<td><span class="badge grade-b">B (seed data name)</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-08.locator-counts.json">v0.1/E-08</a>, <a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>Eco-friendly checkbox</td>
+<td>page loaded</td>
+<td><code>getByTestId(&#39;eco-friendly-filter&#39;)</code></td>
+<td>5 test id</td>
+<td>1</td>
+<td>checkbox &quot;Show only eco-friendly products&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Product card</td>
+<td>list shown</td>
+<td><code>getByRole(&#39;link&#39;).filter({ has: getByRole(&#39;heading&#39;, { name: &#39;&lt;product&gt;&#39;, exact: true, level: 5 }) })</code></td>
+<td>1 role, scoped</td>
+<td>1 (Circular Saw)</td>
+<td>link &quot;Circular Saw Compare Circular Saw CO₂: A B C D E $80.19&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a>, <a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Card names (collection)</td>
+<td>list shown</td>
+<td><code>getByTestId(&#39;product-name&#39;)</code></td>
+<td>5 test id</td>
+<td>8 (8 expected)</td>
+<td>heading level 5</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Card name</td>
+<td>list shown</td>
+<td><code>getByRole(&#39;heading&#39;, { name: &#39;&lt;product&gt;&#39;, exact: true, level: 5 })</code></td>
+<td>1 role</td>
+<td>1</td>
+<td>heading &quot;Circular Saw&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a></td>
+</tr>
+<tr>
+<td>Card price</td>
+<td>list shown</td>
+<td><code>card.getByTestId(&#39;product-price&#39;)</code></td>
+<td>5 test id, scoped</td>
+<td>1, &quot;$80.19&quot; (carried)</td>
+<td>generic</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-09.testid-and-no-results.json">v0.1/E-09</a></td>
+</tr>
+<tr>
+<td>Card image</td>
+<td>list shown</td>
+<td><code>card.getByRole(&#39;img&#39;, { name: &#39;&lt;product&gt;&#39; })</code></td>
+<td>1 role, scoped</td>
+<td>1 (carried)</td>
+<td>img &quot;Circular Saw&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-08.locator-counts.json">v0.1/E-08</a></td>
+</tr>
+<tr>
+<td>Card Compare button</td>
+<td>list shown</td>
+<td><code>card.getByTestId(&#39;compare-btn&#39;)</code></td>
+<td>5 test id, scoped</td>
+<td>1 (carried); pressed state <code>[aria-pressed=&quot;true&quot;]</code> page-wide 1</td>
+<td>button &quot;Compare&quot; (aria-label)</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-09.testid-and-no-results.json">v0.1/E-09</a>, <a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Compare Now link</td>
+<td>after one Compare</td>
+<td><code>getByTestId(&#39;compare-link&#39;)</code></td>
+<td>5 test id</td>
+<td>1</td>
+<td>link &quot;Compare Now&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Language selector</td>
+<td>any page</td>
+<td><code>getByTestId(&#39;language-select&#39;)</code></td>
+<td>5 test id</td>
+<td>1; role button &quot;Select language&quot; also 1</td>
+<td>button &quot;Select language&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>Language option</td>
+<td>language menu open</td>
+<td><code>getByTestId(&#39;lang-de&#39;)</code>, <code>getByTestId(&#39;lang-en&#39;)</code></td>
+<td>5 test id</td>
+<td>1 each (one element per code in <a class="ev" href="evidence/E-07.german-labels.json">E-07</a>&#39;s list)</td>
+<td>-</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-07.german-labels.json">E-07</a></td>
+</tr>
+<tr>
+<td>No-results message</td>
+<td>Grinder ticked, German and English</td>
+<td><code>getByTestId(&#39;category-empty&#39;)</code></td>
+<td>5 test id</td>
+<td>1 in German, 1 in English</td>
+<td>div, no role (F-10)</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a></td>
+</tr>
+<tr>
+<td>Product details heading</td>
+<td>details page</td>
+<td><code>getByRole(&#39;heading&#39;, { name: &#39;&lt;product&gt;&#39;, level: 1 })</code></td>
+<td>1 role</td>
+<td>1</td>
+<td>heading &quot;Circular Saw&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a></td>
+</tr>
+<tr>
+<td>Card highlighted CO₂ letter</td>
+<td>list shown</td>
+<td><code>card.locator(&#39;.co2-letter.active&#39;)</code></td>
+<td>6 scoped CSS</td>
+<td>1, &quot;D&quot; (carried)</td>
+<td>generic, no name (F-11)</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-08.locator-counts.json">v0.1/E-08</a></td>
+</tr>
+<tr>
+<td>Comparison page product column</td>
+<td><code>/comparison</code> after one Compare</td>
+<td><code>getByRole(&#39;columnheader&#39;, { name: &#39;Circular Saw&#39; })</code></td>
+<td>1 role</td>
+<td>not counted; text found in a header cell (<a class="ev" href="evidence/E-05.comparison-loaded.json">E-05</a>)</td>
+<td>-</td>
+<td>proposed, not verified</td>
+<td><span class="badge tag-assumed">Assumed</span></td>
+<td><a class="ev" href="evidence/E-05.comparison-loaded.json">E-05</a></td>
+</tr>
+</tbody></table>
+<p>Stable (A or B, count 1 observed): 19. At risk: 1 (CO₂ letter). Not verified: 1 (comparison column).</p>
+<p>Alternative no longer recommended: <code>getByText(&#39;There are no products found.&#39;)</code>, count 1 in English (<a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>), grade C (translated text). Use the test id.</p>
+<p>Never use: <code>[data-test=&quot;product-&lt;id&gt;&quot;]</code>, <code>[data-test=&quot;category-&lt;id&gt;&quot;]</code>, <code>[data-test=&quot;brand-&lt;id&gt;&quot;]</code>;
+they hold product, category and brand ids, which change on every reset (context file).</p>
+</details>
+<details class="appendix"><summary>Appendix: Console, network and accessibility <code>technical.md</code></summary><h1>Technical notes: KAN-2 v0.2</h1>
+<p>Carried items keep their v0.1 evidence (<code>v0.1/E-nn</code>).</p>
+<h2>Console (<a class="ev" href="evidence/E-11.console-all.log">E-11</a>)</h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Level</th>
+<th>Message</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1, 27, 32, 42 (visitor loads)</td>
+<td>error</td>
+<td>401 Unauthorized <code>GET http://localhost:8091/users/me</code>, twice per load</td>
+<td>Known quirk for visitors (<code>pages/product-overview.md</code>)</td>
+</tr>
+<tr>
+<td>same</td>
+<td>error</td>
+<td><code>ERROR {message: Unauthorized}</code> from Angular</td>
+<td>Same cause</td>
+</tr>
+<tr>
+<td>each load</td>
+<td>warning</td>
+<td><code>barn-2400x1600.avif</code> preloaded but not used within a few seconds</td>
+<td>New in this run&#39;s log; not in v0.1&#39;s warning list (F-14)</td>
+</tr>
+<tr>
+<td>list re-renders</td>
+<td>warning</td>
+<td>NG0956: track by identity re-created the whole collection of 8</td>
+<td>F-14, carried (<a class="ev" href="evidence/v0.1_E-10.console-all.log">v0.1/E-10</a>)</td>
+</tr>
+<tr>
+<td>47-49 (logged in)</td>
+<td>-</td>
+<td>No error</td>
+<td>The 401s are visitor-only</td>
+</tr>
+</tbody></table>
+<h2>Network (<a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>, <a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>, <a class="ev" href="evidence/E-12.network-customer-load.txt">E-12</a>)</h2>
+<ul>
+<li>Click to <code>QUERY /products</code> answer in this run: 977 ms (untick MightyCraft) to 46,016 ms (tick
+Sander) (<a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>); German Grinder 36,652 ms (<a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>). v0.1: 1,420 ms to 42,816 ms (<a class="ev" href="evidence/v0.1_E-05.sort-timed.json">v0.1/E-05</a>, <a class="ev" href="evidence/v0.1_E-09.testid-and-no-results.json">v0.1/E-09</a>).</li>
+<li><code>/comparison</code> showed &quot;Loading...&quot; for 21,033 ms before the product appeared (<a class="ev" href="evidence/E-05.comparison-loaded.json">E-05</a>).</li>
+<li>Details page: URL changed 255 ms after the click; h1 appeared after 23,717 ms (<a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a>).</li>
+<li>Login <code>POST /users/login</code> 200; scripted login took 9,999 ms to reach <code>/account</code> (<a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a>).</li>
+<li>Language change loads <code>assets/i18n/de.json</code> (200) and sends one new <code>QUERY /products</code> (<a class="ev" href="evidence/E-12.network-customer-load.txt">E-12</a>).</li>
+<li>No call failed except the visitor <code>users/me</code> 401s. No call contradicted the UI.</li>
+<li>Carried: requests are not cancelled when a newer one starts (F-04, <a class="ev" href="evidence/v0.1_E-11.network.txt">v0.1/E-11</a>); body parameters
+<code>eco_friendly</code> and <code>by_category_slug</code> are not in the GET documentation (F-13).</li>
+<li>curl before the run: API <code>/brands</code> 200 in 28.2 s (ledger header): the environment was slow throughout.</li>
+</ul>
+<h2>API notes</h2>
+<p>Carried from v0.1 (OpenAPI not re-read): <code>GET /products</code> documents <code>by_brand</code>, <code>by_category</code>,
+<code>is_rental</code>, <code>between</code>, <code>sort</code>, <code>page</code>; every power tool has <code>is_eco_friendly: false</code>; <code>per_page</code> 9.</p>
+<h2>Step 6. API level or UI level</h2>
+<p>Carried from v0.1, plus:</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Lowest level</th>
+<th>Endpoint</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Clearing a filter restores all eight (S-11)</td>
+<td>UI</td>
+<td>wiring of untick to request</td>
+</tr>
+<tr>
+<td>Power Tools select-all and clear (S-14)</td>
+<td>UI</td>
+<td>checkbox state is client-side</td>
+</tr>
+<tr>
+<td>Open details (S-06), comparison page (S-19)</td>
+<td>UI</td>
+<td>navigation</td>
+</tr>
+<tr>
+<td>Logged-in customer list (S-17)</td>
+<td>UI, one check</td>
+<td><code>QUERY /products</code> is the same call</td>
+</tr>
+<tr>
+<td>Language (S-16)</td>
+<td>UI</td>
+<td><code>assets/i18n/&lt;lang&gt;.json</code>; category names come from <code>/categories/tree</code></td>
+</tr>
+<tr>
+<td>Loading sign (S-20)</td>
+<td>UI</td>
+<td>rendering</td>
+</tr>
+</tbody></table>
+<h2>Accessibility observations</h2>
+<p>Observations from DOM reads and snapshots, not an audit.</p>
+<ul>
+<li>Sort dropdown has no accessible name: no aria-label, no id for a label, no aria-labelledby (F-09, T-01, <a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a>).</li>
+<li>No-results message is a plain div with no role or live region, in English and German (F-10, T-02, <a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>).</li>
+<li>List refresh gives no visual or announced sign; old content stays for up to 46 s (F-02, T-04, <a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>).</li>
+<li>CO₂ rating only by CSS class (F-11, T-03, carried <a class="ev" href="evidence/v0.1_E-03.page-dom.json">v0.1/E-03</a>).</li>
+<li>Compare is a button inside the card link (nested interactive), carried (<a class="ev" href="evidence/v0.1_E-01.power-tools-page.snapshot.yml">v0.1/E-01</a>); keyboard not checked.</li>
+<li>In German the browser title stays English (F-15, <a class="ev" href="evidence/E-07.german-labels.json">E-07</a>); the <code>lang</code> attribute of the page was not read.</li>
+<li>Compare button state uses <code>aria-pressed</code> (good) (<a class="ev" href="evidence/E-03.after-compare-click.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a>).</li>
+<li>Filter checkboxes have accessible names from their labels (<a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a>).</li>
+</ul>
+</details>
+<details class="appendix"><summary>Appendix: Ledger <code>ledger.md</code></summary><h1>Ledger: KAN-2 v0.2</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Story</td>
+<td>KAN-2 Add a Power Tools category page (Jira, read 2026-10-15 19:4x Z, last updated 2026-10-13 21:52:10 +0100, 0 comments)</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>local: UI <a href="http://localhost:4200">http://localhost:4200</a>, API <a href="http://localhost:8091">http://localhost:8091</a> (UI 200 in 0.04 s, API <code>/brands</code> 200 in 28.2 s by curl at 19:42:39Z)</td>
+</tr>
+<tr>
+<td>Budget</td>
+<td>20 minutes, 60 browser actions</td>
+</tr>
+<tr>
+<td>Test data prefix</td>
+<td><code>ETA-20261015-2042</code></td>
+</tr>
+<tr>
+<td>Run</td>
+<td>Re-run, unattended (the QA engineer said &quot;run unattended&quot;). Reads v0.1 as step 0 says</td>
+</tr>
+</tbody></table>
+<h2>Step 0. Previous version</h2>
+<ul>
+<li>Latest folder: <code>v0.1</code> (draft). This run is <code>v0.2</code>, a reduced run.</li>
+<li><code>v0.1/qa-review.md</code>: answers to Q-01, Q-02, Q-03, Q-04, Q-05, Q-08; Q-06, Q-07, Q-09 open.
+No QA decision on any scenario. Jira comment box not ticked: nothing to post. Sign-off box not ticked.</li>
+<li>Story last updated 2026-10-13 21:52:10 +0100, the same as in the v0.1 header: no acceptance criterion changed.</li>
+<li>Drafts in this cycle: <code>v0.1</code> only. Carried state is v0.1&#39;s report, every item tagged as there and
+cited <code>v0.1/E-nn</code>.</li>
+</ul>
+<h3>Answers taken as rules for this run</h3>
+<table>
+<thead>
+<tr>
+<th>Q</th>
+<th>Answer (QA)</th>
+<th>Effect on this run</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q-01</td>
+<td>Title starting with &quot;Power Tools&quot; is accepted</td>
+<td>S-02 expectation: title starts with &quot;Power Tools&quot;. <a class="ev" href="evidence/v0.1_E-03.page-dom.json">v0.1/E-03</a> already shows it; F-05 closes as answered</td>
+</tr>
+<tr>
+<td>Q-02</td>
+<td>Eco-friendly = the product&#39;s eco-friendly flag; empty result is correct for launch; check AC 8 through the no-results message</td>
+<td>S-12 expectation: no-results message. <a class="ev" href="evidence/v0.1_E-06.filters-timed.json">v0.1/E-06</a>, <a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a> already show it</td>
+</tr>
+<tr>
+<td>Q-03</td>
+<td>&quot;Power Tools&quot; is select-all; unticking clears all four and shows all power tools. <strong>Re-check unticking</strong></td>
+<td>QA note: re-explore</td>
+</tr>
+<tr>
+<td>Q-04</td>
+<td>&quot;There are no products found.&quot; is the agreed English text</td>
+<td>S-13 expectation fixed; count <code>data-test=&quot;category-empty&quot;</code> (not counted in v0.1)</td>
+</tr>
+<tr>
+<td>Q-05</td>
+<td>Slowness is environment, not product rule; tests wait for the API answer, never a fixed time</td>
+<td>F-02 becomes an environment observation; waits in scenarios are on the API answer</td>
+</tr>
+<tr>
+<td>Q-08</td>
+<td>A loading sign is required while the list refreshes after sort or filter change</td>
+<td>F-03 expectation changed: re-check for a loading sign, with timing</td>
+</tr>
+</tbody></table>
+<h3>Reduced-run plan (step 0.6)</h3>
+<p>Not explored in v0.1 (first): AC 4 open details; AC 12 language; logged-in customer (S-17);
+clearing a filter on its own (S-11, AC 6, AC 7); R-01 rentals overview; R-02 home overview;
+R-03 opening the comparison page; R-04 cart badge; <code>category-empty</code> test id count.
+QA note: unticking Power Tools (Q-03). Expectation changed: loading sign (Q-08).
+Everything else is carried from v0.1.</p>
+<h2>Step 1. Read and restate</h2>
+<h3>Documents read (not browser actions)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Document</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D-01</td>
+<td>Jira KAN-2 through the <code>atlassian</code> MCP server (view evidence)</td>
+<td>Story; unchanged since v0.1</td>
+</tr>
+<tr>
+<td>D-02</td>
+<td><code>tests/exploratory/context.md</code></td>
+<td>Environment, budget, test data rules</td>
+</tr>
+<tr>
+<td>D-03</td>
+<td><code>knowledge/e2e-flows.md</code>, <code>decisions.md</code> (still empty), <code>rules.md</code></td>
+<td>Flows, impact map, rules</td>
+</tr>
+<tr>
+<td>D-04</td>
+<td><code>knowledge/pages/product-overview.md</code>, <code>product-details.md</code>, <code>rentals.md</code></td>
+<td>Pages touched and impact-map rows</td>
+</tr>
+<tr>
+<td>D-05</td>
+<td><code>v0.1/qa-review.md</code>, <code>report.md</code>, <code>ledger.md</code>, <code>locators.md</code>, <code>scenarios.feature</code>, <code>technical.md</code></td>
+<td>Carried state</td>
+</tr>
+<tr>
+<td>D-06</td>
+<td>OpenAPI: not re-read; v0.1 D-05 carried</td>
+<td>Step 6</td>
+</tr>
+</tbody></table>
+<h3>Expected workflow (Assumed: story KAN-2, knowledge files, QA answers)</h3>
+<p>Same as v0.1 ledger steps 1 to 15, with these changes from the answers:
+3. Page title starts with &quot;Power Tools&quot; (Q-01).
+7a. Ticking &quot;Power Tools&quot; ticks Grinder, Sander, Saw, Drill; unticking it clears all four and shows all eight (Q-03).
+9. Eco-friendly only shows &quot;There are no products found.&quot; at launch (Q-02, Q-04).
+6-10. While the list refreshes after a sort or filter change, a loading sign is shown (Q-08).</p>
+<h3>What the story does not say</h3>
+<p>Carried from v0.1 (G-01 to G-15). G-02, G-03, G-08, G-10 (loading part) are now answered by Q-02, Q-03, Q-01, Q-08.
+New: G-16. What happens to the sub-category ticks when one sub-category is unticked while &quot;Power Tools&quot; is ticked. Assumed: &quot;Power Tools&quot; unticks too.</p>
+<h3>Regression (impact map, carried from v0.1)</h3>
+<p>R-01 rentals overview, R-02 home overview grid with sort, R-03 Compare selection reaches the
+comparison page (<code>/comparison</code>, v0.1 F-12), R-04 cart badge and Categories menu.</p>
+<h3>Charter</h3>
+<p><strong>Mission:</strong> close the gaps v0.1 left (open details, language, logged-in customer, clearing filters,
+regression) and re-check unticking &quot;Power Tools&quot; and the loading sign against the QA answers.</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Area</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Clearing filters on its own, unticking Power Tools (Q-03), loading sign (Q-08), timed</td>
+<td>12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>AC 4 open details</td>
+<td>3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>R-03 Compare Now opens comparison</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AC 12 language (German) incl. no-results text</td>
+<td>6</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Logged-in customer (scripted login)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Regression R-01, R-02, R-04</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Locator verification (about 20 percent)</td>
+<td>12</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Console, network, cleanup (about 10 percent)</td>
+<td>6</td>
+</tr>
+<tr>
+<td></td>
+<td>Reserve</td>
+<td>8</td>
+</tr>
+<tr>
+<td></td>
+<td>Total</td>
+<td>60</td>
+</tr>
+</tbody></table>
+<p>Stop opening new paths at 48 actions or 16 minutes.</p>
+<h2>Action log</h2>
+<p>Times are UTC.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Time</th>
+<th>Action</th>
+<th>Result</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>19:43:39</td>
+<td>navigate <code>/category/power-tools</code> as visitor</td>
+<td>Page loads; title in the tool output still the generic app title at that moment</td>
+<td><a class="ev" href="evidence/E-01.power-tools-load.snapshot.yml">E-01</a></td>
+</tr>
+<tr>
+<td>2-3</td>
+<td>19:43:5x-19:44:56</td>
+<td>run_code: wait for list response (2, timed out after 60 s: list had loaded already), wait 300 ms (3)</td>
+<td>Title &quot;Power Tools - Practice Software Testing - Toolshop - v5.0&quot;, 8 cards</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>4-6</td>
+<td>19:44:57</td>
+<td>tick Sander (4), wait for <code>QUERY /products</code> (5), wait 400 ms (6); 250 ms loading sampler</td>
+<td>Answer after 46,016 ms; old list of 8 on screen throughout, no loading sign in 185 samples; then 3 sanders</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>7-9</td>
+<td>19:45:43</td>
+<td>untick Sander, wait response, wait 400 ms</td>
+<td>1,873 ms; all 8 back, nothing ticked</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>10-12</td>
+<td>19:45:46</td>
+<td>tick MightyCraft Hardware, wait, wait</td>
+<td>2,922 ms; Belt Sander, Cordless Drill 12V</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>13-15</td>
+<td>19:45:49</td>
+<td>untick MightyCraft Hardware, wait, wait</td>
+<td>977 ms; all 8 back</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>16-18</td>
+<td>19:45:50</td>
+<td>tick Power Tools, wait, wait</td>
+<td>1,730 ms; Power Tools, Grinder, Sander, Saw, Drill ticked; 8 shown</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>19-21</td>
+<td>19:45:53</td>
+<td>untick Power Tools, wait, wait</td>
+<td>1,022 ms; nothing ticked; 8 shown. Ends with DOM read</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>19:46:28</td>
+<td>click Compare on Circular Saw card</td>
+<td>Stays on page; button <code>[pressed]</code> in snapshot</td>
+<td><a class="ev" href="evidence/E-03.after-compare-click.snapshot.yml">E-03</a></td>
+</tr>
+<tr>
+<td>23</td>
+<td>19:46:36</td>
+<td>click Compare Now (<code>compare-link</code>)</td>
+<td><code>/comparison</code>, title &quot;Product Comparison - ...&quot;</td>
+<td>tool output</td>
+</tr>
+<tr>
+<td>24</td>
+<td>19:46:4x</td>
+<td>evaluate: DOM read of <code>/comparison</code></td>
+<td>&quot;Loading...&quot;, no product yet; <code>compare_ids</code> holds 1 id</td>
+<td><a class="ev" href="evidence/E-04.comparison-page.json">E-04</a></td>
+</tr>
+<tr>
+<td>25</td>
+<td>19:46:5x</td>
+<td>wait_for text &quot;Circular Saw&quot;</td>
+<td>Failed: tool default timeout 5 s</td>
+<td>-</td>
+</tr>
+<tr>
+<td>26</td>
+<td>19:47:13</td>
+<td>run_code: wait for &quot;Loading...&quot; to go (60 s max), DOM read</td>
+<td>Gone after 21,033 ms; Circular Saw column with price, brand, category Saw, CO₂ D, specs</td>
+<td><a class="ev" href="evidence/E-05.comparison-loaded.json">E-05</a></td>
+</tr>
+<tr>
+<td>-</td>
+<td>19:47:23</td>
+<td>check clock and count</td>
+<td>26 actions, about 3 min 45 s of browser time</td>
+<td>-</td>
+</tr>
+<tr>
+<td>27</td>
+<td>19:47:27</td>
+<td>navigate <code>/category/power-tools</code></td>
+<td>Loaded</td>
+<td>tool output</td>
+</tr>
+<tr>
+<td>28-31</td>
+<td>19:47:33</td>
+<td>run_code: wait for Circular Saw card (28), click its name (29), wait for URL (30), wait for h1 (31)</td>
+<td>Card shown after 21 ms; URL <code>/product/&lt;id&gt;</code> after 255 ms; h1 &quot;Circular Saw&quot; after 23,717 ms; title &quot;Circular Saw - ...&quot;; unit price 80.19, category Saw</td>
+<td><a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a></td>
+</tr>
+<tr>
+<td>32</td>
+<td>19:48:18</td>
+<td>navigate <code>/category/power-tools</code></td>
+<td>Loaded</td>
+<td>tool output</td>
+</tr>
+<tr>
+<td>33-35</td>
+<td>19:48:2x</td>
+<td>run_code: open language menu (33), pick DE (34), wait 1 s (35); DOM read</td>
+<td>Seven languages DE EL EN ES FR NL TR. Heading &quot;Kategorie: Power Tools&quot;, sort and filter headings and eco label translated; &quot;Power Tools&quot;, Grinder, Sander, Saw, Drill not translated; product names unchanged; browser title stays English</td>
+<td><a class="ev" href="evidence/E-07.german-labels.json">E-07</a></td>
+</tr>
+<tr>
+<td>36-38</td>
+<td>19:48:35</td>
+<td>run_code: tick Grinder (36), wait response (37), wait for message (38)</td>
+<td>36,652 ms; &quot;Es wurden keine passenden Produkte gefunden.&quot;; <code>[data-test=&quot;category-empty&quot;]</code> count 1, no role, no aria-live</td>
+<td><a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a></td>
+</tr>
+<tr>
+<td>39-41</td>
+<td>19:49:17</td>
+<td>run_code: language menu (39), EN (40), wait for English message (41)</td>
+<td><code>language</code> = en again (cleanup of the language choice); English text count 1, test id count 1</td>
+<td><a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a></td>
+</tr>
+<tr>
+<td>-</td>
+<td>19:49:2x</td>
+<td>check clock and count</td>
+<td>41 actions, about 5 min 45 s</td>
+<td>-</td>
+</tr>
+<tr>
+<td>42-48</td>
+<td>19:49:3x-19:49:57</td>
+<td>run_code, scripted login (guardrail 9): goto login (42), fill email (43), fill password (44), click Login (45), wait for <code>/account</code> (46), goto <code>/category/power-tools</code> (47), wait for first card (48); DOM read</td>
+<td>Login 9,999 ms; password field gone before any read; list after 2,013 ms; same 8 tools and prices (12V &quot;$46.5&quot;), title and heading as for a visitor; no Sign in link. 80 percent of the action budget reached: no new paths</td>
+<td><a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a></td>
+</tr>
+<tr>
+<td>49</td>
+<td>19:50:09</td>
+<td>run_code, read-only: locator counts</td>
+<td>Sort still unnamed (role+name 0, test id 1); all key ids 1; compare selection from action 22 survived the login</td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+</tr>
+<tr>
+<td>50</td>
+<td>19:50:1x</td>
+<td>console messages, all, warning level</td>
+<td>401 <code>users/me</code> and Angular &quot;Unauthorized&quot; on each visitor load; NG0956 twice; image preload warnings; no error while logged in</td>
+<td><a class="ev" href="evidence/E-11.console-all.log">E-11</a></td>
+</tr>
+<tr>
+<td>51</td>
+<td>19:50:1x</td>
+<td>network requests (non-static)</td>
+<td><code>QUERY /products</code>, <code>/brands</code>, <code>/categories/tree</code>, <code>/product-specs/names</code> all 200; login 200; no failed call except visitor <code>users/me</code> 401</td>
+<td><a class="ev" href="evidence/E-12.network-customer-load.txt">E-12</a></td>
+</tr>
+<tr>
+<td>52</td>
+<td>19:50:17</td>
+<td>close browser</td>
+<td>Closed; login token and compare selection discarded with the isolated browser</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p>Final count: 52 of 60 actions. Browser time 19:43:39 to 19:50:17, 6 min 38 s of 20 minutes.
+Stopped opening new paths at action 48 (80 percent). Not reached: R-01 rentals overview, R-02 home
+overview, R-04 cart badge after an add (only the Categories menu and badge presence were read, <a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a>),
+sort and filters as a logged-in customer, a count of the comparison page&#39;s product locator.
+Times marked <code>x</code> were not read from a tool output; they lie between the neighbouring rows.</p>
+<h2>Observations</h2>
+<p>New in this run. Carried observations keep their v0.1 IDs and are cited <code>v0.1/O-nn</code>.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Tag</th>
+<th>Observation</th>
+<th>Evidence</th>
+<th>Finding</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>O-01</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Waiting 46,016 ms for the Sander list: 185 samples at 250 ms, none matched any loading selector (aria-busy, progressbar, spinner, loading, loader, skeleton class parts); the old eight cards stayed on screen until the answer</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+<td>F-02</td>
+</tr>
+<tr>
+<td>O-02</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Unticking Sander restores all eight; unticking MightyCraft Hardware restores all eight</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+<td>AC 6, AC 7, S-11</td>
+</tr>
+<tr>
+<td>O-03</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Ticking Power Tools ticks Grinder, Sander, Saw, Drill; unticking it unticks all five and shows all eight</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+<td>F-07 (resolved), S-14</td>
+</tr>
+<tr>
+<td>O-04</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>List answers in this run: 977 ms to 46,016 ms (<a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>), German Grinder 36,652 ms (<a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>)</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>, <a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a></td>
+<td>F-03</td>
+</tr>
+<tr>
+<td>O-05</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Title &quot;Power Tools - Practice Software Testing - Toolshop - v5.0&quot; (visitor and customer)</td>
+<td><a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a>, <a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a></td>
+<td>F-05 (resolved)</td>
+</tr>
+<tr>
+<td>O-06</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Compare on Circular Saw: button pressed; Compare Now opens <code>/comparison</code>, shows &quot;Loading...&quot; for 21,033 ms, then a Circular Saw column (price $80.19, ForgeFlex Tools, Saw, CO₂ D)</td>
+<td><a class="ev" href="evidence/E-03.after-compare-click.snapshot.yml">E-03</a>, <a class="ev" href="evidence/E-04.comparison-page.json">E-04</a>, <a class="ev" href="evidence/E-05.comparison-loaded.json">E-05</a></td>
+<td>AC 11, F-12, S-19</td>
+</tr>
+<tr>
+<td>O-07</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>The comparison page shows a &quot;Loading...&quot; text while waiting; the category page shows nothing (O-01)</td>
+<td><a class="ev" href="evidence/E-04.comparison-page.json">E-04</a>, <a class="ev" href="evidence/E-02.clear-filters-and-loading-timed.json">E-02</a></td>
+<td>F-02</td>
+</tr>
+<tr>
+<td>O-08</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Selecting the Circular Saw card opens <code>/product/&lt;id&gt;</code> in 255 ms; its h1 &quot;Circular Saw&quot; appears after 23,717 ms; title &quot;Circular Saw - ...&quot;</td>
+<td><a class="ev" href="evidence/E-06.open-details-timed.json">E-06</a></td>
+<td>AC 4, F-03</td>
+</tr>
+<tr>
+<td>O-09</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Language menu offers DE, EL, EN, ES, FR, NL, TR</td>
+<td><a class="ev" href="evidence/E-07.german-labels.json">E-07</a></td>
+<td>Q-09</td>
+</tr>
+<tr>
+<td>O-10</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>German: &quot;Kategorie: Power Tools&quot;, &quot;Sortieren&quot;, &quot;Filter&quot;, &quot;Nach Kategorie:&quot;, &quot;Nach Marken:&quot;, &quot;Nachhaltigkeit:&quot;, sort options translated, eco label &quot;Nur umweltfreundliche Produkte anzeigen&quot;, Compare aria-label &quot;Vergleichen&quot;; product names unchanged</td>
+<td><a class="ev" href="evidence/E-07.german-labels.json">E-07</a></td>
+<td>AC 12</td>
+</tr>
+<tr>
+<td>O-11</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>German: &quot;Power Tools&quot; in heading and filter, Grinder, Sander, Saw, Drill stay English; browser title stays English</td>
+<td><a class="ev" href="evidence/E-07.german-labels.json">E-07</a></td>
+<td>F-15</td>
+</tr>
+<tr>
+<td>O-12</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>German no-results: &quot;Es wurden keine passenden Produkte gefunden.&quot;; <code>[data-test=&quot;category-empty&quot;]</code> count 1, div, no role, no aria-live</td>
+<td><a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a></td>
+<td>AC 10, F-10</td>
+</tr>
+<tr>
+<td>O-13</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Back in English: &quot;There are no products found.&quot; count 1, test id count 1; Grinder stays ticked across the language change</td>
+<td><a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a></td>
+<td>S-13</td>
+</tr>
+<tr>
+<td>O-14</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Logged-in customer: same 8 tools and prices, &quot;$46.5&quot; for Cordless Drill 12V, same heading and title, no console error</td>
+<td><a class="ev" href="evidence/E-09.customer-category-page.json">E-09</a>, <a class="ev" href="evidence/E-11.console-all.log">E-11</a></td>
+<td>S-17, F-01</td>
+</tr>
+<tr>
+<td>O-15</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Compare selection made as a visitor survived the login (session storage)</td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+<td>F-16</td>
+</tr>
+<tr>
+<td>O-16</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Sort dropdown still has no accessible name (no aria-label, no id, no aria-labelledby; role+name &quot;sort&quot; 0)</td>
+<td><a class="ev" href="evidence/E-10.locator-counts-customer.json">E-10</a></td>
+<td>F-09</td>
+</tr>
+<tr>
+<td>O-17</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Console: image preload warning (barn-2400x1600.avif) on each load, besides the known 401s and NG0956</td>
+<td><a class="ev" href="evidence/E-11.console-all.log">E-11</a></td>
+<td>F-14</td>
+</tr>
+<tr>
+<td>O-18</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>Tool observation: <code>wait_for</code> text has a 5 s timeout, too short for this environment; action 25 failed on it</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2>Test data created</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Cleaned up</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>No records (no cart, order, favourite or account change). Login of the shared customer only</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Language choice DE in local storage</td>
+<td>Yes, set back to EN at action 40 (<a class="ev" href="evidence/E-08.german-no-results-and-back-to-en.json">E-08</a>), then the browser closed</td>
+</tr>
+<tr>
+<td>Compare selection (Circular Saw) in session storage; customer login token</td>
+<td>Yes, discarded when the isolated browser closed (action 52)</td>
+</tr>
+<tr>
+<td>Files on disk: MCP output under <code>test-output/mcp/</code> (git-ignored)</td>
+<td>Left; evidence copies in <code>evidence/</code></td>
+</tr>
+</tbody></table>
+<h2>Findings map (report v0.2 to observations)</h2>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Status</th>
+<th>Observations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F-01</td>
+<td>carried, re-observed</td>
+<td>v0.1/O-05, O-14</td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>changed: was v0.1 F-03 (risk, Inferred), now defect, Observed against the Q-08 answer</td>
+<td>O-01, O-07</td>
+</tr>
+<tr>
+<td>F-03</td>
+<td>carried, updated (was v0.1 F-02)</td>
+<td>v0.1/O-09, O-04, O-08</td>
+</tr>
+<tr>
+<td>F-04</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.1/O-18</td>
+</tr>
+<tr>
+<td>F-05</td>
+<td>resolved by Q-01</td>
+<td>v0.1/O-02, O-05</td>
+</tr>
+<tr>
+<td>F-06</td>
+<td>resolved by Q-02</td>
+<td>v0.1/O-14</td>
+</tr>
+<tr>
+<td>F-07</td>
+<td>resolved by Q-03, unticking re-checked</td>
+<td>v0.1/O-17, O-03</td>
+</tr>
+<tr>
+<td>F-08</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.1/O-04</td>
+</tr>
+<tr>
+<td>F-09</td>
+<td>carried, re-observed</td>
+<td>v0.1/O-21, O-16</td>
+</tr>
+<tr>
+<td>F-10</td>
+<td>carried, re-observed</td>
+<td>v0.1/O-24, O-12</td>
+</tr>
+<tr>
+<td>F-11</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.1/O-06</td>
+</tr>
+<tr>
+<td>F-12</td>
+<td>carried, comparison page now opened</td>
+<td>v0.1/O-20, O-06</td>
+</tr>
+<tr>
+<td>F-13</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.1/O-26</td>
+</tr>
+<tr>
+<td>F-14</td>
+<td>carried, updated</td>
+<td>v0.1/O-25, O-17</td>
+</tr>
+<tr>
+<td>F-15</td>
+<td><span class="badge muted">new</span></td>
+<td>O-11</td>
+</tr>
+<tr>
+<td>F-16</td>
+<td><span class="badge muted">new</span></td>
+<td>O-15</td>
+</tr>
+</tbody></table>
+</details>
+</main>
+</body>
+</html>

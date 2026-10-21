@@ -1,0 +1,61 @@
+# Page Title after DE: Rentals Overview - Practice Software Testing - Toolshop - v5.0
+- generic [ref=f3e2]:
+  - generic [ref=f3e3]:
+    - text: View the
+    - link "Documentation" [ref=f3e4] [cursor=pointer]:
+      - /url: https://testsmith-io.github.io/practice-software-testing/#/
+    - text: for this application.
+  - generic [ref=f3e5]:
+    - generic [ref=f3e7]:
+      - generic [ref=f3e8]: Practice Black Box Testing & Bug Hunting
+      - button "Testing Guide" [ref=f3e9] [cursor=pointer]
+    - navigation [ref=f3e10]:
+      - generic [ref=f3e11]:
+        - link "Practice Software Testing - Toolshop" [ref=f3e12] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f3e31]:
+          - menubar "Main menu" [ref=f3e32]:
+            - menuitem [ref=f3e113]:
+              - link "Start" [ref=f3e114] [cursor=pointer]:
+                - /url: /
+            - menuitem [ref=f3e115]:
+              - button "Kategorien" [ref=f3e116] [cursor=pointer]
+            - menuitem [ref=f3e117]:
+              - link "Kontakt" [ref=f3e118] [cursor=pointer]:
+                - /url: /contact
+            - menuitem [ref=f3e119]:
+              - link "Einloggen" [ref=f3e120] [cursor=pointer]:
+                - /url: /auth/login
+            - menuitem [ref=f3e41]:
+              - link "cart" [ref=f3e42] [cursor=pointer]:
+                - /url: /checkout
+                - generic [ref=f3e46]: "11"
+          - button "Select language" [active] [ref=f3e48] [cursor=pointer]: DE
+  - generic [ref=f3e87]:
+    - heading "Mieten" [level=1] [ref=f3e121]
+    - generic [ref=f3e90]:
+      - img "Excavator" [ref=f3e92]
+      - generic [ref=f3e94]:
+        - heading "Excavator" [level=5] [ref=f3e95]
+        - paragraph [ref=f3e96]: Heavy-duty tracked excavator available for hourly rental, designed for professional foundation digging, trenching, utility installation, and general earthmoving operat
+    - generic [ref=f3e98]:
+      - img "Bulldozer" [ref=f3e100]
+      - generic [ref=f3e102]:
+        - heading "Bulldozer" [level=5] [ref=f3e103]
+        - paragraph [ref=f3e104]: Robust tracked bulldozer available for hourly rental, built for heavy-duty grading, site clearing, land leveling, and large-volume earthmoving operations on construct
+    - generic [ref=f3e106]:
+      - img "Crane" [ref=f3e108]
+      - generic [ref=f3e110]:
+        - heading "Crane" [level=5] [ref=f3e111]
+        - paragraph [ref=f3e112]: Mobile hydraulic crane available for hourly rental, purpose-engineered for lifting, positioning, and placing heavy loads on active construction sites, industrial faci
+  - contentinfo [ref=f3e53]:
+    - generic [ref=f3e54]:
+      - generic [ref=f3e55]:
+        - text: Das ist eine Demo Applikation , um Software Test Workshops zu unterstützen. |
+        - link "Privacy Policy" [ref=f3e56] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=f3e57] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=f3e58] [cursor=pointer]:

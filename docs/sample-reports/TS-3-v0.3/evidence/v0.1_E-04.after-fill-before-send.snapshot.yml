@@ -1,0 +1,43 @@
+- generic [ref=e182]:
+  - generic [ref=e183]:
+    - generic [ref=e185]:
+      - generic [ref=e186]: First name
+      - textbox "First name" [ref=e187]:
+        - /placeholder: Your first name *
+        - text: ETA
+    - generic [ref=e189]:
+      - generic [ref=e190]: Last name
+      - textbox "Last name" [ref=e191]:
+        - /placeholder: Your last name *
+        - text: Test
+    - generic [ref=e192]:
+      - generic [ref=e193]: Email address
+      - textbox "Email address" [ref=e194]:
+        - /placeholder: Your email *
+        - text: not-an-email
+      - alert [ref=e216]:
+        - generic [ref=e222]: Email format is invalid
+  - generic [ref=e195]:
+    - generic [ref=e197]:
+      - generic [ref=e198]: Subject
+      - combobox "Subject" [ref=e199]:
+        - option "Customer service" [selected]
+        - option "Webmaster"
+        - option "Return"
+        - option "Payments"
+        - option "Warranty"
+        - option "Status of my order"
+    - generic [ref=e200]:
+      - generic [ref=e201]: Message *
+      - textbox "Message *" [active] [ref=e203]: ETA-20261010-2232 visitor message just below thex
+      - alert [ref=e220]:
+        - generic [ref=e221]: Message is required
+    - generic [ref=e204]:
+      - generic [ref=e205]: Attachment
+      - generic [ref=e206]:
+        - button "Attachment" [ref=e207] [cursor=pointer]
+        - generic [ref=e208]:
+          - text: Only files with the
+          - strong [ref=e209]: txt
+          - text: extension are allowed, and files must be 0kb.
+    - button "Send" [ref=e211] [cursor=pointer]

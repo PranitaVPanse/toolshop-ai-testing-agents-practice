@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__atlassian__atlassianUserInfo",
+      "mcp__atlassian__getAccessibleAtlassianResources",
+      "mcp__atlassian__getJiraIssue",
+      "mcp__atlassian__searchJiraIssuesUsingJql",
+      "mcp__atlassian__discover",
+      "mcp__atlassian__executeRead"
+    ],
+    "ask": ["mcp__atlassian__executeWrite"],
+    "deny": ["mcp__atlassian__executeDestructive"]
+  }
+}

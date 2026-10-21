@@ -1,0 +1,3 @@
+29:              - link "cart" [ref=f3e42] [cursor=pointer]:
+30-                - /url: /checkout
+31-                - generic [ref=f3e46]: "11"

@@ -1,0 +1,31 @@
+          - menubar "Main menu" [ref=e32]:
+            - menuitem [ref=e33]:
+              - link "Home" [ref=e34] [cursor=pointer]:
+                - /url: /
+            - menuitem [ref=e64]:
+              - button "Categories" [expanded] [active] [ref=e36] [cursor=pointer]
+              - list "nav-categories" [ref=e65]:
+                - listitem [ref=e66]:
+                  - link "Hand Tools" [ref=e67] [cursor=pointer]:
+                    - /url: /category/hand-tools
+                - listitem [ref=e68]:
+                  - link "Power Tools" [ref=e69] [cursor=pointer]:
+                    - /url: /category/power-tools
+                - listitem [ref=e70]:
+                  - link "Other" [ref=e71] [cursor=pointer]:
+                    - /url: /category/other
+                - listitem [ref=e72]:
+                  - link "Special Tools" [ref=e73] [cursor=pointer]:
+                    - /url: /category/special-tools
+                - listitem [ref=e74]:
+                  - separator [ref=e75]
+                - listitem [ref=e76]:
+                  - link "Rentals" [ref=e77] [cursor=pointer]:
+                    - /url: /rentals
+            - menuitem [ref=e37]:
+              - link "Contact" [ref=e38] [cursor=pointer]:
+                - /url: /contact
+            - menuitem [ref=e39]:
+              - link "Sign in" [ref=e40] [cursor=pointer]:
+                - /url: /auth/login
+          - button "Select language" [ref=e42] [cursor=pointer]: EN

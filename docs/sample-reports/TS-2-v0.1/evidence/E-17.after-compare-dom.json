@@ -1,0 +1,5 @@
+{"action":19,"note":"DOM read after clicking Compare on Crane details (visitor)",
+"compareBtn":"<button data-test=\"add-to-compare\" class=\"btn btn-primary\"> ... Compare</button> (no state change, no aria-pressed)",
+"sessionStorage":{"cart_quantity":"11","compare_ids":"[\"<Crane product id>\"]","cart_id":"<present>"},
+"elements matching [data-test*=compar], [class*=compar], a[href*=compare]":["BUTTON add-to-compare btn btn-primary :: Compare"],
+"alerts":[]}

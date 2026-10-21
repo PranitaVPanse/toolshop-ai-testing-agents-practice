@@ -7,3 +7,5 @@ package-lock.json
 *.md
 # Agent reports and evidence must stay exactly as captured.
 tests/exploratory/reports/
+docs/sample-reports/
+.claude/settings.local.json

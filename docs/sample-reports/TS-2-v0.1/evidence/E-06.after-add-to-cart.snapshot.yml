@@ -1,0 +1,130 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - text: View the
+    - link "Documentation" [ref=e4] [cursor=pointer]:
+      - /url: https://testsmith-io.github.io/practice-software-testing/#/
+    - text: for this application.
+  - generic [ref=e5]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Practice Black Box Testing & Bug Hunting
+      - button "Testing Guide" [ref=e9] [cursor=pointer]
+    - navigation [ref=e10]:
+      - generic [ref=e11]:
+        - link "Practice Software Testing - Toolshop" [ref=e12] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e31]:
+          - menubar "Main menu" [ref=e32]:
+            - menuitem [ref=e33]:
+              - link "Home" [ref=e34] [cursor=pointer]:
+                - /url: /
+            - menuitem [ref=e387]:
+              - button "Categories" [ref=e36] [cursor=pointer]
+            - menuitem [ref=e37]:
+              - link "Contact" [ref=e38] [cursor=pointer]:
+                - /url: /contact
+            - menuitem [ref=e39]:
+              - link "Sign in" [ref=e40] [cursor=pointer]:
+                - /url: /auth/login
+          - button "Select language" [ref=e42] [cursor=pointer]: EN
+  - generic [ref=e415]:
+    - generic [ref=e416]:
+      - figure [ref=e418]:
+        - img "Excavator" [ref=e420]
+        - generic [ref=e421]:
+          - text: Photo by
+          - link "John Kakuk" [ref=e422] [cursor=pointer]:
+            - /url: https://unsplash.com/@mgnfy
+          - text: "on"
+          - link "Unsplash" [ref=e423] [cursor=pointer]:
+            - /url: https://unsplash.com/photos/HvvPceHYLOg
+          - text: .
+      - generic [ref=e424]:
+        - heading "Excavator" [level=1] [ref=e425]
+        - paragraph [ref=e426]:
+          - generic "category" [ref=e427]: Drill
+          - generic "brand" [ref=e428]: ForgeFlex Tools
+        - generic [ref=e429]:
+          - generic [ref=e430]: $136.50
+          - text: per hour
+          - generic [ref=e431]: / (Total $409.50)
+        - generic "A = most environmentally friendly, E = higher environmental impact" [ref=e432]:
+          - text: "CO₂:"
+          - generic [ref=e433]: A
+          - generic [ref=e434]: B
+          - generic [ref=e435]: C
+          - generic [ref=e436]: D
+          - generic [ref=e437]: E
+        - paragraph [ref=e438]: Heavy-duty tracked excavator available for hourly rental, designed for professional foundation digging, trenching, utility installation, and general earthmoving operations on residential and commercial construction sites. The powerful hydraulic system delivers smooth, responsive boom, arm, and bucket controls for precise positioning and efficient material handling in both tight urban spaces and open excavation sites. An enclosed climate-controlled cab provides operator comfort during long shifts, with excellent forward, side, and rear visibility through large laminated safety-glass windows and an integrated rearview camera system. The rubber-tracked undercarriage minimizes ground disturbance on finished surfaces while providing stable, sure-footed mobility on slopes, soft ground, and uneven terrain. Quick-coupling hydraulic connections allow rapid attachment changes between digging buckets, grading blades, and hydraulic breakers without leaving the cab. Suitable for projects ranging from swimming pool excavation and basement digging to municipal utility trenching and site grading operations.
+        - generic [ref=e439]:
+          - generic [ref=e440]: Duration (3 hour(s))
+          - generic "ngx-slider" [ref=e441]:
+            - slider "ngx-slider" [ref=e450] [cursor=pointer]
+            - generic [ref=e451]: "1"
+            - generic [ref=e452]: "10"
+            - generic [ref=e453]: "3"
+        - generic [ref=e455]:
+          - button [active] [ref=e456] [cursor=pointer]
+          - button [ref=e460] [cursor=pointer]
+          - button [ref=e464] [cursor=pointer]
+    - separator [ref=e468]
+    - generic [ref=e469]:
+      - heading "Related products" [level=2] [ref=e470]
+      - generic [ref=e472]:
+        - link [ref=e473] [cursor=pointer]:
+          - /url: /product/01M2XDJW3CCYH6SX8QY1D12WKB
+          - img "Cordless Drill 20V" [ref=e475]
+          - generic [ref=e476]:
+            - heading "Cordless Drill 20V" [level=5] [ref=e477]
+            - link "More information" [ref=e478]:
+              - /url: "#"
+        - link [ref=e479] [cursor=pointer]:
+          - /url: /product/01M2XDJW3EFFSK1P5SFS4G7VCE
+          - img "Cordless Drill 24V" [ref=e481]
+          - generic [ref=e482]:
+            - heading "Cordless Drill 24V" [level=5] [ref=e483]
+            - link "More information" [ref=e484]:
+              - /url: "#"
+        - link [ref=e485] [cursor=pointer]:
+          - /url: /product/01M2XDJW3F8PXKZ7KY332NXB4Z
+          - img "Cordless Drill 18V" [ref=e487]
+          - generic [ref=e488]:
+            - heading "Cordless Drill 18V" [level=5] [ref=e489]
+            - link "More information" [ref=e490]:
+              - /url: "#"
+        - link [ref=e491] [cursor=pointer]:
+          - /url: /product/01M2XDJW3HXX7T1BCKX1ZF7YEA
+          - img "Cordless Drill 12V" [ref=e493]
+          - generic [ref=e494]:
+            - heading "Cordless Drill 12V" [level=5] [ref=e495]
+            - link "More information" [ref=e496]:
+              - /url: "#"
+        - link [ref=e497] [cursor=pointer]:
+          - /url: /product/01M2XDJW3P466W1FTJHK9BCJ1F
+          - img "Bulldozer" [ref=e499]
+          - generic [ref=e500]:
+            - heading "Bulldozer" [level=5] [ref=e501]
+            - link "More information" [ref=e502]:
+              - /url: "#"
+        - link [ref=e503] [cursor=pointer]:
+          - /url: /product/01M2XDJW3RK7SE5D8CXATRPKQN
+          - img "Crane" [ref=e505]
+          - generic [ref=e506]:
+            - heading "Crane" [level=5] [ref=e507]
+            - link "More information" [ref=e508]:
+              - /url: "#"
+  - contentinfo [ref=e47]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - text: This is a DEMO application, used for software testing training purpose. |
+        - link "Privacy Policy" [ref=e50] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=e51] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=e52] [cursor=pointer]:
+          - /url: https://unsplash.com/photos/t5YUoHW6zRo
+        - text: .
+      - generic [ref=e53]: vdev | Built 2026-09-27 | Angular 20.0.5
+  - button "Open chat" [ref=e55] [cursor=pointer]
+  - button "Show live shop activity" [ref=e59] [cursor=pointer]

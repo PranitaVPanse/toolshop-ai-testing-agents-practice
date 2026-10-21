@@ -1,0 +1,5 @@
+{"action":"5-6","note":"DOM read after ArrowRight x2 on the duration slider (Excavator details)",
+"slider":{"aria-valuenow":"3","aria-valuemin":"1","aria-valuemax":"10","aria-label":"ngx-slider","aria-labelledby":""},
+"priceBlock":"<span>$<span aria-label=\"unit-price\" data-test=\"unit-price\">136.50</span></span>",
+"buttons":[{"data-test":"add-to-cart","id":"btn-add-to-cart","aria-label":null,"text":"Add to cart","disabled":false},{"data-test":"add-to-favorites","id":"btn-add-to-favorites","aria-label":null,"text":"Add to favourites","disabled":false},{"data-test":"add-to-compare","id":"","aria-label":null,"text":"Compare","disabled":false}],
+"co2":["co2-letter:A","co2-letter:B","co2-letter:C","co2-letter:D","co2-letter active rating-e:E"]}

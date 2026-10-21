@@ -1,0 +1,11 @@
+52. [GET] http://localhost:8091/users/me => [200] OK
+53. [GET] http://localhost:8091/users/me => [200] OK
+54. [GET] http://localhost:4200/assets/i18n/en.json => [200] OK
+75. [GET] http://localhost:8091/carts/01m4kscrhyy1smxysc2qajcxcv => [200] OK
+76. [GET] http://localhost:8091/users/me => [200] OK
+77. [GET] http://localhost:8091/users/me => [200] OK
+78. [GET] http://localhost:8091/carts/01m4kscrhyy1smxysc2qajcxcv => [200] OK
+79. [DELETE] http://localhost:8091/carts/01m4kscrhyy1smxysc2qajcxcv/product/01M2XDJW3K8DGCP5EFCWR2T6GZ => [204] No Content
+80. [GET] http://localhost:8091/carts/01m4kscrhyy1smxysc2qajcxcv => [200] OK
+
+Note: 71 static requests not shown, run with "static" option to see them.

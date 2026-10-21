@@ -1,0 +1,33 @@
+#82 [POST] http://localhost:8091/messages
+
+  General
+    status:    [200] OK
+    duration:  12703ms
+    type:      xhr
+    mimeType:  application/json
+
+  Request headers
+    sec-ch-ua-platform: "Windows"
+    referer: http://localhost:4200/
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36
+    accept: application/json, text/plain, */*
+    sec-ch-ua: "Google Chrome";v="153", "Not_A Brand";v="8", "Chromium";v="153"
+    content-type: application/json
+    sec-ch-ua-mobile: ?0
+
+  Response headers
+    transfer-encoding: chunked
+    cache-control: no-cache, private
+    access-control-expose-headers: Content-Disposition
+    connection: keep-alive
+    access-control-allow-origin: *
+    date: Sun, 11 Oct 2026 21:07:50 GMT
+    content-type: application/json
+    server: nginx
+
+Call browser_network_request with part="request-body" to read the request body.
+Call browser_network_request with part="response-body" to read the response body.
+
+Transcribed from the A-27 tool output (network list, filter "messages", whole first page load A-01 to A-27):
+82. [POST] http://localhost:8091/messages
+No other request to /messages was listed.

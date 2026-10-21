@@ -38,7 +38,35 @@ passwords in the ledger, report or evidence.
 |---|---|
 | Time box | 20 minutes |
 | Action budget | 60 browser actions |
-| Reports location | `tests/exploratory/reports/<story-id>/<YYYYMMDD-HHmm>/` |
+| Reports location | `tests/exploratory/reports/<story-id>/<vX.Y>/` (versioned, see the skill) |
+| Report rendering command | `npm run report:explore -- <report folder>` writes `report.html` next to `report.md` |
+
+## Issue tracker
+
+| | |
+|---|---|
+| Tracker | Jira Cloud, through the `atlassian` MCP server (Atlassian Rovo MCP, OAuth; no token in any file) |
+| Site | `https://<your-site>.atlassian.net`. The agent does not need the address: the MCP server lists the signed-in account's site (`getAccessibleAtlassianResources`) |
+| Project | `KAN` |
+| Story for an issue | Read from Jira at every run; the report header records the issue's last-updated time. `stories/<issue key>.md` files are mirrors for readers of the repository, not inputs: do not read them in a Jira run |
+| Report folder for an issue | `tests/exploratory/reports/<issue key>/` |
+| Allowed | Read issues and their comments. Add one comment per version with the open questions, only when the QA engineer ticks "Post this comment" in that version's `qa-review.md` (the next run posts it) or says yes in the conversation |
+| Not allowed | Create, edit, transition or delete issues; edit or delete comments |
+
+Known issues: `KAN-1` is the Rentals story (the same story as `stories/rentals-overview.md`, TS-2).
+`KAN-2` is the Power Tools category story (the same story as `stories/category-power-tools.md`, TS-4).
+
+## Knowledge files
+
+Folder `tests/exploratory/knowledge/`, maintained by the QA engineer. Read in the order the
+skill gives. Everything taken from here is Assumed with the file as its source.
+
+| File | Holds |
+|---|---|
+| `e2e-flows.md` | Pages and routes, end-to-end flows, shared state, and the impact map used for regression scenarios |
+| `rules.md` | Business rules, each with a source and a date |
+| `decisions.md` | QA decisions and answered questions from signed-off reports. The agent appends to it at sign-off |
+| `pages/<page>.md` | Main functionality, verified locators, quirks and regression checks for one page. Read only the pages the story touches and their impact-map rows |
 
 ## Automation stack and conventions
 

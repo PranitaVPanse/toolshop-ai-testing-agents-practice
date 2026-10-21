@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-12T16:52:10.855Z",
+  "url": "http://localhost:4200/contact",
+  "state": "Contact page, visitor after sign-out, language ES, after Send on the empty form",
+  "title": "Contact Us - Practice Software Testing - Toolshop - v5.0",
+  "htmlLang": "es",
+  "languageButton": "ES",
+  "menu": [
+    "nav-home:Inicio",
+    "nav-categories:Categorías",
+    "nav-contact:Contacto",
+    "nav-sign-in:Iniciar sesión"
+  ],
+  "heading": [
+    "H3:Contacto"
+  ],
+  "labels": [
+    "first_name:Nombre",
+    "last_name:Apellido",
+    "email:Dirección de correo electrónico",
+    "subject:Asunto",
+    "message:Mensaje *",
+    "attachment:Adjunto"
+  ],
+  "placeholders": [
+    "first-name:Tu nombre *",
+    "last-name:Tu apellido *",
+    "email:Tu correo electrónico *"
+  ],
+  "options": [
+    ":Selecciona un asunto *",
+    "customer-service:Atención al cliente",
+    "webmaster:Webmaster",
+    "return:Devolución",
+    "payments:Pagos",
+    "warranty:Garantía",
+    "status-of-order:Estado de mi pedido"
+  ],
+  "hint": "Solo se permiten archivos con la extensión txt, y los archivos deben estar vacíos.",
+  "send": "Enviar",
+  "alerts": [
+    "first-name-error:El nombre es obligatorio",
+    "last-name-error:El apellido es obligatorio",
+    "email-error:El correo electrónico es obligatorio",
+    "subject-error:El asunto es obligatorio",
+    "message-error:El mensaje es obligatorio"
+  ],
+  "requestsToMessages": 0
+}

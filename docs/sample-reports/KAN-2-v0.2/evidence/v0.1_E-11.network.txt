@@ -1,0 +1,30 @@
+52. [GET] http://localhost:8091/users/me => [401] Unauthorized
+53. [GET] http://localhost:8091/users/me => [401] Unauthorized
+54. [GET] http://localhost:4200/assets/i18n/en.json => [200] OK
+67. [QUERY] http://localhost:8091/products => [200] OK
+68. [GET] http://localhost:8091/brands => [200] OK
+69. [GET] http://localhost:8091/categories/tree => [200] OK
+70. [GET] http://localhost:8091/product-specs/names => [200] OK
+79. [QUERY] http://localhost:8091/products => [200] OK
+80. [GET] http://localhost:8091/product-specs/names => [200] OK
+81. [QUERY] http://localhost:8091/categories/tree => [200] OK
+90. [QUERY] http://localhost:8091/products => [200] OK
+91. [QUERY] http://localhost:8091/products => [200] OK
+92. [QUERY] http://localhost:8091/products => [200] OK
+93. [QUERY] http://localhost:8091/products => [200] OK
+94. [QUERY] http://localhost:8091/products => [200] OK
+95. [QUERY] http://localhost:8091/products => [200] OK
+96. [QUERY] http://localhost:8091/products => [200] OK
+97. [QUERY] http://localhost:8091/products => [200] OK
+98. [QUERY] http://localhost:8091/products => [200] OK
+99. [QUERY] http://localhost:8091/products => [200] OK
+100. [QUERY] http://localhost:8091/products => [200] OK
+101. [QUERY] http://localhost:8091/products => [200] OK
+102. [QUERY] http://localhost:8091/products => [200] OK
+103. [QUERY] http://localhost:8091/products => [200] OK
+104. [QUERY] http://localhost:8091/products => [200] OK
+105. [QUERY] http://localhost:8091/products => [200] OK
+106. [QUERY] http://localhost:8091/products => [200] OK
+107. [QUERY] http://localhost:8091/products => [200] OK
+
+Note: 79 static requests not shown, run with "static" option to see them.

@@ -1,0 +1,6 @@
+{"action":9,"note":"DOM read a few seconds after Add to cart (Excavator, duration 3)",
+"badge [data-test=cart-quantity]":["3"],
+"navCart":"<a data-test=\"nav-cart\" aria-label=\"cart\" routerlink=\"/checkout\" class=\"nav-link\" href=\"/checkout\">",
+"toasts (#toast-container *, [role=alert], .toast)":[],
+"sessionStorage":{"cart_quantity":"3","cart_id":"<present>"},
+"localStorage keys":[]}

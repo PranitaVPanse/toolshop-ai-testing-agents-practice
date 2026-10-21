@@ -11,3 +11,11 @@ test-output/
 
 # Local working notes: decisions log, planning, presentation material. Never committed.
 .local/
+
+# Exploratory reports: only signed versions (v1.0, v2.0, ...) are committed. Drafts (v0.1, v1.1, ...)
+# and the audit files of every version stay local, for audit and debugging.
+tests/exploratory/reports/*/v*.[1-9]*/
+tests/exploratory/reports/**/report.html
+tests/exploratory/reports/**/technical.md
+tests/exploratory/reports/**/ledger.md
+tests/exploratory/reports/**/evidence/

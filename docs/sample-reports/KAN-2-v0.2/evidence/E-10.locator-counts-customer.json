@@ -1,0 +1,22 @@
+{
+  "note": "run_code result, action 49, read-only locator counts. Test ids counted with CSS [data-test=...] because the MCP browser's getByTestId uses data-testid (v0.1 O-27).",
+  "at": "2026-10-15T19:50:09.252Z",
+  "state": "logged-in customer, /category/power-tools, list shown, no filter, Circular Saw still in the comparison from action 22",
+  "sortRoleNamed": 0,
+  "sortTestId": 1,
+  "sortAria": {"ariaLabel": null, "id": "", "labelled": null},
+  "heading": 1,
+  "productNames": 8,
+  "languageSelect": 1,
+  "languageRole": 1,
+  "navCategories": 1,
+  "navPowerToolsClosedMenu": 1,
+  "cardCircularSaw": 1,
+  "compareBtnPressed": 1,
+  "compareLink": 1,
+  "compareIds": "[\"<one product id>\"]",
+  "sanderCheckbox": 1,
+  "powerToolsCheckbox": 1,
+  "ecoTestId": 1,
+  "signedInMenu": ["Jane Doe "]
+}

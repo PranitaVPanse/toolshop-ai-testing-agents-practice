@@ -1,0 +1,8 @@
+{"action":54,"note":"Visitor, German active, click Send on the empty form, then DOM read",
+"title":"Contact Us - Practice Software Testing - Toolshop - v5.0","heading":"Kontakt","menu":"Kontakt",
+"labels":["Vorname","Nachname","Email Adresse","Betreff","Nachricht *","Anhang"],
+"placeholders":["Ihr Vorname *","Ihr Nachname *","Ihre EMail *"],
+"options":["Betreff auswählen *","Kundenservice","Webmaster","Zurück","Zahlungen","Garantie","Status meiner Bestellung"],
+"hint":"Nur Dateien mit der Endung txt sind erlaubt.","send":"Senden",
+"errors":[{"text":"Vorname ist verpflichtend","data-test":"first-name-error","id":"first_name_alert","role":"alert"},{"text":"Nachname ist verpflichtend","data-test":"last-name-error","id":"last_name_alert","role":"alert"},{"text":"Email ist verpflichtend","data-test":"email-error","id":"email_alert","role":"alert"},{"text":"Betreff ist verpflichtend","data-test":"subject-error","id":"subject_alert","role":"alert"},{"text":"Nachrichttext ist verpflichtend","data-test":"message-error","id":"message_alert","role":"alert"}],
+"aria-describedby / aria-invalid on every control":"null / null","focusAfterSend":"contact-submit"}

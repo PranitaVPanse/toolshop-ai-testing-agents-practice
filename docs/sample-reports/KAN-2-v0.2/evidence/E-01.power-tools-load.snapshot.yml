@@ -1,0 +1,44 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - text: View the
+    - link "Documentation" [ref=e4] [cursor=pointer]:
+      - /url: https://testsmith-io.github.io/practice-software-testing/#/
+    - text: for this application.
+  - generic [ref=e5]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Practice Black Box Testing & Bug Hunting
+      - button "Testing Guide" [ref=e9] [cursor=pointer]
+    - navigation [ref=e10]:
+      - generic [ref=e11]:
+        - link "Practice Software Testing - Toolshop" [ref=e12] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e31]:
+          - menubar "Main menu" [ref=e32]:
+            - menuitem [ref=e33]:
+              - link "Home" [ref=e34] [cursor=pointer]:
+                - /url: /
+            - menuitem [ref=e35]:
+              - button "Categories" [ref=e36] [cursor=pointer]
+            - menuitem [ref=e37]:
+              - link "Contact" [ref=e38] [cursor=pointer]:
+                - /url: /contact
+            - menuitem [ref=e39]:
+              - link "Sign in" [ref=e40] [cursor=pointer]:
+                - /url: /auth/login
+          - button "Select language" [ref=e42] [cursor=pointer]: EN
+  - contentinfo [ref=e47]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - text: This is a DEMO application, used for software testing training purpose. |
+        - link "Privacy Policy" [ref=e50] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=e51] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=e52] [cursor=pointer]:
+          - /url: https://unsplash.com/photos/t5YUoHW6zRo
+        - text: .
+      - generic [ref=e53]: vdev | Built 2026-10-15 | Angular 20.0.5
+  - button "Open chat" [ref=e55] [cursor=pointer]
+  - button "Show live shop activity" [ref=e59] [cursor=pointer]

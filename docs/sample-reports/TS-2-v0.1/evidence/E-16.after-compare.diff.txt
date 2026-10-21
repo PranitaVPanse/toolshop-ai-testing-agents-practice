@@ -1,0 +1,4 @@
+72c72
+<           - button  [cursor=pointer]
+---
+>           - button [active]  [cursor=pointer]

@@ -1,0 +1,179 @@
+{
+  "url": "/contact",
+  "title": "Contact Us - Practice Software Testing - Toolshop - v5.0",
+  "headings": [
+    "H3:Contact"
+  ],
+  "labels": [
+    {
+      "text": "First name",
+      "for": "first_name"
+    },
+    {
+      "text": "Last name",
+      "for": "last_name"
+    },
+    {
+      "text": "Email address",
+      "for": "email"
+    },
+    {
+      "text": "Subject",
+      "for": "subject"
+    },
+    {
+      "text": "Message *",
+      "for": "message"
+    },
+    {
+      "text": "Attachment",
+      "for": "attachment"
+    }
+  ],
+  "controls": [
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "id": "first_name",
+      "dataTest": "first-name",
+      "placeholder": "Your first name *",
+      "required": false,
+      "ariaRequired": null,
+      "ariaLabel": null,
+      "accept": null,
+      "value": ""
+    },
+    {
+      "tag": "INPUT",
+      "type": "text",
+      "id": "last_name",
+      "dataTest": "last-name",
+      "placeholder": "Your last name *",
+      "required": false,
+      "ariaRequired": null,
+      "ariaLabel": null,
+      "accept": null,
+      "value": ""
+    },
+    {
+      "tag": "INPUT",
+      "type": "email",
+      "id": "email",
+      "dataTest": "email",
+      "placeholder": "Your email *",
+      "required": false,
+      "ariaRequired": null,
+      "ariaLabel": null,
+      "accept": null,
+      "value": ""
+    },
+    {
+      "tag": "SELECT",
+      "type": "select-one",
+      "id": "subject",
+      "dataTest": "subject",
+      "placeholder": null,
+      "required": false,
+      "ariaRequired": null,
+      "ariaLabel": null,
+      "accept": null,
+      "value": ""
+    },
+    {
+      "tag": "TEXTAREA",
+      "type": "textarea",
+      "id": "message",
+      "dataTest": "message",
+      "placeholder": null,
+      "required": false,
+      "ariaRequired": null,
+      "ariaLabel": null,
+      "accept": null,
+      "value": ""
+    },
+    {
+      "tag": "INPUT",
+      "type": "file",
+      "id": "attachment",
+      "dataTest": "attachment",
+      "placeholder": null,
+      "required": false,
+      "ariaRequired": null,
+      "ariaLabel": null,
+      "accept": ".txt",
+      "value": ""
+    },
+    {
+      "tag": "INPUT",
+      "type": "submit",
+      "id": "",
+      "dataTest": "contact-submit",
+      "placeholder": null,
+      "required": false,
+      "ariaRequired": null,
+      "ariaLabel": null,
+      "accept": null,
+      "value": "Send"
+    }
+  ],
+  "options": [
+    {
+      "text": "Select a subject *",
+      "value": "",
+      "selected": true,
+      "disabled": true
+    },
+    {
+      "text": "Customer service",
+      "value": "customer-service",
+      "selected": false,
+      "disabled": false
+    },
+    {
+      "text": "Webmaster",
+      "value": "webmaster",
+      "selected": false,
+      "disabled": false
+    },
+    {
+      "text": "Return",
+      "value": "return",
+      "selected": false,
+      "disabled": false
+    },
+    {
+      "text": "Payments",
+      "value": "payments",
+      "selected": false,
+      "disabled": false
+    },
+    {
+      "text": "Warranty",
+      "value": "warranty",
+      "selected": false,
+      "disabled": false
+    },
+    {
+      "text": "Status of my order",
+      "value": "status-of-order",
+      "selected": false,
+      "disabled": false
+    }
+  ],
+  "hint": [
+    "Only files with the txt extension are allowed, and files must be 0kb."
+  ],
+  "formText": "First name\nLast name\nEmail address\nSubject\nSelect a subject *\nCustomer service\nWebmaster\nReturn\nPayments\nWarranty\nStatus of my order\nMessage *\nAttachment\nOnly files with the txt extension are allowed, and files must be 0kb.",
+  "menu": [
+    "nav-home:Home",
+    "nav-categories:Categories",
+    "nav-hand-tools:Hand Tools",
+    "nav-power-tools:Power Tools",
+    "nav-other:Other",
+    "nav-special-tools:Special Tools",
+    "nav-rentals:Rentals",
+    "nav-contact:Contact",
+    "nav-sign-in:Sign in"
+  ],
+  "lang": "en"
+}

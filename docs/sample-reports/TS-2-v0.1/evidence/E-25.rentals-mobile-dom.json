@@ -1,0 +1,4 @@
+{"actions":"32-33","note":"DOM read on /rentals at 375 px after reload, German still active",
+"h1":"Mieten","languageButton":"DE","scrollWidth":375,"clientWidth":375,
+"cards":[{"name":"Excavator","tag":"DIV","class":"card mb-3","data-test":"","tabindex":null,"role":null,"x":12,"width":351,"descriptionLength":1108},{"name":"Bulldozer","tag":"DIV","class":"card mb-3","data-test":"","tabindex":null,"role":null,"x":12,"width":351,"descriptionLength":1031},{"name":"Crane","tag":"DIV","class":"card mb-3","data-test":"","tabindex":null,"role":null,"x":12,"width":351,"descriptionLength":1194}],
+"storageKeys":{"local":["language"],"session":["cart_quantity","compare_ids","cart_id"]}}

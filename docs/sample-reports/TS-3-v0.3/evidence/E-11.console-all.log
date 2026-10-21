@@ -1,0 +1,24 @@
+Total messages: 12 (Errors: 5, Warnings: 3)
+Returning 21 messages for level "warning"
+
+[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8091/users/me:0
+[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8091/users/me:0
+[ERROR] ERROR {message: Unauthorized} @ http://localhost:4200/@fs/app/.angular/cache/20.0.4/Toolshop/vite/deps/chunk-QURCENYN.js?v=425b16d9:2554
+[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8091/users/me:0
+[ERROR] Failed to load resource: the server responded with a status of 422 (Unprocessable Content) @ http://localhost:8091/messages:0
+[WARNING] The resource http://localhost:4200/assets/img/barn-2400x1600.avif was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4200/auth/login:0
+[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8091/users/me:0
+[ERROR] ERROR {message: Unauthorized} @ http://localhost:4200/@fs/app/.angular/cache/20.0.4/Toolshop/vite/deps/chunk-QURCENYN.js?v=425b16d9:2554
+[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8091/users/me:0
+[WARNING] The resource http://localhost:4200/assets/img/barn-2400x1600.avif was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4200/account:0
+[WARNING] The resource http://localhost:4200/assets/img/barn-2400x1600.avif was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4200/contact:0
+[WARNING] The resource http://localhost:4200/assets/img/barn-2400x1600.avif was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4200/contact:0
+[WARNING] The resource http://localhost:4200/assets/img/barn-2400x1600.avif was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4200/account/messages:0
+[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8091/users/me:0
+[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8091/users/refresh:0
+[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8091/users/me:0
+[ERROR] ERROR {message: Unauthorized} @ http://localhost:4200/@fs/app/.angular/cache/20.0.4/Toolshop/vite/deps/chunk-QURCENYN.js?v=425b16d9:2554
+[WARNING] The resource http://localhost:4200/assets/img/barn-2400x1600.avif was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4200/auth/login:0
+[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:8091/users/me:0
+[WARNING] The resource http://localhost:4200/assets/img/barn-2400x1600.avif was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4200/contact:0
+[WARNING] The resource http://localhost:4200/assets/img/barn-2400x1600.avif was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:4200/contact:0

@@ -1,0 +1,3 @@
+{"action":14,"note":"DOM reads after correcting email and message (50 chars, focus still in Message), before and after choosing ETA-wrong-type.pdf (19 bytes)",
+"beforeAttach":{"alerts":[{"text":"Message must be minimal 50 characters","data-test":"message-error","id":"message_alert","class":"alert alert-danger mt-3 p-2"}],"file":[],"messageLength":50,"formClass":"ng-invalid ng-submitted ng-dirty ng-touched"},
+"afterPdf":{"alerts":[{"text":"Message must be minimal 50 characters","data-test":"message-error","id":"message_alert"},{"text":"File should be empty.","data-test":"attachment-error","id":"attachment_alert","class":"alert alert-danger mt-3 p-2"}],"file":["ETA-wrong-type.pdf:19"],"messageLength":50,"formClass":"ng-invalid ng-submitted ng-dirty ng-touched"}}

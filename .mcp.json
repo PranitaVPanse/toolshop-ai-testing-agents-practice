@@ -3,6 +3,10 @@
     "playwright": {
       "command": "cmd",
       "args": ["/c", "npx", "@playwright/mcp", "--isolated", "--output-dir", "test-output/mcp"]
+    },
+    "atlassian": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v2/mcp"
     }
   }
 }

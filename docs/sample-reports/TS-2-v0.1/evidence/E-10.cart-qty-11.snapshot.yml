@@ -1,0 +1,70 @@
+                - link "cart" [ref=e510] [cursor=pointer]:
+                  - /url: /checkout
+                  - generic [ref=e514]: "11"
+            - button "Select language" [ref=e42] [cursor=pointer]: EN
+    - generic [ref=e516]:
+      - list [ref=e518]:
+        - listitem:
+          - generic:
+            - generic: Cart
+            - generic: "1"
+        - listitem:
+          - generic:
+            - generic: Sign in
+            - generic: "2"
+        - listitem:
+          - generic:
+            - generic: Billing Address
+            - generic: "3"
+        - listitem:
+          - generic:
+            - generic: Payment
+            - generic: "4"
+      - generic [ref=e522]:
+        - table [ref=e523]:
+          - rowgroup [ref=e524]:
+            - row [ref=e525]:
+              - columnheader "Item" [ref=e526]
+              - columnheader "Quantity" [ref=e527]
+              - columnheader "Price" [ref=e528]
+              - columnheader "Total" [ref=e529]
+              - columnheader [ref=e530]
+          - rowgroup [ref=e531]:
+            - row [ref=e556]:
+              - cell "Excavator Item for rent, price per hour" [ref=e557]:
+                - generic [ref=e558]: Excavator
+                - text: Item for rent, price per hour
+              - cell [ref=e559]:
+                - spinbutton "Quantity for Excavator" [ref=e561]: "11"
+              - cell "$136.50" [ref=e562]
+              - cell "$1,501.50" [ref=e563]
+              - cell [ref=e564]:
+                - generic [ref=e565] [cursor=pointer]
+          - rowgroup [ref=e545]:
+            - row [ref=e569]:
+              - cell [ref=e547]
+              - cell [ref=e548]
+              - cell [ref=e549]:
+                - strong [ref=e550]: Total
+              - cell "$1,501.50" [ref=e570]
+              - cell [ref=e552]
+        - generic [ref=e553]:
+          - button "Continue Shopping" [ref=e554] [cursor=pointer]
+          - button "Proceed to checkout" [ref=e555] [cursor=pointer]
+    - contentinfo [ref=e47]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - text: This is a DEMO application, used for software testing training purpose. |
+          - link "Privacy Policy" [ref=e50] [cursor=pointer]:
+            - /url: /privacy
+          - text: "| Banner photo by"
+          - link "Barn Images" [ref=e51] [cursor=pointer]:
+            - /url: https://unsplash.com/@barnimages
+          - text: "on"
+          - link "Unsplash" [ref=e52] [cursor=pointer]:
+            - /url: https://unsplash.com/photos/t5YUoHW6zRo
+          - text: .
+        - generic [ref=e53]: vdev | Built 2026-09-27 | Angular 20.0.5
+    - button "Open chat" [ref=e55] [cursor=pointer]
+    - button "Show live shop activity" [ref=e59] [cursor=pointer]
+  - alert "Product quantity updated." [ref=e572]

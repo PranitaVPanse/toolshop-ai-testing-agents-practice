@@ -1,0 +1,21 @@
+{
+  "germanGrinder": {
+    "note": "run_code result, actions 36-38: tick Grinder in German (36), wait for QUERY /products (37), wait for category-empty visible (38); DOM read",
+    "clickIso": "2026-10-15T19:48:35.291Z",
+    "responseMs": 36652,
+    "status": 200,
+    "empty": ["Es wurden keine passenden Produkte gefunden."],
+    "emptyCount": 1,
+    "emptyAttrs": [{"tag": "DIV", "role": null, "live": null}],
+    "names": 0
+  },
+  "backToEnglish": {
+    "note": "run_code result, actions 39-41: click language-select (39), click lang-en (40), wait for the English no-results text (41); counts",
+    "at": "2026-10-15T19:49:17.272Z",
+    "lang": "en",
+    "enTextCount": 1,
+    "emptyTestIdCount": 1,
+    "heading": ["Category: Power Tools"],
+    "grinderChecked": true
+  }
+}

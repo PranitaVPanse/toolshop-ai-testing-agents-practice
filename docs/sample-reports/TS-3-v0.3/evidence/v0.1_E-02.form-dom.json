@@ -1,0 +1,13 @@
+{"action":3,"note":"DOM read of the contact form, visitor, untouched",
+"headings":["H3:Contact"],"form":"<form novalidate class=\"ng-untouched ng-pristine ng-invalid\">",
+"fields":[
+{"tag":"INPUT","type":"text","id":"first_name","data-test":"first-name","placeholder":"Your first name *","required":false,"aria-required":null,"maxlength":null,"label":"First name","aria-describedby":null},
+{"tag":"INPUT","type":"text","id":"last_name","data-test":"last-name","placeholder":"Your last name *","required":false,"aria-required":null,"maxlength":null,"label":"Last name","aria-describedby":null},
+{"tag":"INPUT","type":"email","id":"email","data-test":"email","placeholder":"Your email *","required":false,"aria-required":null,"maxlength":null,"label":"Email address","aria-describedby":null},
+{"tag":"SELECT","id":"subject","data-test":"subject","required":false,"aria-required":null,"label":"Subject","value":""},
+{"tag":"TEXTAREA","id":"message","data-test":"message","placeholder":"","required":false,"aria-required":null,"maxlength":null,"label":"Message *"},
+{"tag":"INPUT","type":"file","id":"attachment","data-test":"attachment","accept":".txt","label":"Attachment","aria-describedby":null},
+{"tag":"INPUT","type":"submit","data-test":"contact-submit","value":"Send"}],
+"options":[{"text":"Select a subject *","value":"","selected":true,"disabled":true,"hidden":true},{"text":"Customer service","value":"customer-service"},{"text":"Webmaster","value":"webmaster"},{"text":"Return","value":"return"},{"text":"Payments","value":"payments"},{"text":"Warranty","value":"warranty"},{"text":"Status of my order","value":"status-of-order"}],
+"labels":[{"text":"First name","for":"first_name"},{"text":"Last name","for":"last_name"},{"text":"Email address","for":"email"},{"text":"Subject","for":"subject"},{"text":"Message *","for":"message"},{"text":"Attachment","for":"attachment"}],
+"hint":"<small id=\"attachmentHelp\" class=\"form-text text-muted\">Only files with the <strong>txt</strong> extension are allowed, and files must be 0kb.</small>"}

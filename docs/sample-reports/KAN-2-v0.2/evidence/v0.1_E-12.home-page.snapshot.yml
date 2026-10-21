@@ -1,0 +1,97 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - text: View the
+    - link "Documentation" [ref=e4] [cursor=pointer]:
+      - /url: https://testsmith-io.github.io/practice-software-testing/#/
+    - text: for this application.
+  - generic [ref=e5]:
+    - generic [ref=e7]:
+      - generic [ref=e8]: Practice Black Box Testing & Bug Hunting
+      - button "Testing Guide" [ref=e9] [cursor=pointer]
+    - navigation [ref=e10]:
+      - generic [ref=e11]:
+        - link "Practice Software Testing - Toolshop" [ref=e12] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e31]:
+          - menubar "Main menu" [ref=e32]:
+            - menuitem [ref=e33]:
+              - link "Home" [ref=e34] [cursor=pointer]:
+                - /url: /
+            - menuitem [ref=e35]:
+              - button "Categories" [ref=e36] [cursor=pointer]
+            - menuitem [ref=e37]:
+              - link "Contact" [ref=e38] [cursor=pointer]:
+                - /url: /contact
+            - menuitem [ref=e39]:
+              - link "Sign in" [ref=e40] [cursor=pointer]:
+                - /url: /auth/login
+          - button "Select language" [ref=e42] [cursor=pointer]: EN
+  - generic [ref=e47]:
+    - generic [ref=e48]:
+      - paragraph [ref=e49]:
+        - img "Banner" [ref=e50]
+      - separator [ref=e51]
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - heading [level=4] [ref=e54]
+        - separator [ref=e58]
+        - combobox "sort" [ref=e61]:
+          - option [selected]
+          - option "Name (A - Z)"
+          - option "Name (Z - A)"
+          - option "Price (High - Low)"
+          - option "Price (Low - High)"
+          - option "CO₂ Rating (A - E)"
+          - option "CO₂ Rating (E - A)"
+        - heading [level=4] [ref=e62]
+        - separator [ref=e66]
+        - generic "ngx-slider" [ref=e68]:
+          - slider "ngx-slider" [ref=e73] [cursor=pointer]
+          - slider "ngx-slider-max" [ref=e74] [cursor=pointer]
+          - generic [ref=e75]: "0"
+          - generic [ref=e76]: "200"
+          - generic [ref=e77]: "1"
+          - generic [ref=e78]: "100"
+        - heading [level=4] [ref=e80]
+        - separator [ref=e84]
+        - generic [ref=e86]:
+          - generic [ref=e87]: Search
+          - textbox "Search" [ref=e88]
+          - button "X" [ref=e89] [cursor=pointer]
+          - button "Search" [ref=e90] [cursor=pointer]
+        - heading [level=4] [ref=e91]
+        - separator [ref=e95]
+        - heading "By category:" [level=4] [ref=e96]
+        - group "Categories"
+        - heading "By brand:" [level=4] [ref=e99]
+        - group "Brands"
+        - heading "Sustainability:" [level=4] [ref=e102]
+        - group "Eco-Friendly Products" [ref=e103]:
+          - generic [ref=e106]:
+            - checkbox "Show only eco-friendly products" [ref=e107]
+            - text: Show only eco-friendly products
+      - generic [ref=e109]:
+        - heading [level=5] [ref=e113]
+        - heading [level=5] [ref=e119]
+        - heading [level=5] [ref=e125]
+        - heading [level=5] [ref=e131]
+        - heading [level=5] [ref=e137]
+        - heading [level=5] [ref=e143]
+        - heading [level=5] [ref=e149]
+        - heading [level=5] [ref=e155]
+  - contentinfo [ref=e159]:
+    - generic [ref=e160]:
+      - generic [ref=e161]:
+        - text: This is a DEMO application, used for software testing training purpose. |
+        - link "Privacy Policy" [ref=e162] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=e163] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=e164] [cursor=pointer]:
+          - /url: https://unsplash.com/photos/t5YUoHW6zRo
+        - text: .
+      - generic [ref=e165]: vdev | Built 2026-09-27 | Angular 20.0.5
+  - button "Open chat" [ref=e167] [cursor=pointer]
+  - button "Show live shop activity" [ref=e171] [cursor=pointer]

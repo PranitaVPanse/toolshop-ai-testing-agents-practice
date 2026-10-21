@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-12T16:47:02.810Z",
+  "url": "http://localhost:4200/contact",
+  "state": "after Send with email not-an-email, other fields valid",
+  "formPresent": true,
+  "fields": {
+    "firstName": {
+      "value": "ETA",
+      "length": 3,
+      "classes": "form-control ng-dirty ng-valid ng-touched"
+    },
+    "lastName": {
+      "value": "Tester-20261012-1744",
+      "length": 20,
+      "classes": "form-control ng-dirty ng-valid ng-touched"
+    },
+    "email": {
+      "value": "not-an-email",
+      "length": 12,
+      "classes": "form-control ng-invalid ng-dirty ng-touched is-invalid"
+    },
+    "subject": {
+      "value": "webmaster",
+      "length": 9,
+      "classes": "form-select ng-untouched ng-dirty ng-valid"
+    },
+    "message": {
+      "value": "ETA-20261012-1744 exploratory message, invalid email check, sixty.",
+      "length": 66,
+      "classes": "form-control ng-touched ng-dirty ng-valid"
+    }
+  },
+  "alerts": [
+    {
+      "dataTest": "email-error",
+      "role": "alert",
+      "classes": "alert alert-danger mt-3 p-2",
+      "text": "Email format is invalid"
+    }
+  ],
+  "send": {
+    "disabled": false,
+    "value": "Send",
+    "ariaBusy": null
+  },
+  "activeElement": "contact-submit",
+  "requestsToMessages": []
+}

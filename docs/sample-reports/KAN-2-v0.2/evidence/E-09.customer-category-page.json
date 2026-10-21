@@ -1,0 +1,19 @@
+{
+  "note": "run_code result, actions 42-48: goto /auth/login (42), fill email (43), fill password (44), click login (45), wait for /account URL (46), goto /category/power-tools (47), wait for first product name (48); DOM read. No snapshot or screenshot was taken while the password field held a value; the field was gone (count 0) before any read.",
+  "loginMs": 9999,
+  "passwordFieldPresent": 0,
+  "listMs": 2013,
+  "read": {
+    "at": "2026-10-15T19:49:57.221Z",
+    "url": "/category/power-tools",
+    "title": "Power Tools - Practice Software Testing - Toolshop - v5.0",
+    "heading": ["Category: Power Tools"],
+    "names": ["Sheet Sander","Belt Sander","Random Orbit Sander","Circular Saw","Cordless Drill 20V","Cordless Drill 24V","Cordless Drill 18V","Cordless Drill 12V"],
+    "prices": ["$58.48","$73.59","$100.79","$80.19","$125.23","$66.54","$119.24","$46.5"],
+    "signInLinkPresent": false,
+    "categoriesCount": 1,
+    "cartBadge": null,
+    "compareBtns": 8,
+    "sortCount": 1
+  }
+}

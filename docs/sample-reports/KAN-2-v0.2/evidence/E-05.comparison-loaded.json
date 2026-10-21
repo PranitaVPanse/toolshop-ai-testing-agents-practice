@@ -1,0 +1,9 @@
+{
+  "note": "run_code result, action 26: wait for the 'Loading...' text on /comparison to disappear (up to 60 s), then DOM read. Action 25 (wait_for text 'Circular Saw') had timed out at its 5 s default.",
+  "waitedMs": 21033,
+  "loadingGone": true,
+  "at": "2026-10-15T19:47:13.007Z",
+  "heads": ["Product Comparison","","×\nCircular Saw","Price","Brand","Category","Availability","CO₂ Rating","Eco-Friendly","Specifications","Blade Diameter","Max Cut Depth","No Load Speed","Power","Voltage","Warranty","Weight","Description"],
+  "hasCircularSaw": true,
+  "textStart": "Product Comparison | Show differences only | Clear All | × Circular Saw | Price $80.19 | Brand ForgeFlex Tools | Category Saw | Availability In Stock | CO₂ Rating D | Eco-Friendly - | Specifications: Blade Diameter 190 mm, Max Cut Depth 67 mm, No Load Speed 5500 rpm, Power 1400 W, Voltage 220 V, Warranty 2 years, Weight 4200 g | Description ..."
+}

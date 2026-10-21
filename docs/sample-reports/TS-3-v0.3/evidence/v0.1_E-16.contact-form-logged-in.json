@@ -1,0 +1,4 @@
+{"actions":"34-40","note":"DOM read of /contact after logging in as the demo customer and waiting for the account menu",
+"url":"/contact","loggedInMenu":true,"passwordFieldsOnPage":0,
+"controls":[{"data-test":"first-name","hasValue":false,"readOnly":false,"disabled":false},{"data-test":"last-name","hasValue":false,"readOnly":false,"disabled":false},{"data-test":"email","hasValue":false,"readOnly":false,"disabled":false},{"data-test":"subject","hasValue":false},{"data-test":"message","hasValue":false},{"data-test":"attachment"},{"data-test":"contact-submit"}],
+"labels":["First name","Last name","Email address","Subject","Message *","Attachment"]}

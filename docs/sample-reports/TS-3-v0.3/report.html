@@ -1,0 +1,2780 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automation-readiness report: TS-3 Customer sends a message to Toolshop through the Contact form</title>
+<style>
+  :root { --ink: #1f2933; --muted: #6b7280; --line: #e5e7eb; --bg: #f6f7f9; --card: #fff; --accent: #4f46e5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+  header { background: var(--card); border-bottom: 1px solid var(--line); padding: 20px 32px; }
+  header h1 { margin: 0 0 12px; font-size: 22px; }
+  .status { display: inline-block; margin-left: 12px; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; vertical-align: middle; }
+  .status.draft { background: #fef3c7; color: #92400e; }
+  .status.signed { background: #d1fae5; color: #065f46; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; font-size: 14px; }
+  .fact { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 6px 0; border-top: 1px solid var(--line); }
+  .fact span { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; padding-top: 2px; }
+  @media (max-width: 900px) { .facts { grid-template-columns: 1fr; } }
+  nav { position: sticky; top: 0; z-index: 1; background: var(--card); border-bottom: 1px solid var(--line); padding: 8px 32px; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+  nav a { color: var(--accent); text-decoration: none; }
+  main { max-width: 1400px; margin: 0 auto; padding: 24px 32px 64px; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; margin: 0 0 16px; padding: 0 20px 4px; }
+  summary { cursor: pointer; font-size: 18px; font-weight: 600; padding: 14px 0; list-style: none; }
+  summary::before { content: "▸ "; color: var(--muted); font-size: 14px; }
+  details[open] > summary::before { content: "▾ "; }
+  details.appendix summary { font-size: 15px; color: var(--muted); }
+  details.scenario { border: 0; margin: 0; padding: 0; background: none; }
+  details.scenario summary { font-size: 14px; font-weight: 500; padding: 0; color: var(--accent); }
+  details.scenario pre { margin: 8px 0 4px; }
+  h3 { font-size: 15px; margin: 20px 0 8px; }
+  blockquote { margin: 12px 0; padding: 10px 16px; border-left: 4px solid var(--accent); background: #eef2ff; border-radius: 0 6px 6px 0; }
+  blockquote p { margin: 4px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 16px; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f3f4f6; font-weight: 600; white-space: nowrap; }
+  tr:nth-child(even) td { background: #fafafa; }
+  td.qa { background: #fffbeb !important; }
+  td.qa.empty { color: var(--muted); text-align: center; }
+  code { font: 13px/1.4 ui-monospace, Consolas, monospace; background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+  pre { background: #1f2933; color: #e5e7eb; padding: 14px; border-radius: 6px; overflow: auto; font-size: 13px; }
+  pre code { background: none; color: inherit; padding: 0; }
+  pre.comment { background: #f9fafb; color: var(--ink); border: 1px solid var(--line); white-space: pre-wrap; font: 14px/1.5 system-ui, sans-serif; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .tag-observed { background: #d1fae5; color: #065f46; }
+  .tag-inferred { background: #dbeafe; color: #1e40af; }
+  .tag-assumed { background: #fef3c7; color: #92400e; }
+  .ok, .dec-now, .grade-a { background: #d1fae5; color: #065f46; }
+  .warn, .dec-clarify, .grade-c { background: #fef3c7; color: #92400e; }
+  .bad, .grade-d { background: #fee2e2; color: #991b1b; }
+  .muted, .dec-no { background: #e5e7eb; color: #374151; }
+  .dec-explore, .grade-b { background: #dbeafe; color: #1e40af; }
+  .type-func { background: #ede9fe; color: #5b21b6; }
+  .type-reg { background: #ffedd5; color: #9a3412; }
+  .st-stable, .st-risk, .st-blocked { background: none; padding-left: 0; font-weight: 500; }
+  .st-stable::before { content: "✅ "; }
+  .st-risk::before { content: "⚠️ "; }
+  .st-blocked::before { content: "⛔ "; }
+  @media (max-width: 700px) { header, nav, main { padding-left: 16px; padding-right: 16px; } table { display: block; overflow-x: auto; } }
+  @media print { nav { display: none; } details { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Automation-readiness report: TS-3 Customer sends a message to Toolshop through the Contact form<span class="status draft">Draft</span></h1>
+  <div class="facts"><div class="facts-col"><div class="fact"><span>Version</span><div>v0.3 (draft)<br>previous: v0.2 (draft), v0.1 (draft)</div></div><div class="fact"><span>Environment</span><div>local: UI <a href="http://localhost:4200">http://localhost:4200</a>, API <a href="http://localhost:8091">http://localhost:8091</a></div></div><div class="fact"><span>Run</span><div>2026-10-12<br>ledger started 17:45<br>browser 17:46:04 to 17:52:50</div></div></div><div class="facts-col"><div class="fact"><span>Budget</span><div>51 of 60 actions<br>7 of 20 minutes<br>stopped: 80 percent of the action budget reached at A-48, the rest was cleanup</div></div><div class="fact"><span>Story source</span><div><code>tests/exploratory/stories/contact-form.md</code> (status Draft)</div></div><div class="fact"><span>Inputs</span><div>story<br>context file<br>knowledge: e2e-flows.md, decisions.md (empty), rules.md, pages/account.md, pages/login.md<br>OpenAPI Toolshop API 5.0.0 (<a href="http://localhost:8091/docs">http://localhost:8091/docs</a>)<br>previous review: <code>v0.2/qa-review.md</code><br>earlier reports: v0.2, v0.1</div></div></div></div>
+</header>
+<nav><a href="#s0">Summary</a><a href="#s1">Acceptance criteria</a><a href="#s2">Findings</a><a href="#s3">Open questions</a><a href="#s4">Test scenarios</a><a href="#s5">Locators and testability</a><a href="#s6">Test data and cleanup</a><a href="#s7">Next step</a></nav>
+<main>
+<details open id="s0"><summary>1. Summary</summary>
+<blockquote>
+<p><code>v0.2/qa-review.md</code> holds the same answers, decisions and notes as v0.1: nothing new came in after v0.2, so no expectation changed. The five answers (Q-01, Q-04, Q-05, Q-07, Q-08) stay rules and the seven QA decisions are carried. This run covered what v0.2 did not reach: spaces only, a second Send, Send with an invalid email, the logged-in customer, Account &gt; Messages and one more language (Spanish). Everything else is carried from v0.2 or v0.1 with its version. New: F-01, F-04, F-05, F-16, Q-15, S-21. Changed: AC 5, AC 11 and AC 12 are explored again; S-15 is split.</p>
+</blockquote>
+<p>Look at these first:</p>
+<ul>
+<li>Two quick clicks on Send store two messages. Send stays enabled for the whole wait (F-01, F-02, S-19, T-05, Q-15).</li>
+<li>Spaces count as content in the form but not in the API: 60 spaces in Message are posted and refused with raw server text; a first name of spaces is stored (F-04, F-05, Q-12, S-17).</li>
+<li>Nine questions from v0.1 and v0.2 are still unanswered and fourteen scenarios have no QA decision; S-08 has had its proof since v0.2 (section 4, <code>qa-review.md</code>).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Acceptance criteria</td>
+<td>6 met · 6 partly · 0 not met · 0 not explored</td>
+</tr>
+<tr>
+<td>Findings</td>
+<td>6 defects · 3 risks · 6 gaps · 1 observation</td>
+</tr>
+<tr>
+<td>Open questions</td>
+<td>10 open · 5 answered</td>
+</tr>
+<tr>
+<td>Scenarios</td>
+<td>13 automate now · 7 clarify first · 0 keep exploratory · 1 not worth automating</td>
+</tr>
+<tr>
+<td>Locators</td>
+<td>17 stable · 1 at risk · 2 blocked · 0 not verified</td>
+</tr>
+<tr>
+<td>Your input</td>
+<td><code>qa-review.md</code>: 10 answers, 14 decisions; S-08 has a decision you may want to change</td>
+</tr>
+</tbody></table>
+</details><details open id="s1"><summary>2. Acceptance criteria</summary>
+<table>
+<thead>
+<tr>
+<th>AC</th>
+<th>Criterion</th>
+<th>Result</th>
+<th>Observed</th>
+<th>Tag</th>
+<th>Scenarios</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Navigation, heading, title</td>
+<td><span class="badge ok">met</span></td>
+<td>Title has the app suffix, accepted by Q-01</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-01, S-02, S-18</td>
+<td><a class="ev" href="evidence/E-01.home-contact-link-count.json">E-01</a>, <a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Fields, labels, Send, <code>*</code> on required fields</td>
+<td><span class="badge warn">partly</span></td>
+<td>Only the Message label has <code>*</code>; three fields have it in the placeholder, Subject in its first option</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-03, S-04</td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Subject starts at &quot;Select a subject&quot;, six subjects</td>
+<td><span class="badge warn">partly</span></td>
+<td>The first option reads &quot;Select a subject *&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-05</td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Required messages, nothing sent</td>
+<td><span class="badge ok">met</span></td>
+<td>carried from v0.2</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-06</td>
+<td><a class="ev" href="evidence/v0.2_E-03.empty-send-errors.json">v0.2/E-03</a>, <a class="ev" href="evidence/v0.2_E-13.post-messages-50.txt">v0.2/E-13</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Invalid email</td>
+<td><span class="badge ok">met</span></td>
+<td>Send clicked with &quot;not-an-email&quot;: message shown, no request</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-07</td>
+<td><a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Under 50 characters refused, exactly 50 accepted</td>
+<td><span class="badge ok">met</span></td>
+<td>carried from v0.2</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-08</td>
+<td><a class="ev" href="evidence/v0.2_E-09.send-49.json">v0.2/E-09</a>, <a class="ev" href="evidence/v0.2_E-11.message-50-after-blur.json">v0.2/E-11</a>, <a class="ev" href="evidence/v0.2_E-13.post-messages-50.txt">v0.2/E-13</a>, <a class="ev" href="evidence/v0.2_E-14.confirmation-50.json">v0.2/E-14</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Attachment type</td>
+<td><span class="badge ok">met</span></td>
+<td>carried from v0.2</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-11</td>
+<td><a class="ev" href="evidence/v0.2_E-15.empty-pdf-chosen.json">v0.2/E-15</a>, <a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Attachment size and hint</td>
+<td><span class="badge ok">met</span></td>
+<td>Hint seen again; the 31-byte txt refusal is carried from v0.2</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-12</td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a>, <a class="ev" href="evidence/v0.2_E-17.send-notempty-txt.json">v0.2/E-17</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Errors clear when corrected</td>
+<td><span class="badge warn">partly</span></td>
+<td>Field messages clear (carried from v0.2); the alert after a refused send does not (F-06)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-09</td>
+<td><a class="ev" href="evidence/v0.2_E-04.firstname-typed-focused.json">v0.2/E-04</a> to <a class="ev" href="evidence/v0.2_E-11.message-50-after-blur.json">v0.2/E-11</a>, <a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Successful send and confirmation</td>
+<td><span class="badge warn">partly</span></td>
+<td>Sent and confirmed; no busy state (F-02); two clicks send twice (F-01)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-13, S-19</td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a>, <a class="ev" href="evidence/v0.2_E-19.timed-send-attachment.json">v0.2/E-19</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Logged-in customer</td>
+<td><span class="badge warn">partly</span></td>
+<td>Only Subject, Message and Attachment remain and the send works; the name and email fields show briefly first (F-07)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-14, S-15, S-21</td>
+<td><a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Language</td>
+<td><span class="badge warn">partly</span></td>
+<td>Spanish: all listed texts and the five required messages translated. Other Spanish messages and five languages not reached; German issues carried (F-15)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>S-16</td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a>, <a class="ev" href="evidence/v0.1_E-19.confirmation-de.snapshot.txt">v0.1/E-19</a>, <a class="ev" href="evidence/v0.1_E-21.form-de-errors.json">v0.1/E-21</a></td>
+</tr>
+</tbody></table>
+<p>The story does not say: how required fields are marked when a label has no <code>*</code> (Q-02, Q-13); whether spaces count as content (Q-12); what a second Send must do (Q-15); which attachment error wins (Q-06); how the name and email fields behave for a customer (Q-09); what Account &gt; Messages shows (Q-10); which languages count (Q-11); how long a send may take (Q-14); maximum lengths of name and email (not explored, no question yet).</p>
+</details><details open id="s2"><summary>3. Findings</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Where</th>
+<th>Finding</th>
+<th>Type</th>
+<th>Severity</th>
+<th>AC</th>
+<th>Tag</th>
+<th>Evidence</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F-01</td>
+<td>Contact &gt; Send button</td>
+<td>A second click 48 ms after the first is accepted: two <code>POST /messages</code>, both 200, two messages stored. The script clicks faster than a person; Send was enabled at both clicks</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge bad">high</span></td>
+<td>10</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+<td><span class="badge muted">new (was a risk in v0.2)</span></td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>Contact &gt; Send button</td>
+<td>No busy state: enabled and without <code>aria-busy</code> 49 and 75 ms after the click, while the answers took 4123 and 12252 ms. Required by the answer to Q-08</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>10</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+<td>carried from v0.2, seen again</td>
+</tr>
+<tr>
+<td>F-03</td>
+<td>Contact &gt; Message field, Send button</td>
+<td>251 characters count as valid, are posted, and the server text &quot;The message field must not be greater than 250 characters.&quot; is shown in an alert at the bottom of the form. Defect by the answer to Q-04</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-18.send-251.json">v0.2/E-18</a></td>
+<td>carried from v0.2</td>
+</tr>
+<tr>
+<td>F-04</td>
+<td>Contact &gt; Message field, Send button</td>
+<td>60 spaces count as valid, are posted, and the server answers 422 after 10928 ms; its text &quot;The message field is required.&quot; is shown in an alert with no role and no test id, not under the field. Form and API disagree; the rule is Q-12</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+<td><span class="badge muted">new</span></td>
+</tr>
+<tr>
+<td>F-05</td>
+<td>Contact &gt; First name field</td>
+<td>A first name of three spaces counts as valid and is stored untrimmed (name <code>&quot;    Tester-20261012-1744&quot;</code>)</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+<td><span class="badge muted">new</span></td>
+</tr>
+<tr>
+<td>F-06</td>
+<td>Contact &gt; alert after a refused send</td>
+<td>The alert stays visible after the field is corrected, until the next send answers</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge ok">low</span></td>
+<td>9</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a>, <a class="ev" href="evidence/v0.2_E-19.timed-send-attachment.json">v0.2/E-19</a></td>
+<td>carried from v0.2, seen again</td>
+</tr>
+<tr>
+<td>F-07</td>
+<td>Contact &gt; First name, Last name, Email address, as a customer</td>
+<td>Opening Contact from the main menu shows the three fields, empty and editable, and they are gone at the 403 ms sample. v0.1 reported &quot;some seconds&quot; on a page load, which was not timed in this run</td>
+<td><span class="badge warn">risk</span></td>
+<td><span class="badge ok">low</span></td>
+<td>11</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a>, <a class="ev" href="evidence/v0.1_E-16.contact-form-logged-in.json">v0.1/E-16</a></td>
+<td>carried from v0.1, re-measured</td>
+</tr>
+<tr>
+<td>F-08</td>
+<td>Account &gt; Messages</td>
+<td>Subject shows the stored value &quot;payments&quot;, not &quot;Payments&quot;; Date shows 16:51:05 while the browser clock read 17:51:30 (Europe/London)</td>
+<td><span class="badge bad">defect</span></td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.account-messages.json">E-09</a></td>
+<td>carried from v0.1, seen again</td>
+</tr>
+<tr>
+<td>F-09</td>
+<td>Contact &gt; Message field</td>
+<td>Its message changes only when the field loses focus; a test must leave the field before it asserts. Allowed by Q-05</td>
+<td>observation</td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-08.message-49-focused.json">v0.2/E-08</a>, <a class="ev" href="evidence/v0.2_E-10.message-50-focused.json">v0.2/E-10</a>, <a class="ev" href="evidence/v0.2_E-11.message-50-after-blur.json">v0.2/E-11</a></td>
+<td>carried from v0.2</td>
+</tr>
+<tr>
+<td>F-10</td>
+<td>Every page as a visitor; Sign out</td>
+<td><code>GET /users/me</code> answers 401 on each visitor load and <code>GET /users/refresh</code> 500 at sign-out, with console errors. A test that fails on console errors fails here</td>
+<td><span class="badge warn">risk</span></td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-11.console-all.log">E-11</a>, <a class="ev" href="evidence/E-12.network-after-sign-out.txt">E-12</a></td>
+<td>carried from v0.2, seen again</td>
+</tr>
+<tr>
+<td>F-11</td>
+<td>API <code>POST /messages</code></td>
+<td>The API document has one optional <code>name</code>, a free-text <code>subject</code>, and no minimum length for <code>message</code>; the story has two required names, six subjects and 50 characters</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td><span class="badge tag-assumed">Assumed (OpenAPI document)</span></td>
+<td>-</td>
+<td>carried from v0.2</td>
+</tr>
+<tr>
+<td>F-12</td>
+<td>Contact &gt; Attachment field</td>
+<td>A non-empty file of the wrong type shows &quot;File should be empty.&quot; instead of the type error</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-06.fixed-fields-then-pdf.json">v0.1/E-06</a>, <a class="ev" href="evidence/v0.1_E-08.attachment-type-and-size.json">v0.1/E-08</a></td>
+<td>carried from v0.1</td>
+</tr>
+<tr>
+<td>F-13</td>
+<td>Contact &gt; confirmation</td>
+<td>After the confirmation the page offers no way to write another message</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.1_E-18.customer-send.json">v0.1/E-18</a></td>
+<td>carried from v0.1</td>
+</tr>
+<tr>
+<td>F-14</td>
+<td>Contact &gt; all fields</td>
+<td>Messages are not tied to their fields, focus stays on Send after a refused send, and no field has a required attribute</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge warn">medium</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a>, <a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a></td>
+<td>carried from v0.1, seen again</td>
+</tr>
+<tr>
+<td>F-15</td>
+<td>Contact page in another language</td>
+<td>The page title stays &quot;Contact Us - ...&quot; in Spanish. In German the hint loses the 0 KB rule and &quot;Return&quot; reads &quot;Zurück&quot;</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge ok">low</span></td>
+<td>12</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a>, <a class="ev" href="evidence/v0.1_E-19.confirmation-de.snapshot.txt">v0.1/E-19</a>, <a class="ev" href="evidence/v0.1_E-21.form-de-errors.json">v0.1/E-21</a></td>
+<td>Spanish new; German carried from v0.1</td>
+</tr>
+<tr>
+<td>F-16</td>
+<td>Account &gt; Messages of the shared customer</td>
+<td>Messages cannot be deleted, so the list grows with every run: it held this run&#39;s message and the one of 2026-10-10. A test must find its row by its own text, never by position or count</td>
+<td><span class="badge warn">risk</span></td>
+<td><span class="badge ok">low</span></td>
+<td>-</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.account-messages.json">E-09</a></td>
+<td><span class="badge muted">new</span></td>
+</tr>
+</tbody></table>
+<p>Not explored: Spanish messages other than the required ones and the five other languages; a customer&#39;s send with an attachment; a page load of <code>/contact</code> as a customer; maximum lengths of name and email; <code>.TXT</code> and files without extension; keyboard-only use. Reason: four actions were lost to tool errors (A-17, A-23 to A-25) and the 80 percent limit was reached at A-48.</p>
+</details><details open id="s3"><summary>4. Open questions</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Question</th>
+<th>For</th>
+<th>Agent&#39;s assumption</th>
+<th>Blocks</th>
+<th>Answer (QA)</th></tr>
+</thead>
+<tbody><tr><td>Q-02</td>
+<td>Must every required field carry <code>*</code> in its label?</td>
+<td>product owner</td>
+<td>Yes, as AC 2 reads</td>
+<td>S-04</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-03</td>
+<td>Is &quot;Select a subject *&quot; the intended starting text?</td>
+<td>product owner</td>
+<td>Yes, once Q-02 is settled</td>
+<td>S-05 (text only)</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-06</td>
+<td>Are &quot;File should have a txt extension.&quot; and &quot;File should be empty.&quot; the intended texts, and which one wins for a non-empty wrong file?</td>
+<td>product owner</td>
+<td>Texts accepted; type error should win</td>
+<td>S-11, S-12 (texts only)</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-09</td>
+<td>For a logged-in customer, must the name and email fields be absent from the start?</td>
+<td>product owner</td>
+<td>Yes</td>
+<td>S-14 (not blocking: the end state is the same)</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-10</td>
+<td>In Account &gt; Messages, should the subject show its label and the time be local?</td>
+<td>product owner</td>
+<td>Yes to both</td>
+<td>S-21</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-11</td>
+<td>Which languages count for AC 12, and must the hint keep the 0 KB rule and the title be translated?</td>
+<td>product owner</td>
+<td>All seven; hint must match; title not required</td>
+<td>S-16</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-12</td>
+<td>Do spaces count toward the 50 characters and the required names?</td>
+<td>domain</td>
+<td>No; input is trimmed. Observed: the form counts them, the API refuses a message of spaces and stores a name of spaces (F-04, F-05)</td>
+<td>S-17</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-13</td>
+<td>Is a <code>*</code> in the placeholder (First name, Last name, Email address) or in the first option (&quot;Select a subject *&quot;) enough to mark a required field, or must every label carry it as the Message label does? Is &quot;Select a subject *&quot; accepted for AC 3? Repeats Q-02 and Q-03: one answer covers all three</td>
+<td>product owner</td>
+<td>Every required label carries <code>*</code>; the first option reads &quot;Select a subject&quot;</td>
+<td>S-04, AC 2, AC 3</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-14</td>
+<td>Which timeout should an automated send use on local? Answers took 3757 to 12703 ms in v0.2 and 4123 to 12252 ms in this run</td>
+<td>environment</td>
+<td>20 s</td>
+<td>S-13, S-14 (not blocking)</td>
+<td class="qa empty">—</td></tr>
+<tr><td>Q-15</td>
+<td>Is disabling Send while a message is being sent (T-05) enough, or must the API also refuse an identical message posted twice?</td>
+<td>product owner</td>
+<td>Disabling Send is enough for this story</td>
+<td>S-19</td>
+<td class="qa empty">—</td></tr>
+</tbody></table>
+</details><details open id="s4"><summary>5. Test scenarios</summary>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Level</th>
+<th>Decision</th>
+<th>Reason</th>
+<th>Depends on</th>
+<th>QA decision</th></tr>
+</thead>
+<tbody><tr><td>S-01</td><td><details class="scenario"><summary>Contact page opens from the main menu</summary><pre class="gherkin">  Scenario: S-01 Contact page opens from the main menu
+    Given a visitor is on the home page
+    When they select "Contact" in the main menu
+    Then the Contact page is shown at "/contact"
+    And the page heading is "Contact"
+
+  @automate-now @functional @ui
+  # carried from v0.2. The test waits for the title: it is set shortly after the route opens</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge muted">carried (QA)</span></td>
+<td>-</td>
+<td class="qa">Automate now — Agree.</td></tr>
+<tr><td>S-02</td><td><details class="scenario"><summary>Contact page title</summary><pre class="gherkin">  Scenario: S-02 Contact page title
+    Given a visitor opened the Contact page from the main menu
+    Then the page title starts with "Contact Us"
+
+  @automate-now @functional @ui
+  # carried (QA): Automate now, without the attachment hint step</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge muted">carried</span></td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-03</td><td><details class="scenario"><summary>Contact form shows its fields and the Send button</summary><pre class="gherkin">  Scenario: S-03 Contact form shows its fields and the Send button
+    Given a visitor is on the Contact page
+    Then the form shows the fields "First name", "Last name", "Email address", "Subject", "Message" and "Attachment", each with a label
+    And the form shows the "Send" button
+
+  @clarify-first @functional @ui
+  # Depends on Q-02 and Q-13. Observed: only the Message label has the mark (E-02)</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>carried (QA); no hint step</td>
+<td>T-01 for the hint</td>
+<td class="qa">Automate now — Without the attachment hint step; the hint waits for T-01.</td></tr>
+<tr><td>S-04</td><td><details class="scenario"><summary>Required fields are marked</summary><pre class="gherkin">  Scenario: S-04 Required fields are marked
+    Given a visitor is on the Contact page
+    Then the labels "First name", "Last name", "Email address", "Subject" and "Message" are marked with "*"
+
+  @automate-now @functional @ui
+  # The text of the first option depends on Q-03 and is left out</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td><span class="badge muted">carried</span></td>
+<td>Q-02, Q-13</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-05</td><td><details class="scenario"><summary>Subject offers the six subjects</summary><pre class="gherkin">  Scenario: S-05 Subject offers the six subjects
+    Given a visitor is on the Contact page
+    Then the Subject drop-down has no subject selected
+    And it offers "Customer service", "Webmaster", "Return", "Payments", "Warranty" and "Status of my order"
+
+  @automate-now @functional @ui
+  # carried (QA): Automate now</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge muted">carried</span></td>
+<td>Q-03 for the first option</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-06</td><td><details class="scenario"><summary>Empty required fields show their messages</summary><pre class="gherkin">  Scenario: S-06 Empty required fields show their messages
+    Given a visitor is on the Contact page
+    When they select "Send" without filling in anything
+    Then the form shows "First name is required", "Last name is required", "Email is required", "Subject is required" and "Message is required"
+    And no message is sent
+
+  @automate-now @functional @ui
+  # carried (QA): Automate now. The Send click with the invalid address was observed in v0.3 (E-03)</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge muted">carried (QA)</span></td>
+<td>-</td>
+<td class="qa">Automate now — Agree.</td></tr>
+<tr><td>S-07</td><td><details class="scenario"><summary>An invalid email address is rejected</summary><pre class="gherkin">  Scenario: S-07 An invalid email address is rejected
+    Given a visitor filled in a valid first name, last name, subject and message
+    And they entered "not-an-email" in "Email address"
+    When they select "Send"
+    Then the Email address field shows "Email format is invalid"
+    And no message is sent
+
+  @clarify-first @functional @ui
+  # carried (QA): Clarify first. The proof asked for in the note is in v0.2: no attachment is
+  # used, and 50 characters are proven by the confirmation. The agent suggests Automate now</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>carried (QA). The Send click is now observed, so the steps cover all of AC 5</td>
+<td>-</td>
+<td class="qa">Automate now — Agree.</td></tr>
+<tr><td>S-08</td><td><details class="scenario"><summary>The message needs at least 50 characters</summary><pre class="gherkin">  Scenario: S-08 The message needs at least 50 characters
+    Given a visitor filled in a valid first name, last name, email address and subject
+    And they entered a message of 49 characters
+    When they select "Send"
+    Then the Message field shows "Message must be minimal 50 characters"
+    And no message is sent
+    When they add one character to the message and leave the field
+    Then the Message field shows no message
+    When they select "Send"
+    Then the confirmation "Thanks for your message! We will contact you shortly." is shown
+
+  @automate-now @functional @ui
+  # carried from v0.2</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>carried (QA). v0.2 gave the proof the note asks for; the agent suggests Automate now</td>
+<td>-</td>
+<td class="qa">Clarify first — Do not stop the send with an invalid attachment. Show how 50 characters is proven accepted without relying on another rule.</td></tr>
+<tr><td>S-09</td><td><details class="scenario"><summary>An error disappears when its field is corrected</summary><pre class="gherkin">  Scenario Outline: S-09 An error disappears when its field is corrected
+    Given a visitor selected "Send" on the empty Contact form
+    When they type "&lt;value&gt;" in "&lt;field&gt;" and leave the field
+    Then the message "&lt;message&gt;" is no longer shown
+
+    Examples:
+      | field         | value                    | message                |
+      | First name    | ETA                      | First name is required |
+      | Email address | not-an-email@example.com | Email is required      |
+    # The Message field is covered by S-08: its message changes only when the field loses focus (F-09)
+
+  @clarify-first @functional @ui
+  # Expected by the QA answer to Q-04. Observed in v0.2: defect F-03, the request is sent and the raw server text is shown</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge muted">carried</span></td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-10</td><td><details class="scenario"><summary>A message above the maximum length is refused clearly</summary><pre class="gherkin">  Scenario: S-10 A message above the maximum length is refused clearly
+    Given a visitor filled in a valid first name, last name, email address and subject
+    And they entered a message of 251 characters
+    When they select "Send"
+    Then the Message field shows a message about the maximum of 250 characters
+    And no message is sent
+
+  @automate-now @functional @ui
+  # carried (QA): Automate now. Re-checked in v0.2 with the Send click</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>carried: automate after F-03 is fixed</td>
+<td>F-03, T-06</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-11</td><td><details class="scenario"><summary>An attachment that is not a txt file is refused</summary><pre class="gherkin">  Scenario: S-11 An attachment that is not a txt file is refused
+    Given a visitor filled in every required field with valid values
+    And they chose an empty file "empty.pdf" as attachment
+    When they select "Send"
+    Then the Attachment field shows "File should have a txt extension."
+    And no message is sent
+
+  @automate-now @functional @ui
+  # carried from v0.2</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge muted">carried (QA)</span></td>
+<td>-</td>
+<td class="qa">Automate now — Re-check first: the Send with the empty PDF was never done in v0.1.</td></tr>
+<tr><td>S-12</td><td><details class="scenario"><summary>A txt attachment larger than 0 KB is refused</summary><pre class="gherkin">  Scenario: S-12 A txt attachment larger than 0 KB is refused
+    Given a visitor filled in every required field with valid values
+    And they chose a txt file of 31 bytes as attachment
+    When they select "Send"
+    Then the Attachment field shows "File should be empty."
+    And no message is sent
+
+  @automate-now @functional @ui
+  # carried from v0.2. The wait for the confirmation needs a timeout above the slowest answer seen (Q-14)</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge muted">carried</span></td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-13</td><td><details class="scenario"><summary>A valid message is sent and confirmed</summary><pre class="gherkin">  Scenario: S-13 A valid message is sent and confirmed
+    Given a visitor filled in every required field with valid values
+    And they chose an empty txt file as attachment
+    When they select "Send"
+    Then the form is replaced by "Thanks for your message! We will contact you shortly."
+    And the visitor is still on the Contact page
+
+  @automate-now @functional @ui
+  # Observed in v0.3 (E-07, E-08) and in v0.1. The form is asserted after the name fields have gone (F-07)</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>carried; leaves a message that only a reset removes</td>
+<td>Q-14, not blocking</td>
+<td class="qa">Re-measure the visitor send with an attachment: time from the Send click to the confirmation, with timestamps.</td></tr>
+<tr><td>S-14</td><td><details class="scenario"><summary>A logged-in customer only chooses a subject and writes a message</summary><pre class="gherkin">  Scenario: S-14 A logged-in customer only chooses a subject and writes a message
+    Given a customer is logged in
+    And they opened the Contact page from the main menu
+    Then the form shows "Subject", "Message" and "Attachment" and no "First name", "Last name" or "Email address"
+    When they choose the subject "Payments" and enter a valid message
+    And they select "Send"
+    Then the form is replaced by "Thanks for your message! We will contact you shortly."
+
+  @automate-now @regression @ui
+  # Observed in v0.3 (E-09). The message text must be unique in its first 50 characters:
+  # the list cuts it there and keeps the messages of earlier runs (F-16)</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed in this run and in v0.1; locators stable; leaves a message on the shared account (F-16)</td>
+<td>Q-09, Q-14, not blocking</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-15</td><td><details class="scenario"><summary>A customer&#39;s message appears under Account &gt; Messages</summary><pre class="gherkin">  Scenario: S-15 A customer's message appears under Account &gt; Messages
+    Given a logged-in customer sent a message through the Contact form
+    When they open "Messages" in their account
+    Then the list has a row with the start of that message and the status "NEW"
+
+  @clarify-first @functional @ui
+  # Depends on Q-11. Spanish observed in v0.3 for labels, placeholders, options, hint and the
+  # required messages (E-10); German in v0.1. Tests run in English only</pre></details></td>
+<td><span class="badge type-reg">regression</span></td>
+<td>UI, API <code>GET /messages</code></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Observed; row found by the message&#39;s own text, which must be unique in its first 50 characters</td>
+<td>F-16</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-16</td><td><details class="scenario"><summary>The Contact form is translated</summary><pre class="gherkin">  Scenario: S-16 The Contact form is translated
+    Given a visitor is on the Contact page
+    When they change the language
+    Then the labels, placeholders, subject options, hint and error messages are shown in that language
+
+  @clarify-first @functional @ui
+  # Depends on Q-12. Observed in v0.3: the form accepts spaces, the API refuses a message of
+  # spaces with raw server text (F-04) and stores a first name of spaces (F-05)</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Spanish and German observed in part; tests run in English only</td>
+<td>Q-11</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-17</td><td><details class="scenario"><summary>Input made of spaces only is not accepted</summary><pre class="gherkin">  Scenario: S-17 Input made of spaces only is not accepted
+    Given a visitor is on the Contact page
+    When they fill the required text fields with spaces only
+    And they select "Send"
+    Then each of those fields shows its required message
+    And no message is sent
+
+  @not-worth-automating @functional @ui
+  # carried (QA): Not worth automating</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Was Keep exploratory. Now observed, and form and API differ (F-04, F-05)</td>
+<td>Q-12</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-18</td><td><details class="scenario"><summary>The Contact page opens from a direct link</summary><pre class="gherkin">  Scenario: S-18 The Contact page opens from a direct link
+    When a visitor opens "/contact" directly
+    Then the Contact page is shown with its form
+
+  @clarify-first @functional @ui
+  # Expected by the QA answer to Q-08. Observed in v0.3: no busy state (F-02) and two clicks
+  # store two messages (F-01). Automate after the fix (T-05)</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-no">Not worth automating</span></td>
+<td><span class="badge muted">carried (QA)</span></td>
+<td>-</td>
+<td class="qa">Not worth automating — Agree.</td></tr>
+<tr><td>S-19</td><td><details class="scenario"><summary>Sending stays safe while the server is slow</summary><pre class="gherkin">  Scenario: S-19 Sending stays safe while the server is slow
+    Given a visitor filled in every required field with valid values
+    When they select "Send" twice in a row
+    Then the Send button shows a busy state until the answer arrives
+    And only one message is stored
+
+  @automate-now @functional @api
+  # carried from v0.2. POST /messages. Observed through the UI request in v0.2/E-18</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Was Keep exploratory. Expected by Q-08 and observed differ (F-01, F-02); automate after the fix</td>
+<td>T-05, Q-15</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-20</td><td><details class="scenario"><summary>The API refuses a message above 250 characters</summary><pre class="gherkin">  Scenario: S-20 The API refuses a message above 250 characters
+    Given a contact request with a valid name, email address and subject
+    And a message of 251 characters
+    When the request is posted to "/messages"
+    Then the answer has status 422
+    And the answer names the message field and the limit of 250 characters
+
+  @clarify-first @regression @ui
+  # New in v0.3, split from S-15. Depends on Q-10. Observed: subject "payments" and a time one hour behind (F-08)</pre></details></td>
+<td><span class="badge type-func">functional</span></td>
+<td>API <code>POST /messages</code></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>carried; the project has no API tests yet</td>
+<td>-</td>
+<td class="qa empty">—</td></tr>
+<tr><td>S-21</td><td><details class="scenario"><summary>Account &gt; Messages shows the subject and time as the customer knows them</summary><pre class="gherkin">  Scenario: S-21 Account &gt; Messages shows the subject and time as the customer knows them
+    Given a logged-in customer sent a message with the subject "Payments"
+    When they open "Messages" in their account
+    Then the row shows the subject "Payments"
+    And the row shows the time of sending in the customer's local time</pre></details></td>
+<td><span class="badge type-reg">regression</span></td>
+<td>UI</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>New, split from S-15. Observed differs from the assumption (F-08)</td>
+<td>Q-10</td>
+<td class="qa empty">—</td></tr>
+</tbody></table>
+<p>Click a scenario for its steps. Your decision goes in <code>qa-review.md</code>.</p>
+</details><details open id="s5"><summary>6. Locators and testability</summary>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Status</th>
+<th>Best locator found</th>
+<th>Why it is at risk</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Contact &gt; Attachment hint</td>
+<td><span class="badge st-risk">at risk (C)</span></td>
+<td><code>getByText(&#39;Only files with the txt extension are allowed, and files must be 0kb.&#39;)</code>, matches 1</td>
+<td>Translated text; no test id; the file control does not reference it</td>
+</tr>
+<tr>
+<td>Contact &gt; alert after a refused send</td>
+<td><span class="badge st-blocked">blocked (D)</span></td>
+<td><code>locator(&#39;.alert.alert-danger&#39;)</code>, proposed, not verified</td>
+<td>No role, no test id, not under the field it is about</td>
+</tr>
+<tr>
+<td>Contact &gt; Send busy state</td>
+<td><span class="badge st-blocked">blocked (D)</span></td>
+<td>none</td>
+<td>No busy state exists (F-02)</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Element</th>
+<th>Request</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T-01</td>
+<td>Contact &gt; Attachment hint</td>
+<td>Reference <code>attachmentHelp</code> from the file control with <code>aria-describedby</code>; add test id &quot;attachment-hint&quot;</td>
+<td>The hint is read with the field; a check that does not depend on the language</td>
+</tr>
+<tr>
+<td>T-02</td>
+<td>Contact &gt; alert after a refused send</td>
+<td>Give it <code>role=&quot;alert&quot;</code> and test id &quot;contact-error&quot;</td>
+<td>Screen readers hear it; a stable locator</td>
+</tr>
+<tr>
+<td>T-03</td>
+<td>Contact &gt; field messages</td>
+<td>Link each message to its field (<code>aria-describedby</code>, <code>aria-invalid</code>) and move focus to the first invalid field</td>
+<td>Messages are read with their field; a test finds a field&#39;s message through the field</td>
+</tr>
+<tr>
+<td>T-04</td>
+<td>Contact &gt; required fields</td>
+<td>Add <code>required</code> or <code>aria-required</code> and put <code>*</code> in the label</td>
+<td>The required state is exposed; a test asserts it without reading placeholders</td>
+</tr>
+<tr>
+<td>T-05</td>
+<td>Contact &gt; Send button</td>
+<td>Disable Send and set <code>aria-busy</code> while a send is pending</td>
+<td>No second message (F-01); a defined state to wait for; users see the click was taken</td>
+</tr>
+<tr>
+<td>T-06</td>
+<td>Contact &gt; Message field</td>
+<td>Show the maximum-length and spaces-only refusals under the Message field with test id &quot;message-error&quot; and role alert</td>
+<td>One stable locator for every Message rule; the error is announced</td>
+</tr>
+</tbody></table>
+<p>Accessibility observations (not an audit; full list in <code>technical.md</code>):</p>
+<ul>
+<li>Three required marks sit in placeholders and vanish on typing, and no field has <code>aria-required</code> (T-04, Q-13). Field messages have role alert but are not tied to their fields; focus stays on Send (T-03).</li>
+<li>The alert after a refused send has no role, so it is not announced (T-02, T-06).</li>
+<li>Nothing tells the customer that a message is being sent (T-05). The attachment hint is not referenced by the file control (T-01).</li>
+</ul>
+</details><details open id="s6"><summary>7. Test data and cleanup</summary>
+<table>
+<thead>
+<tr>
+<th>Data created</th>
+<th>Cleaned up</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Two visitor messages (ids <code>01m4rg84cc1tfys9aqy2z7qwzc</code>, <code>01m4rg84ccpcz48jjcr3106neh</code>), last name &quot;Tester-20261012-1744&quot;, subject Webmaster</td>
+<td>No. Messages cannot be deleted in the UI or the API; <code>npm run aut:reset</code> removes them</td>
+</tr>
+<tr>
+<td>One message of the demo customer (id <code>01m4rgcsqaxp3zc762sr5mtjvt</code>), subject Payments, text starts <code>ETA-20261012-1744</code></td>
+<td>No. It stays under the shared customer&#39;s Account &gt; Messages until a reset</td>
+</tr>
+<tr>
+<td>Language Spanish; customer session; two temporary login script files in <code>test-output/</code></td>
+<td>Yes: English restored (<a class="ev" href="evidence/E-13.contact-en-restored.snapshot.yml">E-13</a>), signed out, browser closed; files deleted</td>
+</tr>
+</tbody></table>
+<p>No upload file was created. The folder was searched for the credential values: no match. The messages of the v0.1 and v0.2 runs are also still in the system.</p>
+</details><details open id="s7"><summary>8. Next step</summary>
+<p>Fill in <code>qa-review.md</code>: the ten open questions (one answer covers Q-02, Q-03 and Q-13) and the 14 open decisions; S-08 if the v0.2 proof changes your decision. Sign-off needs a QA decision on every scenario. F-01 to F-04 are worth raising with the developers now. Consider <code>npm run aut:reset</code>.</p>
+<p>Knowledge to add at sign-off:</p>
+<ul>
+<li>New page file <code>pages/contact.md</code>: fields, test ids, messages, confirmation text, stable locators (O-02 to O-05, O-15, O-16; v0.2 locators).</li>
+<li><code>rules.md</code>: Message 50 to 250 characters, the form checks only 50 (F-03); spaces pass the form (F-04, F-05); a logged-in customer&#39;s name comes from the account and no email is posted (O-16). <code>pages/contact.md</code> quirks: Message validates on blur (F-09); a send takes 4 to 13 s on local (Q-14); Send has no busy state and two clicks send twice (F-01, F-02); visitor pages log 401 console errors (F-10).</li>
+<li><code>pages/account.md</code>: Messages lists Subject, Message (first 50 characters), Status, Date in UTC; rows are never removed (O-17, F-08, F-16); row locator (O-19). <code>e2e-flows.md</code> impact map: a row for Contact with Account &gt; Messages and the language files.</li>
+</ul>
+</details>
+
+<details class="appendix"><summary>Appendix: QA review (your answers, decisions and Jira comment) <code>qa-review.md</code></summary><h1>QA review: TS-3 v0.3</h1>
+<p>Fill in the two tables. Leave a cell empty to keep the item pending. The next run reads this
+file; nothing else in the report needs editing.</p>
+<h2>Answers</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q-01</td>
+<td>Is the title with the app suffix acceptable, and should &quot;Contact&quot; be the page&#39;s main heading?</td>
+<td>The title with the app suffix is accepted. The heading level is outside this story; keep it as an accessibility observation only.</td>
+</tr>
+<tr>
+<td>Q-02</td>
+<td>Must every required field carry <code>*</code> in its label?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-03</td>
+<td>Is &quot;Select a subject *&quot; the intended starting text?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-04</td>
+<td>Is 250 the intended maximum for the message, and what must the form show above it?</td>
+<td>Yes, 250 is the maximum. The form must show a message under the Message field before sending; showing the raw server text is a defect.</td>
+</tr>
+<tr>
+<td>Q-05</td>
+<td>When must an error refresh: while typing, on leaving the field, or on Send?</td>
+<td>An error must refresh at the latest when the field loses focus. Re-check AC 9 by typing key by key and leaving the field.</td>
+</tr>
+<tr>
+<td>Q-06</td>
+<td>Are &quot;File should have a txt extension.&quot; and &quot;File should be empty.&quot; the intended texts, and which one wins for a non-empty wrong file?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-07</td>
+<td>Is &quot;Thanks for your message! We will contact you shortly.&quot; the intended confirmation?</td>
+<td>Yes, that is the intended confirmation text.</td>
+</tr>
+<tr>
+<td>Q-08</td>
+<td>Are 7 to 45 second answers from <code>POST /messages</code> normal on local, and must the page show progress and block a second Send?</td>
+<td>Slow answers on local are an environment matter, not a defect. A busy state while sending is required (T-05).</td>
+</tr>
+<tr>
+<td>Q-09</td>
+<td>For a logged-in customer, must the name and email fields be absent from the start?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-10</td>
+<td>In Account &gt; Messages, should the subject show its label and the time be local?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-11</td>
+<td>Which languages count for AC 12, and must the hint keep the 0 KB rule and the title be translated?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-12</td>
+<td>Do spaces count toward the 50 characters and the required names?</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-13</td>
+<td>Is a <code>*</code> in the placeholder (First name, Last name, Email address) or in the first option (&quot;Select a subject *&quot;) enough to mark a required field, or must every label carry it as the Message label does? Is &quot;Select a subject *&quot; accepted for AC 3? Repeats Q-02 and Q-03: one answer covers all three.</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-14</td>
+<td>Which timeout should an automated send use on local? Answers took 3757 to 12703 ms in v0.2 and 4123 to 12252 ms in v0.3.</td>
+<td></td>
+</tr>
+<tr>
+<td>Q-15</td>
+<td>Is disabling Send while a message is being sent (T-05) enough, or must the API also refuse an identical message posted twice?</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Decisions</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Agent&#39;s decision</th>
+<th>QA decision</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S-01</td>
+<td>Contact page opens from the main menu</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Agree.</td>
+</tr>
+<tr>
+<td>S-02</td>
+<td>Contact page title</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-03</td>
+<td>Contact form shows its fields and the Send button</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Without the attachment hint step; the hint waits for T-01.</td>
+</tr>
+<tr>
+<td>S-04</td>
+<td>Required fields are marked</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-05</td>
+<td>Subject offers the six subjects</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-06</td>
+<td>Empty required fields show their messages</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Agree.</td>
+</tr>
+<tr>
+<td>S-07</td>
+<td>An invalid email address is rejected</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Agree.</td>
+</tr>
+<tr>
+<td>S-08</td>
+<td>The message needs at least 50 characters</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Do not stop the send with an invalid attachment. Show how 50 characters is proven accepted without relying on another rule.</td>
+</tr>
+<tr>
+<td>S-09</td>
+<td>An error disappears when its field is corrected</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-10</td>
+<td>A message above the maximum length is refused clearly</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-11</td>
+<td>An attachment that is not a txt file is refused</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Re-check first: the Send with the empty PDF was never done in v0.1.</td>
+</tr>
+<tr>
+<td>S-12</td>
+<td>A txt attachment larger than 0 KB is refused</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-13</td>
+<td>A valid message is sent and confirmed</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td>Re-measure the visitor send with an attachment: time from the Send click to the confirmation, with timestamps.</td>
+</tr>
+<tr>
+<td>S-14</td>
+<td>A logged-in customer only chooses a subject and writes a message</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-15</td>
+<td>A customer&#39;s message appears under Account &gt; Messages</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-16</td>
+<td>The Contact form is translated</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-17</td>
+<td>Input made of spaces only is not accepted</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-18</td>
+<td>The Contact page opens from a direct link</td>
+<td><span class="badge dec-no">Not worth automating</span></td>
+<td><span class="badge dec-no">Not worth automating</span></td>
+<td>Agree.</td>
+</tr>
+<tr>
+<td>S-19</td>
+<td>Sending stays safe while the server is slow</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-20</td>
+<td>The API refuses a message above 250 characters</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S-21</td>
+<td>Account &gt; Messages shows the subject and time as the customer knows them</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2>Sign-off</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Signed off by ____________ on __________</li>
+</ul>
+</details>
+<details class="appendix"><summary>Appendix: Full locator table <code>locators.md</code></summary><h1>Locators: TS-3 v0.3</h1>
+<p>Rows counted in this run cite <code>E-nn</code>. Rows not re-counted are carried from v0.2 and cite
+<code>v0.2/E-nn</code>; they keep their tag and are not new observations. Method in this run: Playwright
+locator <code>count()</code> in read-only parts of code-run calls (<a class="ev" href="evidence/E-01.home-contact-link-count.json">E-01</a>, <a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a>, <a class="ev" href="evidence/E-09.account-messages.json">E-09</a>).</p>
+<p>Tool note (carried from <a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>): the MCP browser session uses the default test id attribute,
+so test ids were counted as <code>[data-test=&quot;x&quot;]</code>. The project configures <code>data-test</code>, so in the
+framework <code>getByTestId(&#39;x&#39;)</code> equals <code>[data-test=&quot;x&quot;]</code>.</p>
+<p>The app is multilingual and tests run in English only (context file), so a locator that rests on
+visible text or an accessible name is graded one level lower. Spanish names differ (<a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a>).</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>State</th>
+<th>Recommended locator</th>
+<th>Strategy</th>
+<th>Matches</th>
+<th>Role / accessible name</th>
+<th>Grade</th>
+<th>Tag</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Main menu &gt; Contact</td>
+<td>Home page, visitor</td>
+<td><code>getByRole(&#39;link&#39;, { name: &#39;Contact&#39; })</code></td>
+<td>1 role and name</td>
+<td>1 (also 1 with <code>exact: true</code>)</td>
+<td>link &quot;Contact&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-01.home-contact-link-count.json">E-01</a></td>
+</tr>
+<tr>
+<td>Contact &gt; heading</td>
+<td>Visitor form (carried); customer form</td>
+<td><code>getByRole(&#39;heading&#39;, { name: &#39;Contact&#39; })</code></td>
+<td>1 role and name</td>
+<td>1; 1</td>
+<td>heading &quot;Contact&quot;, level 3</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>Contact &gt; First name</td>
+<td>Visitor form</td>
+<td><code>getByRole(&#39;textbox&#39;, { name: &#39;First name&#39; })</code></td>
+<td>1 role and name</td>
+<td>1; 0 for a customer</td>
+<td>textbox &quot;First name&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Last name</td>
+<td>Visitor form</td>
+<td><code>getByLabel(&#39;Last name&#39;)</code></td>
+<td>2 label</td>
+<td>1; 0 for a customer</td>
+<td>textbox &quot;Last name&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Email address</td>
+<td>Visitor form</td>
+<td><code>getByLabel(&#39;Email address&#39;)</code></td>
+<td>2 label</td>
+<td>1; 0 for a customer</td>
+<td>textbox &quot;Email address&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Subject</td>
+<td>Visitor form (carried); customer form</td>
+<td><code>getByRole(&#39;combobox&#39;, { name: &#39;Subject&#39; })</code></td>
+<td>1 role and name</td>
+<td>1; 1</td>
+<td>combobox &quot;Subject&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Message</td>
+<td>Visitor form (carried); customer form</td>
+<td><code>getByRole(&#39;textbox&#39;, { name: &#39;Message&#39; })</code></td>
+<td>1 role and name</td>
+<td>1; 1</td>
+<td>textbox &quot;Message *&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Attachment</td>
+<td>Visitor form (carried); customer form</td>
+<td><code>getByLabel(&#39;Attachment&#39;)</code></td>
+<td>2 label</td>
+<td>1; 1</td>
+<td>button &quot;Attachment&quot; (file control)</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Send button</td>
+<td>Visitor form (carried); customer form</td>
+<td><code>getByRole(&#39;button&#39;, { name: &#39;Send&#39; })</code></td>
+<td>1 role and name</td>
+<td>1; 1; 0 after the confirmation</td>
+<td>button &quot;Send&quot;</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a>, <a class="ev" href="evidence/v0.2_E-19.timed-send-attachment.json">v0.2/E-19</a></td>
+</tr>
+<tr>
+<td>Contact &gt; First name message</td>
+<td>After Send on the empty form</td>
+<td><code>getByTestId(&#39;first-name-error&#39;)</code></td>
+<td>5 test id</td>
+<td>1 visible; 0 when the field is valid</td>
+<td>alert &quot;First name is required&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td>Observed, carried from v0.2</td>
+<td><a class="ev" href="evidence/v0.2_E-03.empty-send-errors.json">v0.2/E-03</a>, <a class="ev" href="evidence/v0.2_E-17.send-notempty-txt.json">v0.2/E-17</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Last name message</td>
+<td>After Send on the empty form</td>
+<td><code>getByTestId(&#39;last-name-error&#39;)</code></td>
+<td>5 test id</td>
+<td>1 visible; 0 when valid</td>
+<td>alert &quot;Last name is required&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td>Observed, carried from v0.2</td>
+<td><a class="ev" href="evidence/v0.2_E-03.empty-send-errors.json">v0.2/E-03</a>, <a class="ev" href="evidence/v0.2_E-17.send-notempty-txt.json">v0.2/E-17</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Email address message</td>
+<td>After Send on the empty form</td>
+<td><code>getByTestId(&#39;email-error&#39;)</code></td>
+<td>5 test id</td>
+<td>1 visible; 0 when valid</td>
+<td>alert &quot;Email is required&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td>Observed, carried from v0.2</td>
+<td><a class="ev" href="evidence/v0.2_E-03.empty-send-errors.json">v0.2/E-03</a>, <a class="ev" href="evidence/v0.2_E-17.send-notempty-txt.json">v0.2/E-17</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Subject message</td>
+<td>After Send on the empty form</td>
+<td><code>getByTestId(&#39;subject-error&#39;)</code></td>
+<td>5 test id</td>
+<td>1 visible; 0 when valid</td>
+<td>alert &quot;Subject is required&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td>Observed, carried from v0.2</td>
+<td><a class="ev" href="evidence/v0.2_E-03.empty-send-errors.json">v0.2/E-03</a>, <a class="ev" href="evidence/v0.2_E-17.send-notempty-txt.json">v0.2/E-17</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Message message</td>
+<td>After Send on the empty form</td>
+<td><code>getByTestId(&#39;message-error&#39;)</code></td>
+<td>5 test id</td>
+<td>1 visible; 0 when valid</td>
+<td>alert &quot;Message is required&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td>Observed, carried from v0.2</td>
+<td><a class="ev" href="evidence/v0.2_E-03.empty-send-errors.json">v0.2/E-03</a>, <a class="ev" href="evidence/v0.2_E-17.send-notempty-txt.json">v0.2/E-17</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Attachment message</td>
+<td>Non-empty txt chosen</td>
+<td><code>getByTestId(&#39;attachment-error&#39;)</code></td>
+<td>5 test id</td>
+<td>1</td>
+<td>alert &quot;File should be empty.&quot;</td>
+<td><span class="badge grade-a">A</span></td>
+<td>Observed, carried from v0.2</td>
+<td><a class="ev" href="evidence/v0.2_E-17.send-notempty-txt.json">v0.2/E-17</a></td>
+</tr>
+<tr>
+<td>Contact &gt; confirmation</td>
+<td>After a successful send, as a customer</td>
+<td><code>getByRole(&#39;alert&#39;).filter({ hasText: &#39;Thanks for your message! We will contact you shortly.&#39; })</code></td>
+<td>1 role with text filter</td>
+<td>1</td>
+<td>alert, text as shown</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-08.customer-send.json">E-08</a>, <a class="ev" href="evidence/v0.2_E-19.timed-send-attachment.json">v0.2/E-19</a></td>
+</tr>
+<tr>
+<td>Account &gt; Messages &gt; row of one message</td>
+<td>Customer, after a send</td>
+<td><code>getByRole(&#39;row&#39;, { name: /&lt;start of the message text&gt;/ })</code></td>
+<td>1 role and name</td>
+<td>1 (with <code>/ETA-20261012-1744/</code>); the list had 2 rows</td>
+<td>row</td>
+<td><span class="badge grade-b">B</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.account-messages.json">E-09</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Attachment hint</td>
+<td>Visitor form</td>
+<td><code>getByText(&#39;Only files with the txt extension are allowed, and files must be 0kb.&#39;)</code></td>
+<td>4 text</td>
+<td>1; <code>locator(&#39;#attachmentHelp&#39;)</code> also 1; <code>[data-test=&quot;attachment-hint&quot;]</code> 0</td>
+<td>text; no role; not referenced by the file control</td>
+<td><span class="badge grade-c">C</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+</tr>
+<tr>
+<td>Contact &gt; alert after a refused send</td>
+<td>After Send with 251 characters (v0.2) or 60 spaces (v0.3)</td>
+<td><code>locator(&#39;.alert.alert-danger&#39;)</code></td>
+<td>6 CSS</td>
+<td>not counted with a locator; DOM reads list one visible alert without role and test id</td>
+<td>none</td>
+<td>D, proposed, not verified</td>
+<td><span class="badge tag-assumed">Assumed</span></td>
+<td><a class="ev" href="evidence/v0.2_E-18.send-251.json">v0.2/E-18</a>, <a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+</tr>
+<tr>
+<td>Contact &gt; Send busy state</td>
+<td>While a send is pending</td>
+<td>none exists</td>
+<td>-</td>
+<td>no disabled state and no <code>aria-busy</code> at 49 and 75 ms</td>
+<td>-</td>
+<td><span class="badge grade-d">D</span></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+</tr>
+</tbody></table>
+<p>Notes:</p>
+<ul>
+<li>The message row is graded B, not C: its text is the test&#39;s own input, not seed data. Two
+limits: the list shows only the first 50 characters, and it keeps the messages of earlier runs,
+so the text must be unique within those 50 characters (F-16).</li>
+<li>Field messages by test id were not re-counted with a locator in this run. DOM reads of this
+run list the same test ids on the visible alerts: <code>email-error</code> alone after Send with an
+invalid address (<a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a>) and the five required ones in Spanish (<a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a>).</li>
+<li>Each field also has a test id that matched 1 in v0.2 (<code>first-name</code>, <code>last-name</code>, <code>email</code>,
+<code>subject</code>, <code>message</code>, <code>attachment</code>, <code>contact-submit</code>, <code>nav-contact</code>; <a class="ev" href="evidence/v0.2_E-17.send-notempty-txt.json">v0.2/E-17</a>). They are grade A
+and the fallback if a test must run in another language. This run drove the page with them.</li>
+<li>For a logged-in customer the name and email locators match 0 once the account is applied, but
+they match for a moment after the page opens (F-07, <a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a>). A test must not assert their absence
+at once without a retrying assertion.</li>
+</ul>
+<p>Counts: 17 stable (menu link, heading, 6 fields, Send, 6 field messages, confirmation, message
+row), 1 at risk (Attachment hint), 2 blocked (alert after a refused send, busy state), 0 not verified.</p>
+<h2>Testability requests</h2>
+<pre><code>ID:           T-01 (carried from v0.1)
+Element:      Contact &gt; Attachment hint
+Problem:      Found only by its translated sentence (1 match) or by the id attachmentHelp
+              (1 match). No test id; the file control has no aria-describedby
+Request:      Reference attachmentHelp from the file control with aria-describedby; add test id
+              &quot;attachment-hint&quot;
+Benefit:      The hint is read with the field; a check that does not depend on the language
+Evidence:     <a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a>
+</code></pre>
+<pre><code>ID:           T-02 (carried from v0.1)
+Element:      Contact &gt; alert after a refused send
+Problem:      One visible alert with style classes only: no role, no test id
+Request:      Give it role alert and test id &quot;contact-error&quot;
+Benefit:      Screen readers hear it; a stable locator for S-10 and S-17
+Evidence:     <a class="ev" href="evidence/v0.2_E-18.send-251.json">v0.2/E-18</a>, <a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a>
+</code></pre>
+<pre><code>ID:           T-03 (carried from v0.1)
+Element:      Contact &gt; field messages
+Problem:      Each message has role alert but no field has aria-describedby or aria-invalid, and
+              focus stays on Send after a refused send
+Request:      Link each message to its field and move focus to the first invalid field
+Benefit:      Messages are read with their field; a test finds a field&#39;s message through the field
+Evidence:     <a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a>, <a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a>
+</code></pre>
+<pre><code>ID:           T-04 (carried from v0.1)
+Element:      Contact &gt; required fields
+Problem:      No field has required or aria-required; three marks sit in placeholders
+Request:      Add required or aria-required and put * in the label
+Benefit:      The required state is exposed; a test asserts it without reading placeholders
+Evidence:     <a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a>
+</code></pre>
+<pre><code>ID:           T-05 (named by the QA engineer in the answer to Q-08)
+Element:      Contact &gt; Send button while a message is being sent
+Problem:      No busy state. Send is enabled with no aria-busy 49 and 75 ms after the click while
+              the answers took 4123 and 12252 ms. A second click 48 ms later stored a second message
+Request:      Disable Send and set aria-busy on the form while the request is pending
+Benefit:      No second message; a test waits for a defined state; users see the click was taken
+Evidence:     <a class="ev" href="evidence/E-05.second-send.json">E-05</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a>, <a class="ev" href="evidence/v0.2_E-18.send-251.json">v0.2/E-18</a>, <a class="ev" href="evidence/v0.2_E-19.timed-send-attachment.json">v0.2/E-19</a>
+</code></pre>
+<pre><code>ID:           T-06 (carried from v0.2, widened)
+Element:      Contact &gt; Message field
+Problem:      The refusals for more than 250 characters and for spaces only come from the server
+              and are shown in the alert of T-02, not under the field
+Request:      Show both under the Message field with test id &quot;message-error&quot; and role alert, as
+              the QA engineer&#39;s answer to Q-04 requires for the maximum
+Benefit:      One stable locator for every Message rule; the error is announced
+Evidence:     <a class="ev" href="evidence/v0.2_E-18.send-251.json">v0.2/E-18</a>, <a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a>
+</code></pre>
+</details>
+<details class="appendix"><summary>Appendix: Console, network and accessibility <code>technical.md</code></summary><h1>Technical notes: TS-3 v0.3</h1>
+<p>Observations from this run, plus carried rows marked with their version. They are not an audit.</p>
+<h2>Console</h2>
+<p>Source: the tool&#39;s console log for the whole session, saved as <a class="ev" href="evidence/E-11.console-all.log">E-11</a> (warning level and above).</p>
+<table>
+<thead>
+<tr>
+<th>After action</th>
+<th>Level</th>
+<th>Message</th>
+<th>Affects a decision</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A-01 to A-03 (visitor loads)</td>
+<td>error</td>
+<td><code>GET http://localhost:8091/users/me</code> 401 Unauthorized, three times, plus one Angular &quot;ERROR {message: Unauthorized}&quot;</td>
+<td>Yes, F-10</td>
+</tr>
+<tr>
+<td>A-15</td>
+<td>error</td>
+<td><code>POST http://localhost:8091/messages</code> 422 Unprocessable Content</td>
+<td>Yes, F-04</td>
+</tr>
+<tr>
+<td>A-41 (sign-out)</td>
+<td>error</td>
+<td><code>GET http://localhost:8091/users/refresh</code> 500 Internal Server Error, then 401 on <code>GET /users/me</code> and the Angular error</td>
+<td>Yes, F-10</td>
+</tr>
+<tr>
+<td>several loads</td>
+<td>warning</td>
+<td>Preloaded image <code>barn-2400x1600.avif</code> not used within a few seconds</td>
+<td>No</td>
+</tr>
+<tr>
+<td>A-31 to A-39 (logged in)</td>
+<td>-</td>
+<td>No errors while logged in (the tool reported 0 errors on <code>/contact</code> and <code>/account/messages</code>)</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2>Network</h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Request</th>
+<th>Status</th>
+<th>Time from the click</th>
+<th>Note</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A-10</td>
+<td>none after Send with &quot;not-an-email&quot;</td>
+<td>-</td>
+<td>-</td>
+<td>Client-side refusal</td>
+<td><a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a></td>
+</tr>
+<tr>
+<td>A-15</td>
+<td><code>POST /messages</code>, message of 60 spaces</td>
+<td>422</td>
+<td>10928 ms</td>
+<td>Body <code>{&quot;message&quot;:[&quot;The message field is required.&quot;]}</code>. The UI shows this text unchanged (F-04)</td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+</tr>
+<tr>
+<td>A-20</td>
+<td><code>POST /messages</code>, first click</td>
+<td>200</td>
+<td>4123 ms</td>
+<td>Sent 43 ms after the script started the click; id <code>01m4rg84cc1tfys9aqy2z7qwzc</code></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+</tr>
+<tr>
+<td>A-21</td>
+<td><code>POST /messages</code>, second click</td>
+<td>200</td>
+<td>4123 ms</td>
+<td>Sent at 92 ms with the same body; id <code>01m4rg84ccpcz48jjcr3106neh</code> (F-01)</td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+</tr>
+<tr>
+<td>A-35</td>
+<td><code>POST /messages</code> as the customer</td>
+<td>200</td>
+<td>12252 ms</td>
+<td>Body has <code>name</code> &quot;Jane Doe&quot; (the seeded demo customer), <code>subject</code>, <code>message</code>; no <code>email</code>; Authorization header present. The answer carries a <code>user_id</code></td>
+<td><a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+</tr>
+<tr>
+<td>A-38</td>
+<td><code>GET /messages?page=1</code></td>
+<td>200</td>
+<td>-</td>
+<td>Fills Account &gt; Messages</td>
+<td><a class="ev" href="evidence/E-12.network-after-sign-out.txt">E-12</a></td>
+</tr>
+<tr>
+<td>A-41</td>
+<td><code>GET /users/refresh</code></td>
+<td>500</td>
+<td>-</td>
+<td>At sign-out</td>
+<td><a class="ev" href="evidence/E-12.network-after-sign-out.txt">E-12</a></td>
+</tr>
+<tr>
+<td>A-45</td>
+<td>none after Send on the empty Spanish form</td>
+<td>-</td>
+<td>-</td>
+<td>Client-side refusal</td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a></td>
+</tr>
+</tbody></table>
+<p>Carried from v0.2: <code>POST /messages</code> with 251 characters answers 422 after 6617 ms (<a class="ev" href="evidence/v0.2_E-18.send-251.json">v0.2/E-18</a>); a
+send with an attachment posts <code>POST /messages/{id}/attach-file</code> after the message is stored
+(<a class="ev" href="evidence/v0.2_E-19.timed-send-attachment.json">v0.2/E-19</a>).</p>
+<p>Response times are an environment matter on local (QA answer to Q-08). They matter here only for
+the timeout of a test (Q-14) and for how long Send stays clickable (F-01).</p>
+<h2>API notes (OpenAPI Toolshop API 5.0.0 at <code>http://localhost:8091/docs</code>, read outside the browser)</h2>
+<ul>
+<li>The context file names <code>http://localhost:8091/api/documentation</code>. That URL is the HTML viewer;
+the JSON document is at <code>/docs</code>.</li>
+<li><code>POST /messages</code>: no authentication required. <code>ContactRequest</code>: <code>name</code> (max 120), <code>email</code>
+(max 256, &quot;required when not authenticated&quot;), <code>subject</code> (max 120), <code>message</code> (max 250).
+Required: <code>subject</code>, <code>message</code>. No minimum length for <code>message</code> (F-11).</li>
+<li>Observed against it: a message of spaces is refused as missing (<a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a>), so the API trims or
+treats spaces as empty for <code>message</code>; a name starting with four spaces is stored as sent (<a class="ev" href="evidence/E-05.second-send.json">E-05</a>),
+so <code>name</code> is not trimmed and not required.</li>
+<li>The UI joins first and last name with a space into <code>name</code> and posts the subject as a slug
+(<code>webmaster</code>, <code>payments</code>). Account &gt; Messages shows that slug (F-08).</li>
+<li><code>GET /messages</code> and <code>GET /messages/{messageId}</code> need authentication. <code>GET /messages?page=1</code>
+is what Account &gt; Messages calls. No delete operation exists for messages.</li>
+<li>Checks that can move to API level: maximum 250 (S-20); a message of spaces refused; the rule
+for a name of spaces once Q-12 is answered; whether an identical second post is refused once
+Q-15 is answered; the read-back of a customer&#39;s message through <code>GET /messages</code> (S-15).</li>
+</ul>
+<h2>Accessibility observations (from the snapshots and DOM reads already taken)</h2>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Observation</th>
+<th>Evidence</th>
+<th>Resolved by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Contact &gt; heading</td>
+<td>&quot;Contact&quot; is a level 3 heading and the only heading on the page</td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+<td>Outside this story (QA answer to Q-01)</td>
+</tr>
+<tr>
+<td>Contact &gt; First name, Last name, Email address, Subject</td>
+<td>Required is shown only by <code>*</code> in the placeholder or the first option; no <code>required</code> or <code>aria-required</code> on any field</td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+<td>T-04, Q-13</td>
+</tr>
+<tr>
+<td>Contact &gt; field messages</td>
+<td>Role alert, but no field has <code>aria-describedby</code>; after a refused Send focus stays on the Send button</td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a>, <a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a></td>
+<td>T-03</td>
+</tr>
+<tr>
+<td>Contact &gt; alert after a refused send</td>
+<td>No role, so it is not announced; not tied to the Message field</td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+<td>T-02, T-06</td>
+</tr>
+<tr>
+<td>Contact &gt; Send button</td>
+<td>No busy state while sending</td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+<td>T-05</td>
+</tr>
+<tr>
+<td>Contact &gt; Attachment hint</td>
+<td>Not referenced by the file control</td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+<td>T-01</td>
+</tr>
+<tr>
+<td>Contact &gt; confirmation</td>
+<td>Has role alert</td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Contact page in Spanish</td>
+<td><code>html lang</code> changes to &quot;es&quot;; the page title stays English</td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a></td>
+<td>Q-11</td>
+</tr>
+<tr>
+<td>Account &gt; Messages</td>
+<td>The page has a level 1 heading &quot;Messages&quot;; the Details link of each row has the same name &quot;Details&quot;</td>
+<td><a class="ev" href="evidence/E-09.account-messages.json">E-09</a></td>
+<td>Not requested; a row scope makes it unique</td>
+</tr>
+</tbody></table>
+<p>Carried from v0.2: the Message field&#39;s message changes only when the field loses focus
+(<a class="ev" href="evidence/v0.2_E-08.message-49-focused.json">v0.2/E-08</a>, <a class="ev" href="evidence/v0.2_E-10.message-50-focused.json">v0.2/E-10</a>, <a class="ev" href="evidence/v0.2_E-11.message-50-after-blur.json">v0.2/E-11</a>), accepted by the QA answer to Q-05.</p>
+<p>Not checked: keyboard-only use of the form, focus after the confirmation.</p>
+<h2>Tool observations</h2>
+<ul>
+<li><code>getByTestId</code> uses <code>data-testid</code> in the MCP session, not the project&#39;s <code>data-test</code> (carried from <a class="ev" href="evidence/v0.2_E-16.send-empty-pdf.json">v0.2/E-16</a>).</li>
+<li>Code-run cannot import modules, and a script given through <code>filename</code> failed with
+<code>SyntaxError: Unexpected token &#39;const&#39;</code> (A-23 to A-25). The login therefore ran from a script in
+the call itself; the tool echoes that script to the conversation, not to this folder.</li>
+<li><code>fill</code> sets a value without key presses. The form still validated the values (classes in <a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a>,
+<a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a>), so the spaces findings do not depend on typing.</li>
+<li>The script&#39;s two Send clicks were 48 ms apart, faster than a person (<a class="ev" href="evidence/E-05.second-send.json">E-05</a>). Send was enabled
+for the whole 4123 ms, so a slower double click would meet the same state (Inferred, ledger O-11).</li>
+<li><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a>: the DOM read is 31 s after the click because a second wait in the script ran to its
+timeout. The page had its outcome at 10927 ms.</li>
+<li>The title read right after a navigation can still be the application default
+(&quot;Practice Software Testing - Toolshop - v5.0&quot; on <code>/account</code> and <code>/account/messages</code>, <a class="ev" href="evidence/E-06.after-login.json">E-06</a>, A-38);
+a moment later it is the page&#39;s own title. A title assertion should wait.</li>
+</ul>
+</details>
+<details class="appendix"><summary>Appendix: Ledger <code>ledger.md</code></summary><h1>Ledger: TS-3 v0.3</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Story</td>
+<td>TS-3 Customer sends a message to Toolshop through the Contact form (<code>tests/exploratory/stories/contact-form.md</code>, status Draft)</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>v0.3, draft, reduced run. Previous: v0.2 (draft), v0.1 (draft)</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>local: UI <code>http://localhost:4200</code>, API <code>http://localhost:8091</code></td>
+</tr>
+<tr>
+<td>Mode</td>
+<td>Unattended (argument &quot;run unattended&quot;)</td>
+</tr>
+<tr>
+<td>Budget</td>
+<td>20 minutes of browser work, 60 browser actions</td>
+</tr>
+<tr>
+<td>Test data prefix</td>
+<td><code>ETA-20261012-1744</code></td>
+</tr>
+<tr>
+<td>Step 1 written</td>
+<td>2026-10-12 17:45, before the first browser action (A-01 at 17:46:04)</td>
+</tr>
+</tbody></table>
+<h2>Step 0. Previous version</h2>
+<p>Latest folder: <code>v0.2</code> (draft, sign-off box empty). Read: <code>v0.2/qa-review.md</code>, <code>v0.2/report.md</code>,
+<code>v0.1/report.md</code>, and for wording and evidence IDs <code>v0.2/scenarios.feature</code>, <code>v0.2/locators.md</code>,
+<code>v0.2/technical.md</code>, <code>v0.1/locators.md</code>, <code>v0.1/qa-review.md</code>. <code>.local/</code> was not read.</p>
+<p><code>v0.2/qa-review.md</code> holds the same answers, decisions and notes as <code>v0.1/qa-review.md</code>. The QA
+engineer added nothing after v0.2: Q-13, Q-14 and S-20 are empty. So no expectation changed since
+v0.2, and the notes on S-08, S-11 and S-13 were already acted on in v0.2.</p>
+<h3>Answers that are rules (verbatim, unchanged)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>QA answer</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Q-01</td>
+<td>The title with the app suffix is accepted. The heading level is outside this story; keep it as an accessibility observation only.</td>
+<td>Title with a suffix passes AC 1</td>
+</tr>
+<tr>
+<td>Q-04</td>
+<td>Yes, 250 is the maximum. The form must show a message under the Message field before sending; showing the raw server text is a defect.</td>
+<td>S-10 expectation</td>
+</tr>
+<tr>
+<td>Q-05</td>
+<td>An error must refresh at the latest when the field loses focus. Re-check AC 9 by typing key by key and leaving the field.</td>
+<td>S-09 expectation; done in v0.2</td>
+</tr>
+<tr>
+<td>Q-07</td>
+<td>Yes, that is the intended confirmation text.</td>
+<td>&quot;Thanks for your message! We will contact you shortly.&quot; is expected</td>
+</tr>
+<tr>
+<td>Q-08</td>
+<td>Slow answers on local are an environment matter, not a defect. A busy state while sending is required (T-05).</td>
+<td>Busy state expected between the click and the answer</td>
+</tr>
+</tbody></table>
+<p>Unanswered: Q-02, Q-03, Q-06, Q-09, Q-10, Q-11, Q-12, Q-13, Q-14.</p>
+<h3>QA decisions (fixed)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>QA decision</th>
+<th>Note (verbatim)</th>
+<th>Status of the note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S-01</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Agree.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>S-03</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Without the attachment hint step; the hint waits for T-01.</td>
+<td>applied in v0.2</td>
+</tr>
+<tr>
+<td>S-06</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Agree.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>S-07</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Agree.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>S-08</td>
+<td><span class="badge dec-clarify">Clarify first</span></td>
+<td>Do not stop the send with an invalid attachment. Show how 50 characters is proven accepted without relying on another rule.</td>
+<td>acted on in v0.2 (<a class="ev" href="evidence/v0.2_E-09.send-49.json">v0.2/E-09</a>, <a class="ev" href="evidence/E-11.console-all.log">E-11</a>, <a class="ev" href="evidence/E-13.contact-en-restored.snapshot.yml">E-13</a>, E-14); decision stays with the QA engineer</td>
+</tr>
+<tr>
+<td>S-11</td>
+<td><span class="badge dec-now">Automate now</span></td>
+<td>Re-check first: the Send with the empty PDF was never done in v0.1.</td>
+<td>done in v0.2 (<a class="ev" href="evidence/v0.2_E-15.empty-pdf-chosen.json">v0.2/E-15</a>, E-16)</td>
+</tr>
+<tr>
+<td>S-13</td>
+<td>(empty)</td>
+<td>Re-measure the visitor send with an attachment: time from the Send click to the confirmation, with timestamps.</td>
+<td>done in v0.2 (<a class="ev" href="evidence/v0.2_E-19.timed-send-attachment.json">v0.2/E-19</a>: 4212 ms)</td>
+</tr>
+<tr>
+<td>S-18</td>
+<td><span class="badge dec-no">Not worth automating</span></td>
+<td>Agree.</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h3>Carried state (latest result per item)</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Latest result</th>
+<th>Last observed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AC 1</td>
+<td><span class="badge ok">met (title accepted by Q-01)</span></td>
+<td><a class="ev" href="evidence/v0.2_E-01.contact-visitor.snapshot.yml">v0.2/E-01</a>, <a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+</tr>
+<tr>
+<td>AC 2</td>
+<td>partly: only the Message label has <code>*</code></td>
+<td><a class="ev" href="evidence/v0.2_E-02.contact-form-dom.json">v0.2/E-02</a></td>
+</tr>
+<tr>
+<td>AC 3</td>
+<td>partly: first option &quot;Select a subject *&quot;</td>
+<td><a class="ev" href="evidence/v0.2_E-02.contact-form-dom.json">v0.2/E-02</a></td>
+</tr>
+<tr>
+<td>AC 4</td>
+<td><span class="badge ok">met</span></td>
+<td><a class="ev" href="evidence/v0.2_E-03.empty-send-errors.json">v0.2/E-03</a>, <a class="ev" href="evidence/E-13.contact-en-restored.snapshot.yml">E-13</a></td>
+</tr>
+<tr>
+<td>AC 5</td>
+<td>v0.2 partly (Send not clicked with the invalid address); v0.1 met</td>
+<td><a class="ev" href="evidence/v0.2_E-06.email-invalid-typed-focused.json">v0.2/E-06</a>; <a class="ev" href="evidence/v0.1_E-04.after-fill-before-send.snapshot.yml">v0.1/E-04</a>, <a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+</tr>
+<tr>
+<td>AC 6</td>
+<td><span class="badge ok">met</span></td>
+<td><a class="ev" href="evidence/v0.2_E-09.send-49.json">v0.2/E-09</a>, <a class="ev" href="evidence/E-11.console-all.log">E-11</a>, <a class="ev" href="evidence/E-13.contact-en-restored.snapshot.yml">E-13</a>, E-14</td>
+</tr>
+<tr>
+<td>AC 7</td>
+<td><span class="badge ok">met</span></td>
+<td><a class="ev" href="evidence/v0.2_E-15.empty-pdf-chosen.json">v0.2/E-15</a>, E-16</td>
+</tr>
+<tr>
+<td>AC 8</td>
+<td><span class="badge ok">met</span></td>
+<td><a class="ev" href="evidence/v0.2_E-02.contact-form-dom.json">v0.2/E-02</a>, E-17</td>
+</tr>
+<tr>
+<td>AC 9</td>
+<td><span class="badge warn">partly (alert of v0.2 F-02 does not clear)</span></td>
+<td><a class="ev" href="evidence/v0.2_E-04.firstname-typed-focused.json">v0.2/E-04</a> to <a class="ev" href="evidence/E-11.console-all.log">E-11</a>, E-19</td>
+</tr>
+<tr>
+<td>AC 10</td>
+<td><span class="badge warn">partly (no busy state)</span></td>
+<td><a class="ev" href="evidence/v0.2_E-14.confirmation-50.json">v0.2/E-14</a>, E-19</td>
+</tr>
+<tr>
+<td>AC 11</td>
+<td>not explored in v0.2; v0.1: works, but name and email fields show for some seconds first (v0.1 F-17)</td>
+<td><a class="ev" href="evidence/v0.1_E-16.contact-form-logged-in.json">v0.1/E-16</a>, E-17, E-18</td>
+</tr>
+<tr>
+<td>AC 12</td>
+<td>not explored in v0.2; v0.1 partly: German only, hint loses the 0 KB rule, &quot;Return&quot; is &quot;Zurück&quot;, title stays English</td>
+<td><a class="ev" href="evidence/v0.1_E-19.confirmation-de.snapshot.txt">v0.1/E-19</a>, E-21</td>
+</tr>
+<tr>
+<td>v0.2 F-01 to F-07</td>
+<td>as in the v0.2 report</td>
+<td><a class="ev" href="evidence/v0.2_E-18.send-251.json">v0.2/E-18</a>, E-19, E-20, E-21, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a>, <a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a>, <a class="ev" href="evidence/E-11.console-all.log">E-11</a></td>
+</tr>
+<tr>
+<td>v0.1 F-10 (non-empty wrong file shows the size error)</td>
+<td>gap, not re-checked in v0.2</td>
+<td><a class="ev" href="evidence/v0.1_E-06.fixed-fields-then-pdf.json">v0.1/E-06</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+</tr>
+<tr>
+<td>v0.1 F-17 (fields flash for a customer)</td>
+<td>defect, not re-checked in v0.2</td>
+<td><a class="ev" href="evidence/v0.1_E-16.contact-form-logged-in.json">v0.1/E-16</a>, E-17</td>
+</tr>
+<tr>
+<td>v0.1 F-19 (no way to write another message after the confirmation)</td>
+<td><span class="badge muted">gap</span></td>
+<td><a class="ev" href="evidence/v0.1_E-18.customer-send.json">v0.1/E-18</a></td>
+</tr>
+<tr>
+<td>v0.1 F-21 (Messages shows &quot;warranty&quot; and time one hour behind)</td>
+<td><span class="badge bad">defect</span></td>
+<td><a class="ev" href="evidence/v0.1_E-20.account-messages.json">v0.1/E-20</a></td>
+</tr>
+<tr>
+<td>v0.1 F-23 (errors not tied to fields, focus stays on Send, no required attribute)</td>
+<td><span class="badge muted">gap</span></td>
+<td><a class="ev" href="evidence/v0.1_E-02.form-dom.json">v0.1/E-02</a>, E-21</td>
+</tr>
+<tr>
+<td>v0.1 F-25 (story and API disagree: one <code>name</code>, free-text <code>subject</code>)</td>
+<td><span class="badge muted">gap</span></td>
+<td><span class="badge tag-assumed">Assumed (OpenAPI)</span></td>
+</tr>
+<tr>
+<td>Locators</td>
+<td>15 stable in v0.2; hint C in v0.1; Messages row not verified</td>
+<td><a class="ev" href="evidence/v0.2_E-03.empty-send-errors.json">v0.2/E-03</a>, E-16, E-17, E-19; <a class="ev" href="evidence/v0.1_E-17.locators-customer-untouched.json">v0.1/E-17</a>, E-20</td>
+</tr>
+<tr>
+<td>T-01 to T-06</td>
+<td>open</td>
+<td>v0.1 and v0.2 reports</td>
+</tr>
+</tbody></table>
+<h3>Reduced run plan</h3>
+<p>Nothing has a new QA note or a changed expectation. So this run covers what v0.2 did not reach,
+never-explored items first:</p>
+<ol>
+<li>Never explored in any version: spaces only (S-17), a second Send during the wait (S-19, v0.2 F-04).</li>
+<li>Not reached in v0.2: Send with an invalid email still in the field (AC 5), the Contact link
+counted on the home page, the Attachment hint locator.</li>
+<li>Not reached in v0.2, observed only in v0.1: language (AC 12, S-16; a second language, since v0.1
+did German), the logged-in customer (AC 11, S-14, v0.1 F-17 timed), Account &gt; Messages (S-15).</li>
+</ol>
+<p>Not planned (carried): everything v0.2 observed (AC 1 to 4, 6 to 10, S-01 to S-13, S-20).</p>
+<h2>Step 1. Read and restate</h2>
+<p>Documents read (not browser actions): the story, <code>context.md</code>, <code>knowledge/e2e-flows.md</code>,
+<code>knowledge/decisions.md</code> (no lines), <code>knowledge/rules.md</code>, <code>knowledge/pages/account.md</code>,
+<code>knowledge/pages/login.md</code>, the OpenAPI document (Toolshop API 5.0.0, <code>http://localhost:8091/docs</code>;
+the context file&#39;s URL <code>/api/documentation</code> is the HTML viewer), the skill reference files. There
+is no <code>knowledge/pages/contact.md</code>. The story file is unchanged in its criteria since v0.2 as far
+as the v0.2 report&#39;s criteria rows show.</p>
+<h3>Expected workflow</h3>
+<ol>
+<li>Contact in the main menu opens <code>/contact</code>, heading &quot;Contact&quot;, title starting &quot;Contact Us&quot; (AC 1, Q-01).</li>
+<li>The form shows six labelled fields, <code>*</code> on required ones, and Send (AC 2).</li>
+<li>Subject starts at &quot;Select a subject&quot; and offers six subjects (AC 3).</li>
+<li>Send on the empty form shows five required messages and sends nothing (AC 4).</li>
+<li>An invalid email shows &quot;Email format is invalid&quot; and nothing is sent (AC 5).</li>
+<li>Under 50 characters is refused, exactly 50 accepted (AC 6); over 250 gets a field message before sending (Q-04).</li>
+<li>A non-txt attachment or a txt above 0 KB shows an error; nothing is sent (AC 7, 8).</li>
+<li>A corrected field loses its error at the latest on blur (AC 9, Q-05).</li>
+<li>Valid input: Send shows a busy state (Q-08), one message is stored, the form is replaced by &quot;Thanks for your message! We will contact you shortly.&quot; on the same page (AC 10, Q-07).</li>
+<li>A logged-in customer sees no name and email fields and only chooses a subject and writes a message (AC 11); the message is listed under Account &gt; Messages (e2e-flows F6, Assumed).</li>
+<li>Changing the language translates labels, placeholders, options, hints and errors (AC 12).</li>
+</ol>
+<p>AC to steps: AC 1: 1. AC 2: 2. AC 3: 3. AC 4: 4. AC 5: 5. AC 6: 6. AC 7, 8: 7. AC 9: 8. AC 10: 9. AC 11: 10. AC 12: 11.</p>
+<h3>What the story does not say (Assumed unless a question covers it)</h3>
+<table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Assumption</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Whether spaces count as content</td>
+<td>No; input is trimmed</td>
+<td>Q-12</td>
+</tr>
+<tr>
+<td>What a second Send during the wait does</td>
+<td>One message is stored</td>
+<td>Q-08 answered: busy state required</td>
+</tr>
+<tr>
+<td>How a customer&#39;s name and email are shown</td>
+<td>Fields absent from the start</td>
+<td>Q-09</td>
+</tr>
+<tr>
+<td>What Account &gt; Messages shows</td>
+<td>Subject label and local time</td>
+<td>Q-10</td>
+</tr>
+<tr>
+<td>Which languages count</td>
+<td>All in the header selector</td>
+<td>Q-11</td>
+</tr>
+<tr>
+<td>Maximum length of name and email</td>
+<td>120 and 256 (OpenAPI <code>ContactRequest</code>)</td>
+<td>none yet; not planned in this run</td>
+</tr>
+<tr>
+<td>Which attachment error wins</td>
+<td>Type error</td>
+<td>Q-06</td>
+</tr>
+<tr>
+<td>How long a send may take</td>
+<td>Timeout 20 s on local</td>
+<td>Q-14</td>
+</tr>
+</tbody></table>
+<p>Story against knowledge and OpenAPI: no new contradiction. Carried: the API has one optional
+<code>name</code>, a free-text <code>subject</code>, <code>message</code> max 250 and no minimum (v0.1 F-25, v0.2 F-07).</p>
+<h3>Regression scope (impact map)</h3>
+<p>No row for Contact. Applying rows: &quot;Language files&quot; (menu entries and validation messages on
+every page) and &quot;Login or register&quot; (account pages). Regression scenarios: S-15 Account &gt; Messages,
+S-18 direct link. Share of the budget: about 5 actions (Messages list).</p>
+<h3>Charter</h3>
+<p>Mission: observe what no earlier version observed (spaces only, a second Send) and re-observe what
+v0.2 did not reach (invalid email with Send, a second language, the logged-in customer, Account &gt;
+Messages), so every row of the v0.3 table rests on evidence with a version.</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Area</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Home page: Contact link count; Contact page: hint locator, DOM read</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Spaces only (S-17), heuristic: Boundaries, text of only spaces</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Second Send during the wait (S-19), heuristic: Interruptions, submit twice</td>
+<td>6</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Send with an invalid email in the field (AC 5)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Language: a second language, labels, options, hint, errors (AC 12)</td>
+<td>7</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Logged-in customer: login, timed look at the name fields, send (AC 11); Account &gt; Messages (S-15)</td>
+<td>15</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Locator counts in the customer state and on Messages (about 20 percent with the counts above)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Console and network reads; sign out, language back to English (cleanup, 10 percent)</td>
+<td>6</td>
+</tr>
+<tr>
+<td></td>
+<td>Total planned</td>
+<td>50 of 60</td>
+</tr>
+</tbody></table>
+<p>Counting rule used: one action per browser tool call; a <code>fill_form</code> call is one call and is
+counted as one action per field it fills; a scripted call counts one per page interaction in it.</p>
+<h2>Action log</h2>
+<p>Time box started with A-01. Times are local, from the machine clock when the row was written.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Time</th>
+<th>Action</th>
+<th>Result</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A-01</td>
+<td>17:46:04</td>
+<td>Navigate to <code>http://localhost:4200/</code> (visitor)</td>
+<td>Home page, title &quot;Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-02</td>
+<td>17:46:11</td>
+<td>Read-only code-run: count the Contact link locators on the home page</td>
+<td>role and name 1, <code>[data-test=&quot;nav-contact&quot;]</code> 1, visible. Console: 3 errors after the load</td>
+<td><a class="ev" href="evidence/E-01.home-contact-link-count.json">E-01</a></td>
+</tr>
+<tr>
+<td>A-03</td>
+<td>17:46:18</td>
+<td>Click Contact in the main menu (<code>[data-test=&quot;nav-contact&quot;]</code>)</td>
+<td><code>/contact</code>, title &quot;Contact Us - Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-04</td>
+<td>17:46:29</td>
+<td>Read-only code-run: DOM read of the form, hint locator counts</td>
+<td>Fields, labels and options as in v0.2; hint is one element <code>#attachmentHelp</code>, not referenced by the file input; full-sentence <code>getByText</code> 1, <code>#attachmentHelp</code> 1; seven languages in the header</td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+</tr>
+<tr>
+<td>A-05 to A-09</td>
+<td>17:46:55</td>
+<td><code>fill_form</code> (5 fields, 5 actions): First name &quot;ETA&quot;, Last name &quot;Tester-20261012-1744&quot;, Email address &quot;not-an-email&quot;, Subject Webmaster, Message 66 characters starting <code>ETA-20261012-1744</code></td>
+<td>Filled. Tool note: <code>fill</code> sets the value without key presses</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-10</td>
+<td>17:46:55</td>
+<td>Click Send with &quot;not-an-email&quot; in Email address, other fields valid</td>
+<td>Still on <code>/contact</code>, form shown</td>
+<td><a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a></td>
+</tr>
+<tr>
+<td>A-11</td>
+<td>17:47:02</td>
+<td>Evaluate: DOM read after the Send</td>
+<td>One alert, test id <code>email-error</code>, &quot;Email format is invalid&quot;; no request to <code>/messages</code>; focus on Send; Send enabled</td>
+<td><a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a></td>
+</tr>
+<tr>
+<td>A-12 to A-14</td>
+<td>17:47:20</td>
+<td><code>fill_form</code> (3 fields, 3 actions): Email address &quot;<a href="mailto:eta-20261012-1744@example.com">eta-20261012-1744@example.com</a>&quot;, First name 3 spaces, Message 60 spaces</td>
+<td>Filled. Last name stays &quot;Tester-20261012-1744&quot; so a stored message carries the prefix</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-15</td>
+<td>17:47:22</td>
+<td>Scripted timed Send, step 1: click Send</td>
+<td><code>POST /messages</code> sent 39 ms after the click, name <code>&quot;    Tester-20261012-1744&quot;</code>, message 60 spaces</td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+</tr>
+<tr>
+<td>A-16</td>
+<td>17:47:33</td>
+<td>Step 2: wait for a visible alert</td>
+<td>Alert at 10927 ms; answer 422 <code>{&quot;message&quot;:[&quot;The message field is required.&quot;]}</code> at 10928 ms</td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+</tr>
+<tr>
+<td>A-17</td>
+<td>17:47:53</td>
+<td>Step 3: wait for a response (script error: the answer had already arrived, the wait ran to its 20 s timeout)</td>
+<td>Nothing new. Tool-caused delay, counted</td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+</tr>
+<tr>
+<td>A-18</td>
+<td>17:47:53</td>
+<td>Step 4: wait 500 ms, then DOM read</td>
+<td>Form still shown; First name (3 spaces) and Message (60 spaces) both <code>ng-valid</code>; one alert, no role, no test id, text &quot;The message field is required.&quot;</td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+</tr>
+<tr>
+<td>A-19</td>
+<td>17:48:20</td>
+<td>Fill Message with 64 characters starting <code>ETA-20261012-1744</code>; First name stays 3 spaces</td>
+<td>Filled</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-20</td>
+<td>17:48:29</td>
+<td>Scripted timed action, step 1: click Send</td>
+<td><code>POST /messages</code> at 43 ms; Send still enabled, no <code>aria-busy</code>, the old alert &quot;The message field is required.&quot; still shown (read at 49 ms)</td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+</tr>
+<tr>
+<td>A-21</td>
+<td>17:48:29</td>
+<td>Step 2: click Send again (93 ms)</td>
+<td>Click accepted; a second <code>POST /messages</code> at 92 ms with the same body</td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+</tr>
+<tr>
+<td>A-22</td>
+<td>17:48:33</td>
+<td>Step 3: wait for both answers, then DOM read</td>
+<td>Both 200 at 4123 ms, two ids (<code>01m4rg84cc1tfys9aqy2z7qwzc</code>, <code>01m4rg84ccpcz48jjcr3106neh</code>); stored name <code>&quot;    Tester-20261012-1744&quot;</code>; form replaced by the confirmation (role alert)</td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+</tr>
+<tr>
+<td>A-23</td>
+<td>about 17:49:00</td>
+<td>Scripted login from a script file (<code>filename</code>)</td>
+<td>Failed before touching the page: <code>SyntaxError: Unexpected token &#39;const&#39;</code>. Counted</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-24</td>
+<td>about 17:49:15</td>
+<td>Same call again</td>
+<td>Same error. Counted</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-25</td>
+<td>about 17:49:35</td>
+<td>Scripted login reading the environment file inside the call</td>
+<td>Failed before touching the page: dynamic import is not available in the tool. Counted</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-26</td>
+<td>17:49:53</td>
+<td>Scripted login, step 1: navigate to <code>/auth/login</code></td>
+<td>Login page</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-27</td>
+<td>17:49:54</td>
+<td>Step 2: fill Email address from <code>AUT_CUSTOMER_EMAIL</code></td>
+<td>Filled</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-28</td>
+<td>17:49:54</td>
+<td>Step 3: fill Password from <code>AUT_CUSTOMER_PASSWORD</code> (value not recorded)</td>
+<td>Filled</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-29</td>
+<td>17:49:55</td>
+<td>Step 4: click Login</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-30</td>
+<td>17:49:58</td>
+<td>Step 5: wait for <code>/account</code>, then DOM read</td>
+<td>Landed after 5275 ms in all; no password field on the page when read</td>
+<td><a class="ev" href="evidence/E-06.after-login.json">E-06</a></td>
+</tr>
+<tr>
+<td>A-31</td>
+<td>17:50:17</td>
+<td>Scripted timed action, step 1: click Contact in the main menu as the logged-in customer</td>
+<td><code>/contact</code>; First name, Last name, Email address shown, empty and editable at the first sample</td>
+<td><a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>A-32</td>
+<td>17:50:29</td>
+<td>Step 2: sample the form every 50 ms for 12 s, then count locators</td>
+<td>The three fields are gone at the 403 ms sample. After 12 s: labels Subject, Message *, Attachment; Subject, Message, Attachment, Send and heading count 1; name and email locators 0</td>
+<td><a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+</tr>
+<tr>
+<td>A-33, A-34</td>
+<td>17:50:50</td>
+<td><code>fill_form</code> (2 fields, 2 actions): Subject Payments, Message 66 characters starting <code>ETA-20261012-1744</code></td>
+<td>Filled</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-35</td>
+<td>17:50:55</td>
+<td>Scripted timed Send as the customer, step 1: click Send</td>
+<td><code>POST /messages</code> at 72 ms with name &quot;Jane Doe&quot;, subject <code>payments</code>, an Authorization header and no email; Send enabled, no <code>aria-busy</code> at 75 ms</td>
+<td><a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+</tr>
+<tr>
+<td>A-36</td>
+<td>17:51:07</td>
+<td>Step 2: wait for the answer</td>
+<td>200 at 12252 ms, id <code>01m4rgcsqaxp3zc762sr5mtjvt</code>, status NEW</td>
+<td><a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+</tr>
+<tr>
+<td>A-37</td>
+<td>17:51:07</td>
+<td>Step 3: wait for the confirmation, then DOM read</td>
+<td>Confirmation visible at 12258 ms, role alert, locator count 1; form gone; still <code>/contact</code></td>
+<td><a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+</tr>
+<tr>
+<td>A-38</td>
+<td>17:51:21</td>
+<td>Navigate to <code>/account/messages</code> (still logged in)</td>
+<td>Page opened; title at that moment &quot;Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-39</td>
+<td>17:51:30</td>
+<td>Read-only code-run: wait for the row text (11 ms), DOM read, locator counts</td>
+<td>Two rows. This run&#39;s: Subject &quot;payments&quot;, Message cut to 50 characters plus &quot;...&quot;, Status NEW, Date &quot;2026-10-12 16:51:05&quot; while the browser clock read 17:51:30 (Europe/London). Row locator by message text counts 1. The v0.1 run&#39;s message is still listed</td>
+<td><a class="ev" href="evidence/E-09.account-messages.json">E-09</a></td>
+</tr>
+<tr>
+<td>A-40</td>
+<td>17:51:43</td>
+<td>Click the user menu in the header</td>
+<td>Menu open</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-41</td>
+<td>17:51:45</td>
+<td>Click Sign out</td>
+<td>Page reloaded, title back to the application default, 2 console errors; signed-out state is confirmed by the DOM read of A-46 (name fields present)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-42</td>
+<td>17:51:51</td>
+<td>Click Contact in the main menu (signed out)</td>
+<td><code>/contact</code>, title &quot;Contact Us - ...&quot;</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-43</td>
+<td>17:51:54</td>
+<td>Click the language selector in the header</td>
+<td>List open</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-44</td>
+<td>17:51:57</td>
+<td>Click ES</td>
+<td>Language switched; the tool still reports the title &quot;Contact Us - Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a></td>
+</tr>
+<tr>
+<td>A-45</td>
+<td>17:52:04</td>
+<td>Click Send on the empty Spanish form</td>
+<td>Form stays</td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a></td>
+</tr>
+<tr>
+<td>A-46</td>
+<td>17:52:10</td>
+<td>Evaluate: DOM read of the Spanish form</td>
+<td>Menu, heading, 6 labels, 3 placeholders, 7 options, hint, Send and the 5 required messages are in Spanish; <code>html lang=&quot;es&quot;</code>; the page title stays &quot;Contact Us - ...&quot;; no request to <code>/messages</code>; name fields present, so the visitor state is confirmed</td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a></td>
+</tr>
+<tr>
+<td>A-47</td>
+<td>17:52:15</td>
+<td>Read all console messages (warning and above)</td>
+<td>21 entries: 401 on <code>GET /users/me</code> on visitor loads, one 422 on <code>POST /messages</code>, one 500 on <code>GET /users/refresh</code> at sign-out, preload warnings</td>
+<td><a class="ev" href="evidence/E-11.console-all.log">E-11</a></td>
+</tr>
+<tr>
+<td>A-48</td>
+<td>17:52:16</td>
+<td>Read the network requests since the last page load</td>
+<td><code>GET /messages?page=1</code> 200; <code>GET /users/refresh</code> 500; <code>GET /users/me</code> 401 after sign-out; <code>es.json</code> loaded</td>
+<td><a class="ev" href="evidence/E-12.network-after-sign-out.txt">E-12</a></td>
+</tr>
+<tr>
+<td>A-49</td>
+<td>17:52:24</td>
+<td>Cleanup: click the language selector</td>
+<td>List open</td>
+<td>-</td>
+</tr>
+<tr>
+<td>A-50</td>
+<td>17:52:27</td>
+<td>Cleanup: click EN</td>
+<td>English labels back; the form still shows the required messages, now in English</td>
+<td><a class="ev" href="evidence/E-13.contact-en-restored.snapshot.yml">E-13</a></td>
+</tr>
+<tr>
+<td>A-51</td>
+<td>17:52:50</td>
+<td>Close the browser page</td>
+<td>Closed</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p>Totals: 51 actions (A-01 to A-51), browser work 17:46:04 to 17:52:50, 7 minutes. 80 percent of the
+action budget (48) was reached at A-48; A-49 to A-51 are cleanup. No new path was opened after A-44.</p>
+<p>Deviations from the charter: three actions were lost to failed login attempts (A-23 to A-25) and
+one to a script error (A-17). The language check came last and was cut to one language and the
+required messages. Not reached: the other Spanish messages (email format, message length,
+attachment), the five other languages, a customer&#39;s send with an attachment, a full page load of
+<code>/contact</code> as a customer, maximum lengths of name and email, keyboard-only use.</p>
+<p>Heuristics behind the ideas: Boundaries, text of only spaces (A-12 to A-22); Interruptions, submit
+twice quickly (A-20 to A-22); State and role changes, same action as each role (A-26 to A-39);
+CRUD, a Create can be Read back (A-38, A-39); Platform, locale (A-43 to A-46).</p>
+<h2>Observations</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Observation</th>
+<th>Tag</th>
+<th>Evidence</th>
+<th>Became</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>O-01</td>
+<td>Home page: the Contact link matches 1 by role and name and 1 by <code>[data-test=&quot;nav-contact&quot;]</code></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-01.home-contact-link-count.json">E-01</a></td>
+<td>locators</td>
+</tr>
+<tr>
+<td>O-02</td>
+<td>The menu link opens <code>/contact</code>; heading &quot;Contact&quot; (level 3); title &quot;Contact Us - Practice Software Testing - Toolshop - v5.0&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+<td>AC 1</td>
+</tr>
+<tr>
+<td>O-03</td>
+<td>Only the Message label has <code>*</code>; First name, Last name, Email address have it in the placeholder; the first Subject option reads &quot;Select a subject *&quot; and is hidden and disabled; no field has <code>required</code> or <code>aria-required</code></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+<td>AC 2, AC 3, F-14</td>
+</tr>
+<tr>
+<td>O-04</td>
+<td>The hint is one element <code>#attachmentHelp</code> with the story&#39;s text; the file input does not reference it; full-sentence <code>getByText</code> matches 1</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-02.contact-form-dom-and-hint.json">E-02</a></td>
+<td>locators, T-01</td>
+</tr>
+<tr>
+<td>O-05</td>
+<td>Send with &quot;not-an-email&quot;: one alert <code>email-error</code> &quot;Email format is invalid&quot;; no request; focus stays on Send</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-03.send-invalid-email.json">E-03</a></td>
+<td>AC 5, F-14</td>
+</tr>
+<tr>
+<td>O-06</td>
+<td>Message of 60 spaces and First name of 3 spaces are valid for the form; Send posts; the API answers 422 &quot;The message field is required.&quot; after 10928 ms; the text is shown in an alert with no role and no test id</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a></td>
+<td>F-04</td>
+</tr>
+<tr>
+<td>O-07</td>
+<td>The name is posted as <code>&quot;    Tester-20261012-1744&quot;</code>: the spaces are not trimmed</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-04.send-spaces-only.json">E-04</a>, <a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+<td>F-05</td>
+</tr>
+<tr>
+<td>O-08</td>
+<td>After the message was corrected the alert of O-06 was still visible at the next Send click</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+<td>F-06</td>
+</tr>
+<tr>
+<td>O-09</td>
+<td>Send is enabled and has no <code>aria-busy</code> 49 ms after a click (visitor) and 75 ms after a click (customer) while the answers took 4123 and 12252 ms</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a>, <a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+<td>F-02</td>
+</tr>
+<tr>
+<td>O-10</td>
+<td>A second Send click 48 ms after the first is accepted: two <code>POST /messages</code>, two 200 answers, two ids</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+<td>F-01</td>
+</tr>
+<tr>
+<td>O-11</td>
+<td>A person&#39;s double click is slower than the script&#39;s 48 ms but far inside the 4123 ms wait, so it would also post twice</td>
+<td>Inferred from O-09, O-10: Send stays enabled for the whole wait</td>
+<td>-</td>
+<td>F-01</td>
+</tr>
+<tr>
+<td>O-12</td>
+<td>Both stored messages have a first name of spaces only</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-05.second-send.json">E-05</a></td>
+<td>F-05</td>
+</tr>
+<tr>
+<td>O-13</td>
+<td>Login as the demo customer lands on <code>/account</code></td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-06.after-login.json">E-06</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>O-14</td>
+<td>Customer opens Contact from the menu: First name, Last name, Email address are shown, empty and editable, at the first sample and are gone at the 403 ms sample</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+<td>F-07</td>
+</tr>
+<tr>
+<td>O-15</td>
+<td>Customer form after 12 s: labels Subject, Message *, Attachment; Subject, Message, Attachment, Send, heading locators match 1; name and email locators 0</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-07.customer-contact-timeline-and-counts.json">E-07</a></td>
+<td>AC 11, locators</td>
+</tr>
+<tr>
+<td>O-16</td>
+<td>Customer send: body has name &quot;Jane Doe&quot;, subject <code>payments</code>, no email, with an Authorization header; 200 after 12252 ms; confirmation at 12258 ms, locator count 1</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-08.customer-send.json">E-08</a></td>
+<td>AC 11, S-14</td>
+</tr>
+<tr>
+<td>O-17</td>
+<td>Account &gt; Messages lists the message: Subject &quot;payments&quot;, Message cut to 50 characters plus &quot;...&quot;, Status NEW, Date &quot;2026-10-12 16:51:05&quot; while the browser clock read 17:51:30 Europe/London</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.account-messages.json">E-09</a></td>
+<td>S-15, F-08</td>
+</tr>
+<tr>
+<td>O-18</td>
+<td>The list also holds the customer message of the v0.1 run (2026-10-10)</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.account-messages.json">E-09</a></td>
+<td>F-16</td>
+</tr>
+<tr>
+<td>O-19</td>
+<td><code>getByRole(&#39;row&#39;, { name: /ETA-20261012-1744/ })</code> matches 1</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-09.account-messages.json">E-09</a></td>
+<td>locators</td>
+</tr>
+<tr>
+<td>O-20</td>
+<td>Spanish: menu, heading, labels, placeholders, options, hint, Send and the five required messages are translated; <code>html lang=&quot;es&quot;</code>; the page title stays English</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a></td>
+<td>AC 12, F-15</td>
+</tr>
+<tr>
+<td>O-21</td>
+<td>The Spanish hint says the files must be empty (&quot;deben estar vacíos&quot;) where the English one says &quot;0kb&quot;</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-10.contact-es-errors.json">E-10</a></td>
+<td>AC 12</td>
+</tr>
+<tr>
+<td>O-22</td>
+<td>Console: 401 on <code>GET /users/me</code> on every visitor load, 500 on <code>GET /users/refresh</code> at sign-out</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-11.console-all.log">E-11</a>, <a class="ev" href="evidence/E-12.network-after-sign-out.txt">E-12</a></td>
+<td>F-10</td>
+</tr>
+<tr>
+<td>O-23</td>
+<td>English restored at the end; nobody signed in</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td><a class="ev" href="evidence/E-13.contact-en-restored.snapshot.yml">E-13</a></td>
+<td>cleanup</td>
+</tr>
+<tr>
+<td>O-24</td>
+<td>Tool: code-run cannot import modules and a script file given by <code>filename</code> failed with a syntax error, so the login script carried the demo values in the call itself. They are not in this folder</td>
+<td><span class="badge tag-observed">Observed</span></td>
+<td>A-23 to A-25</td>
+<td>technical.md</td>
+</tr>
+</tbody></table>
+<h2>Findings map</h2>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Observations</th>
+<th>Earlier ID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F-01</td>
+<td>O-10, O-11</td>
+<td>v0.2 F-04 (risk, Inferred), v0.1 F-14</td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>O-09</td>
+<td>v0.2 F-03</td>
+</tr>
+<tr>
+<td>F-03</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.2 F-01, v0.1 F-16</td>
+</tr>
+<tr>
+<td>F-04</td>
+<td>O-06</td>
+<td><span class="badge muted">new</span></td>
+</tr>
+<tr>
+<td>F-05</td>
+<td>O-07, O-12</td>
+<td><span class="badge muted">new</span></td>
+</tr>
+<tr>
+<td>F-06</td>
+<td>O-08</td>
+<td>v0.2 F-02</td>
+</tr>
+<tr>
+<td>F-07</td>
+<td>O-14</td>
+<td>v0.1 F-17</td>
+</tr>
+<tr>
+<td>F-08</td>
+<td>O-17</td>
+<td>v0.1 F-21</td>
+</tr>
+<tr>
+<td>F-09</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.2 F-05</td>
+</tr>
+<tr>
+<td>F-10</td>
+<td>O-22</td>
+<td>v0.2 F-06, v0.1 F-24</td>
+</tr>
+<tr>
+<td>F-11</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.2 F-07, v0.1 F-25</td>
+</tr>
+<tr>
+<td>F-12</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.1 F-10</td>
+</tr>
+<tr>
+<td>F-13</td>
+<td><span class="badge muted">carried</span></td>
+<td>v0.1 F-19</td>
+</tr>
+<tr>
+<td>F-14</td>
+<td>O-03, O-05</td>
+<td>v0.1 F-23</td>
+</tr>
+<tr>
+<td>F-15</td>
+<td>O-20</td>
+<td>v0.1 AC 12 row</td>
+</tr>
+<tr>
+<td>F-16</td>
+<td>O-18</td>
+<td><span class="badge muted">new</span></td>
+</tr>
+</tbody></table>
+<h2>Test data</h2>
+<table>
+<thead>
+<tr>
+<th>Created</th>
+<th>Where</th>
+<th>Cleaned up</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Message id <code>01m4rg84cc1tfys9aqy2z7qwzc</code>, visitor, name <code>&quot;    Tester-20261012-1744&quot;</code>, subject webmaster, text starts <code>ETA-20261012-1744</code> (A-20)</td>
+<td>API messages</td>
+<td>No: no delete in the UI or the API. <code>npm run aut:reset</code></td>
+</tr>
+<tr>
+<td>Message id <code>01m4rg84ccpcz48jjcr3106neh</code>, same content, from the second click (A-21)</td>
+<td>API messages</td>
+<td>No. Same</td>
+</tr>
+<tr>
+<td>Message id <code>01m4rgcsqaxp3zc762sr5mtjvt</code>, demo customer, subject payments, text starts <code>ETA-20261012-1744</code> (A-35)</td>
+<td>Account &gt; Messages of the shared customer</td>
+<td>No. Same</td>
+</tr>
+<tr>
+<td>Language ES (A-44)</td>
+<td>browser session</td>
+<td>Yes, EN restored (A-50, <a class="ev" href="evidence/E-13.contact-en-restored.snapshot.yml">E-13</a>)</td>
+</tr>
+<tr>
+<td>Customer session (A-26 to A-30)</td>
+<td>browser session</td>
+<td>Yes, signed out (A-41) and browser closed (A-51)</td>
+</tr>
+<tr>
+<td>Two temporary login script files in <code>test-output/</code></td>
+<td>disk</td>
+<td>Yes, deleted before A-26</td>
+</tr>
+</tbody></table>
+<p>No upload file was created. Nothing in the shared customer&#39;s profile, password or address was touched.</p>
+<h2>Handover checks</h2>
+<ul>
+<li>Credential search: every <code>AUT_*_EMAIL</code> and <code>AUT_*_PASSWORD</code> value from the environment was searched in this folder with a fixed-string search: 0 matches. No redaction was needed.</li>
+<li>Evidence: <a class="ev" href="evidence/E-01.home-contact-link-count.json">E-01</a> to <a class="ev" href="evidence/E-13.contact-en-restored.snapshot.yml">E-13</a> exist; every <code>E-nn</code> and <code>vX.Y/E-nn</code> cited in the report, locators and technical notes resolves to a file.</li>
+<li>Scenario IDs match between <code>report.md</code>, <code>scenarios.feature</code> and <code>qa-review.md</code> (S-01 to S-21); each Gherkin tag equals the Decision column.</li>
+<li><code>report.md</code> has 149 lines. No step definitions, page objects or spec files were written.</li>
+</ul>
+</details>
+</main>
+</body>
+</html>

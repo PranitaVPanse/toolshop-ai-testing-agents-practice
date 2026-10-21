@@ -1,0 +1,95 @@
+- generic [ref=f4e2]:
+  - generic [ref=f4e3]:
+    - text: View the
+    - link "Documentation" [ref=f4e4] [cursor=pointer]:
+      - /url: https://testsmith-io.github.io/practice-software-testing/#/
+    - text: for this application.
+  - generic [ref=f4e5]:
+    - generic [ref=f4e7]:
+      - generic [ref=f4e8]: Practice Black Box Testing & Bug Hunting
+      - button "Testing Guide" [ref=f4e9] [cursor=pointer]
+    - navigation [ref=f4e10]:
+      - generic [ref=f4e11]:
+        - link "Practice Software Testing - Toolshop" [ref=f4e144] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f4e31]:
+          - menubar "Main menu" [ref=f4e32]:
+            - menuitem [ref=f4e145]:
+              - link "Home" [ref=f4e146] [cursor=pointer]:
+                - /url: /
+            - menuitem [ref=f4e147]:
+              - button "Categories" [ref=f4e148] [cursor=pointer]
+            - menuitem [ref=f4e149]:
+              - link "Contact" [ref=f4e150] [cursor=pointer]:
+                - /url: /contact
+            - menuitem [ref=f4e151]:
+              - link "Sign in" [ref=f4e152] [cursor=pointer]:
+                - /url: /auth/login
+          - button "Select language" [active] [ref=f4e42] [cursor=pointer]: EN
+  - generic [ref=f4e68]:
+    - heading "Contact" [level=3] [ref=f4e153]
+    - generic [ref=f4e71]:
+      - generic [ref=f4e72]:
+        - generic [ref=f4e73]:
+          - generic [ref=f4e74]:
+            - generic [ref=f4e75]: First name
+            - textbox "First name" [ref=f4e154]:
+              - /placeholder: Your first name *
+          - alert [ref=f4e134]:
+            - generic [ref=f4e135]: First name is required
+        - generic [ref=f4e77]:
+          - generic [ref=f4e78]:
+            - generic [ref=f4e79]: Last name
+            - textbox "Last name" [ref=f4e155]:
+              - /placeholder: Your last name *
+          - alert [ref=f4e136]:
+            - generic [ref=f4e137]: Last name is required
+        - generic [ref=f4e81]:
+          - generic [ref=f4e82]: Email address
+          - textbox "Email address" [ref=f4e156]:
+            - /placeholder: Your email *
+          - alert [ref=f4e138]:
+            - generic [ref=f4e139]: Email is required
+      - generic [ref=f4e84]:
+        - generic [ref=f4e85]:
+          - generic [ref=f4e86]:
+            - generic [ref=f4e87]: Subject
+            - combobox "Subject" [ref=f4e157]:
+              - option "Customer service"
+              - option "Webmaster"
+              - option "Return"
+              - option "Payments"
+              - option "Warranty"
+              - option "Status of my order"
+          - alert [ref=f4e140]:
+            - generic [ref=f4e141]: Subject is required
+        - generic [ref=f4e89]:
+          - generic [ref=f4e90]: Message *
+          - textbox "Message *" [ref=f4e158]
+          - alert [ref=f4e142]:
+            - generic [ref=f4e143]: Message is required
+        - generic [ref=f4e93]:
+          - generic [ref=f4e94]: Attachment
+          - generic [ref=f4e95]:
+            - button "Attachment" [ref=f4e159] [cursor=pointer]
+            - generic [ref=f4e97]:
+              - text: Only files with the
+              - strong [ref=f4e160]: txt
+              - text: extension are allowed, and files must be 0kb.
+        - button "Send" [ref=f4e161] [cursor=pointer]
+  - contentinfo [ref=f4e47]:
+    - generic [ref=f4e48]:
+      - generic [ref=f4e49]:
+        - text: This is a DEMO application, used for software testing training purpose. |
+        - link "Privacy Policy" [ref=f4e50] [cursor=pointer]:
+          - /url: /privacy
+        - text: "| Banner photo by"
+        - link "Barn Images" [ref=f4e51] [cursor=pointer]:
+          - /url: https://unsplash.com/@barnimages
+        - text: "on"
+        - link "Unsplash" [ref=f4e52] [cursor=pointer]:
+          - /url: https://unsplash.com/photos/t5YUoHW6zRo
+        - text: .
+      - generic [ref=f4e53]: vdev | Built 2026-09-27 | Angular 20.0.5
+  - button "Open chat" [ref=f4e55] [cursor=pointer]
+  - button "Show live shop activity" [ref=f4e59] [cursor=pointer]

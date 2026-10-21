@@ -1,0 +1,1 @@
+action 47: grep for 'alert' in the snapshot taken right after clicking Add to favourites as the logged-in customer returned no lines (no alert present).

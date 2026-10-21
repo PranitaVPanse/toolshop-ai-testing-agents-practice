@@ -1,0 +1,12 @@
+52. [GET] http://localhost:8091/users/me => [200] OK
+53. [GET] http://localhost:8091/users/me => [200] OK
+54. [GET] http://localhost:4200/assets/i18n/en.json => [200] OK
+79. [GET] http://localhost:8091/messages?page=1 => [200] OK
+131. [GET] http://localhost:8091/users/me => [401] Unauthorized
+132. [GET] http://localhost:8091/users/me => [401] Unauthorized
+133. [GET] http://localhost:4200/assets/i18n/en.json => [200] OK
+158. [GET] http://localhost:8091/users/refresh => [500] Internal Server Error
+166. [GET] http://localhost:8091/users/me => [401] Unauthorized
+167. [GET] http://localhost:4200/assets/i18n/es.json => [200] OK
+
+Note: 157 static requests not shown, run with "static" option to see them.

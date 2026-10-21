@@ -1,0 +1,16 @@
+# Title after DE: Contact Us - Practice Software Testing - Toolshop - v5.0
+4:    - link "Documentation" [ref=f4e4] [cursor=pointer]:
+10:      - button "Testing Guide" [ref=f4e9] [cursor=pointer]
+13:        - link "Practice Software Testing - Toolshop" [ref=f4e12] [cursor=pointer]:
+18:              - link "Start" [ref=f4e87] [cursor=pointer]:
+21:              - button "Kategorien" [ref=f4e89] [cursor=pointer]
+23:              - link "Kontakt" [ref=f4e91] [cursor=pointer]:
+26:              - button "Jane Doe" [ref=f4e40] [cursor=pointer]
+27:          - button "Select language" [active] [ref=f4e42] [cursor=pointer]: DE
+29:    - heading "Kontakt" [level=3] [ref=f4e92]
+30:    - alert [ref=f4e67]: Danke für Ihre Nachricht. Wir werden uns in Kürze bei Ihnen melden.
+35:        - link "Privacy Policy" [ref=f4e72] [cursor=pointer]:
+38:        - link "Barn Images" [ref=f4e73] [cursor=pointer]:
+41:        - link "Unsplash" [ref=f4e74] [cursor=pointer]:
+45:  - button "Open chat" [ref=f4e77] [cursor=pointer]
+46:  - button "Show live shop activity" [ref=f4e81] [cursor=pointer]

@@ -1,0 +1,68 @@
+{
+  "t": "2026-10-14T17:28:00.071Z",
+  "url": "http://localhost:4200/category/power-tools",
+  "sessionStorage": {
+    "compare_ids": "[\"01M2XDJW38M1T4EHKZN0H0H3CD\"]"
+  },
+  "compareButtons": [
+    {
+      "card": "Sheet Sander",
+      "aria": "Compare",
+      "title": "Compare",
+      "pressed": "false",
+      "cls": "btn compare-btn position-absolute top-0 start-0 m-2"
+    },
+    {
+      "card": "Belt Sander",
+      "aria": "Compare",
+      "title": "Compare",
+      "pressed": "false",
+      "cls": "btn compare-btn position-absolute top-0 start-0 m-2"
+    },
+    {
+      "card": "Random Orbit Sander",
+      "aria": "Compare",
+      "title": "Compare",
+      "pressed": "false",
+      "cls": "btn compare-btn position-absolute top-0 start-0 m-2"
+    },
+    {
+      "card": "Cordless Drill 20V",
+      "aria": "Compare",
+      "title": "Compare",
+      "pressed": "false",
+      "cls": "btn compare-btn position-absolute top-0 start-0 m-2"
+    },
+    {
+      "card": "Cordless Drill 24V",
+      "aria": "Compare",
+      "title": "Compare",
+      "pressed": "false",
+      "cls": "btn compare-btn position-absolute top-0 start-0 m-2"
+    },
+    {
+      "card": "Cordless Drill 18V",
+      "aria": "Compare",
+      "title": "Compare",
+      "pressed": "false",
+      "cls": "btn compare-btn position-absolute top-0 start-0 m-2"
+    },
+    {
+      "card": "Cordless Drill 12V",
+      "aria": "Compare",
+      "title": "Compare",
+      "pressed": "false",
+      "cls": "btn compare-btn position-absolute top-0 start-0 m-2"
+    },
+    {
+      "card": "Circular Saw",
+      "aria": "Compare",
+      "title": "Compare",
+      "pressed": "true",
+      "cls": "btn compare-btn position-absolute top-0 start-0 m-2 compare-btn-active"
+    }
+  ],
+  "compareBar": "<a _ngcontent-ng-c1867419432=\"\" routerlink=\"/comparison\" data-test=\"compare-link\" class=\"btn btn-light btn-sm\" href=\"/comparison\"> Compare Now </a>",
+  "toasts": [],
+  "navCompare": []
+}

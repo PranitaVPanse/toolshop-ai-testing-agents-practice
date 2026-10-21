@@ -1,0 +1,1 @@
+navigate http://localhost:4200/compare -> final URL http://localhost:4200/ , title 'Practice Software Testing - Toolshop - v5.0'; grep 'compar' in snapshot above (empty = none)

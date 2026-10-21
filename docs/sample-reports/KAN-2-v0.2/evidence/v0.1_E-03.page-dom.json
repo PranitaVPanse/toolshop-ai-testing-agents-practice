@@ -1,0 +1,256 @@
+{
+  "t": "2026-10-14T17:21:00.023Z",
+  "title": "Power Tools - Practice Software Testing - Toolshop - v5.0",
+  "url": "http://localhost:4200/category/power-tools",
+  "h2": [
+    "Category: Power Tools"
+  ],
+  "h4": [
+    {
+      "text": "Sort",
+      "html": "<fa-icon _ngcontent-ng-c1867419432=\"\" class=\"ng-fa-icon\"><svg aria-hidden=\"true\" focusable=\"false\" data-prefix=\"fas\" dat"
+    },
+    {
+      "text": "Filters",
+      "html": "<fa-icon _ngcontent-ng-c1867419432=\"\" class=\"ng-fa-icon\"><svg aria-hidden=\"true\" focusable=\"false\" data-prefix=\"fas\" dat"
+    },
+    {
+      "text": "By category:",
+      "html": "By category:"
+    },
+    {
+      "text": "By brand:",
+      "html": "By brand:"
+    },
+    {
+      "text": "Sustainability:",
+      "html": "Sustainability:"
+    }
+  ],
+  "sort": {
+    "dataTest": "sort",
+    "aria": null,
+    "id": "",
+    "labelFor": null,
+    "options": [
+      {
+        "v": "",
+        "t": ""
+      },
+      {
+        "v": "name,asc",
+        "t": "Name (A - Z)"
+      },
+      {
+        "v": "name,desc",
+        "t": "Name (Z - A)"
+      },
+      {
+        "v": "price,desc",
+        "t": "Price (High - Low)"
+      },
+      {
+        "v": "price,asc",
+        "t": "Price (Low - High)"
+      },
+      {
+        "v": "co2_rating,asc",
+        "t": "CO₂ Rating (A - E)"
+      },
+      {
+        "v": "co2_rating,desc",
+        "t": "CO₂ Rating (E - A)"
+      }
+    ]
+  },
+  "checkboxes": [
+    {
+      "label": "Power Tools",
+      "checked": false,
+      "dataTest": "category-01M2XDJVYCVTD0Y1RRN25KEWB1",
+      "name": "category_id",
+      "value": "01M2XDJVYCVTD0Y1RRN25KEWB1"
+    },
+    {
+      "label": "Grinder",
+      "checked": false,
+      "dataTest": "category-01M2XDJVYH339N0PGKBCEAZC4A",
+      "name": "category_id",
+      "value": "01M2XDJVYH339N0PGKBCEAZC4A"
+    },
+    {
+      "label": "Sander",
+      "checked": false,
+      "dataTest": "category-01M2XDJVYH339N0PGKBCEAZC4B",
+      "name": "category_id",
+      "value": "01M2XDJVYH339N0PGKBCEAZC4B"
+    },
+    {
+      "label": "Saw",
+      "checked": false,
+      "dataTest": "category-01M2XDJVYH339N0PGKBCEAZC4C",
+      "name": "category_id",
+      "value": "01M2XDJVYH339N0PGKBCEAZC4C"
+    },
+    {
+      "label": "Drill",
+      "checked": false,
+      "dataTest": "category-01M2XDJVYH339N0PGKBCEAZC4D",
+      "name": "category_id",
+      "value": "01M2XDJVYH339N0PGKBCEAZC4D"
+    },
+    {
+      "label": "ForgeFlex Tools",
+      "checked": false,
+      "dataTest": "brand-01M2XDJVJQD9WMJGXPZWZVM54G",
+      "name": "brand_id",
+      "value": "01M2XDJVJQD9WMJGXPZWZVM54G"
+    },
+    {
+      "label": "MightyCraft Hardware",
+      "checked": false,
+      "dataTest": "brand-01M2XDJVJRWBY979QAJZKGS4TP",
+      "name": "brand_id",
+      "value": "01M2XDJVJRWBY979QAJZKGS4TP"
+    },
+    {
+      "label": "Show only eco-friendly products",
+      "checked": false,
+      "dataTest": "eco-friendly-filter",
+      "name": "eco_friendly",
+      "value": "on"
+    }
+  ],
+  "cards": [
+    {
+      "dataTest": "product-01M2XDJW3393FKA39E9JA4KM4V",
+      "name": "Sheet Sander",
+      "price": "$58.48",
+      "co2Active": [
+        "E (co2-letter active rating-e)"
+      ],
+      "compare": [
+        {
+          "text": "",
+          "dataTest": "compare-btn"
+        }
+      ],
+      "img": "Sheet Sander",
+      "outOfStock": false
+    },
+    {
+      "dataTest": "product-01M2XDJW35DTTMJJCN6R5AX3JY",
+      "name": "Belt Sander",
+      "price": "$73.59",
+      "co2Active": [
+        "E (co2-letter active rating-e)"
+      ],
+      "compare": [
+        {
+          "text": "",
+          "dataTest": "compare-btn"
+        }
+      ],
+      "img": "Belt Sander",
+      "outOfStock": false
+    },
+    {
+      "dataTest": "product-01M2XDJW3A2S97QC8ETFVCRFM9",
+      "name": "Random Orbit Sander",
+      "price": "$100.79",
+      "co2Active": [
+        "E (co2-letter active rating-e)"
+      ],
+      "compare": [
+        {
+          "text": "",
+          "dataTest": "compare-btn"
+        }
+      ],
+      "img": "Random Orbit Sander",
+      "outOfStock": false
+    },
+    {
+      "dataTest": "product-01M2XDJW38M1T4EHKZN0H0H3CD",
+      "name": "Circular Saw",
+      "price": "$80.19",
+      "co2Active": [
+        "D (co2-letter active rating-d)"
+      ],
+      "compare": [
+        {
+          "text": "",
+          "dataTest": "compare-btn"
+        }
+      ],
+      "img": "Circular Saw",
+      "outOfStock": false
+    },
+    {
+      "dataTest": "product-01M2XDJW3CCYH6SX8QY1D12WKB",
+      "name": "Cordless Drill 20V",
+      "price": "$125.23",
+      "co2Active": [
+        "E (co2-letter active rating-e)"
+      ],
+      "compare": [
+        {
+          "text": "",
+          "dataTest": "compare-btn"
+        }
+      ],
+      "img": "Cordless Drill 20V",
+      "outOfStock": false
+    },
+    {
+      "dataTest": "product-01M2XDJW3EFFSK1P5SFS4G7VCE",
+      "name": "Cordless Drill 24V",
+      "price": "$66.54",
+      "co2Active": [
+        "E (co2-letter active rating-e)"
+      ],
+      "compare": [
+        {
+          "text": "",
+          "dataTest": "compare-btn"
+        }
+      ],
+      "img": "Cordless Drill 24V",
+      "outOfStock": false
+    },
+    {
+      "dataTest": "product-01M2XDJW3F8PXKZ7KY332NXB4Z",
+      "name": "Cordless Drill 18V",
+      "price": "$119.24",
+      "co2Active": [
+        "E (co2-letter active rating-e)"
+      ],
+      "compare": [
+        {
+          "text": "",
+          "dataTest": "compare-btn"
+        }
+      ],
+      "img": "Cordless Drill 18V",
+      "outOfStock": false
+    },
+    {
+      "dataTest": "product-01M2XDJW3HXX7T1BCKX1ZF7YEA",
+      "name": "Cordless Drill 12V",
+      "price": "$46.5",
+      "co2Active": [
+        "E (co2-letter active rating-e)"
+      ],
+      "compare": [
+        {
+          "text": "",
+          "dataTest": "compare-btn"
+        }
+      ],
+      "img": "Cordless Drill 12V",
+      "outOfStock": false
+    }
+  ],
+  "search": false,
+  "slider": false
+}

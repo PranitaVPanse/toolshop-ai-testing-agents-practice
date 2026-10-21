@@ -1,0 +1,15 @@
+{
+  "note": "run_code result, actions 33-35: click language-select (33), click lang-de (34), wait 1000 ms (35); DOM read on /category/power-tools. A leftover no-op locator line and an unused response listener in the script did not act on the page.",
+  "languages": ["lang-de=DE","lang-el=EL","lang-en=EN","lang-es=ES","lang-fr=FR","lang-nl=NL","lang-tr=TR"],
+  "de": {
+    "h": ["Kategorie: Power Tools","Sortieren","Filter","Nach Kategorie:","Nach Marken:","Nachhaltigkeit:"],
+    "sortOptions": ["","Name (A - Z)","Name (Z - A)","Preis (Hoch - Niedrig)","Preis (Niedrig - Hoch)","CO₂-Bewertung (A - E)","CO₂-Bewertung (E - A)"],
+    "checkboxes": ["Power Tools","Grinder","Sander","Saw","Drill","ForgeFlex Tools","MightyCraft Hardware","Nur umweltfreundliche Produkte anzeigen"],
+    "names": ["Sheet Sander","Belt Sander","Random Orbit Sander","Circular Saw","Cordless Drill 20V","Cordless Drill 24V","Cordless Drill 18V","Cordless Drill 12V"],
+    "compareLabel": "Vergleichen",
+    "empty": null,
+    "title": "Power Tools - Practice Software Testing - Toolshop - v5.0",
+    "lang": "de"
+  },
+  "grinderMatches": 1
+}
